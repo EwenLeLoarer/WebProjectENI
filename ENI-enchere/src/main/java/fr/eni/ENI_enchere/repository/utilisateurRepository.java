@@ -27,21 +27,22 @@ public class utilisateurRepository {
         return users.stream().findFirst();
     }
 	
-	private RowMapper<Utilisateur> UtilisateurRowMapper(){
-		return (rs, rowNum) -> new Utilisateur(
-				rs.getInt("noUtilisateur"),
-				rs.getString("pseudo"),
-				rs.getString("nom"),
-				rs.getString("prenom"),
-				rs.getString("email"),
-				rs.getString("telephone"),
-				rs.getString("rue"),
-				rs.getString("codePostal"),
-				rs.getString("ville"),
-				rs.getString("motDePasse"),
-				rs.getInt("credit"),
-				rs.getBoolean("administrateur")
-		);
+    private RowMapper<Utilisateur> UtilisateurRowMapper() {
+        return (rs, rowNum) -> new Utilisateur(
+                rs.getObject("no_utilisateur", Integer.class),  // Utiliser getObject pour gérer les valeurs null
+                rs.getString("pseudo"),
+                rs.getString("nom"),
+                rs.getString("prenom"),
+                rs.getString("email"),
+                rs.getString("telephone"),
+                rs.getString("rue"),
+                rs.getString("codePostal"),
+                rs.getString("ville"),
+                rs.getString("motDePasse"),
+                rs.getObject("credit", Integer.class),  // Le champ credit semble être un int, donc rs.getInt est correct ici
+                rs.getObject("administrateur", Boolean.class) // Utiliser getObject pour gérer les valeurs null
+        );
+    }
 		
 	}
-}
+
