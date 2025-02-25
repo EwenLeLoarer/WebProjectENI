@@ -20,7 +20,6 @@ public class utilisateurRepository {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
-    // ✅ Find user by pseudo
     public Optional<Utilisateur> findByPseudoOrEmail(String identifier) {
         String sql = "SELECT pseudo, password, active FROM utilisateur WHERE pseudo = ?";
         List<Utilisateur> users = jdbcTemplate.query(sql, UtilisateurRowMapper(), identifier);
@@ -39,7 +38,8 @@ public class utilisateurRepository {
                 rs.getObject("credit", Integer.class),  // Le champ credit semble être un int, donc rs.getInt est correct ici
                 rs.getObject("administrateur", Boolean.class) // Utiliser getObject pour gérer les valeurs null
         );
-    }
-		
+
+
 	}
+}
 
