@@ -18,17 +18,14 @@ public class SecurityConfig {
 	UserDetailsManager userDetailsManager(DataSource dataSource) {
 		JdbcUserDetailsManager manager = new JdbcUserDetailsManager(dataSource);
 		
-		manager.setUsersByUsernameQuery("select pseudo, password, "
-								+ "active from utilisateur where pseudo = ?");
-		
-		manager.setUsersByUsernameQuery("select email, password, "
-				+ "active from utilisateur where email = ?");
+		manager.setUsersByUsernameQuery("select pseudo, mot_de_passe, "
+								+ "active from utilisateurs where pseudo = ?");
 
-		manager.setAuthoritiesByUsernameQuery(("select pseudo, email, [role] from [role] "
-											+ "where pseudo=?"));
+		manager.setAuthoritiesByUsernameQuery("SELECT u.pseudo, r.ROLE " +
+		        "FROM UTILISATEURS u " +
+		        "JOIN ROLES r ON (u.administrateur = r.IS_ADMIN) " +
+		        "WHERE u.pseudo = ?");
 		
-		manager.setAuthoritiesByUsernameQuery(("select email, [role] from [role] "
-				+ "where email=?"));
 		return manager;
 	}
 	

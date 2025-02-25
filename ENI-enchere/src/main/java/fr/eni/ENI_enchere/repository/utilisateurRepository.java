@@ -21,7 +21,7 @@ public class utilisateurRepository {
 	}
 	
     // ✅ Find user by pseudo
-    public Optional<Utilisateur> findByPseudoOrEmail(String identifier) {
+    /*public Optional<Utilisateur> findByPseudoOrEmail(String identifier) {
         String sql = "SELECT pseudo, password, active FROM utilisateur WHERE pseudo = ?";
         List<Utilisateur> users = jdbcTemplate.query(sql, UtilisateurRowMapper(), identifier);
         return users.stream().findFirst();
@@ -41,5 +41,10 @@ public class utilisateurRepository {
         );
     }
 		
+<<<<<<< Updated upstream
 	}
 
+=======
+	}*/
+}
+>>>>>>> Stashed changes
