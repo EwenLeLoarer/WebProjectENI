@@ -28,16 +28,13 @@ public class utilisateurRepository {
     }
 	
     private RowMapper<Utilisateur> UtilisateurRowMapper() {
-        return (rs, rowNum) -> new Utilisateur(
-                rs.getObject("no_utilisateur", Integer.class),  // Utiliser getObject pour gérer les valeurs null
+        return (rs, rowNum) -> new Utilisateur(  // Utiliser getObject pour gérer les valeurs null
                 rs.getString("pseudo"),
                 rs.getString("nom"),
                 rs.getString("prenom"),
                 rs.getString("email"),
                 rs.getString("telephone"),
-                rs.getString("rue"),
-                rs.getString("codePostal"),
-                rs.getString("ville"),
+                rs.getObject("no_adresse", Integer.class),
                 rs.getString("motDePasse"),
                 rs.getObject("credit", Integer.class),  // Le champ credit semble être un int, donc rs.getInt est correct ici
                 rs.getObject("administrateur", Boolean.class) // Utiliser getObject pour gérer les valeurs null
