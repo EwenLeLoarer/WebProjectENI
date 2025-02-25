@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+
+	
+<!--  tire passé en paramètre -->					
+<title>Connexion</title>		
+
+<main>
+	<form data-th-action="@{/login}" method="post">
+	<ul class="flex-outer">
+		<li>
+			<label for="idUser">Pseudo</label>
+			<!--  ne pas modifier le name utiliser username -->
+			<input id="idUser" type="text" placeholder="ton pseudo" name="username">
+		</li>
+		<li>
+			<label for="idPass">Mot de passe</label>
+			<!--  ne pas modifier le name utiliser password -->
+			<input id="idPass" type="password" placeholder="ton mot de passe" name="password">
+		</li>
+		<li>
+			<button type="submit">Connexion</button>
+		</li>
+	</ul>
+	</form>
+</main>
+
+</html>
