@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Enchères en cours</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Enchères en cours</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nom de l'article</th>
+                <th>Description</th>
+                <th>Date de fin</th>
+                <th>Prix initial</th>
+                <th>Vendeur</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="enchere : ${encheres}">
+                <td th:text="${enchere.nomArticle}"></td>
+                <td th:text="${enchere.description}"></td>
+                <td th:text="${#temporals.format(enchere.dateFin, 'dd/MM/yyyy HH:mm')}"></td>
+                <td th:text="${enchere.prixInitial} + ' €'"></td>
+                <td th:text="${enchere.vendeur}"></td>
+                <td><a th:href="@{'/enchere/' + ${enchere.id}}">Voir l'enchère</a></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

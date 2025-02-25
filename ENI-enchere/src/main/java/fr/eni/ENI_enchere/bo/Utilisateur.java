@@ -6,8 +6,8 @@ import lombok.*;
 @Getter
 @Setter
 @AllArgsConstructor
-@RequiredArgsConstructor
-@NoArgsConstructor
+//@RequiredArgsConstructor
+//@NoArgsConstructor
 @ToString(exclude = "motDePasse")
 public class Utilisateur {
 	
@@ -64,4 +64,5 @@ public class Utilisateur {
 	
 	@SuppressWarnings("unused")
 	private Boolean administrateur;
+	
 }

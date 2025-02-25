@@ -21,27 +21,27 @@ public class utilisateurRepository {
 	}
 	
     // ✅ Find user by pseudo
-    public Optional<Utilisateur> findByPseudoOrEmail(String identifier) {
-        String sql = "SELECT pseudo, password, active FROM utilisateur WHERE pseudo = ?";
-        List<Utilisateur> users = jdbcTemplate.query(sql, UtilisateurRowMapper(), identifier);
-        return users.stream().findFirst();
-    }
-	
-	private RowMapper<Utilisateur> UtilisateurRowMapper(){
-		return (rs, rowNum) -> new Utilisateur(
-				rs.getInt("noUtilisateur"),
-				rs.getString("pseudo"),
-				rs.getString("nom"),
-				rs.getString("prenom"),
-				rs.getString("email"),
-				rs.getString("telephone"),
-				rs.getString("rue"),
-				rs.getString("codePostal"),
-				rs.getString("ville"),
-				rs.getString("motDePasse"),
-				rs.getInt("credit"),
-				rs.getBoolean("administrateur")
-		);
-		
-	}
+//    public Optional<Utilisateur> findByPseudoOrEmail(String identifier) {
+//        String sql = "SELECT pseudo, password, active FROM utilisateur WHERE pseudo = ?";
+//        List<Utilisateur> users = jdbcTemplate.query(sql, UtilisateurRowMapper(), identifier);
+//        return users.stream().findFirst();
+//    }
+//	
+//	private RowMapper<Utilisateur> UtilisateurRowMapper(){
+//		return (rs, rowNum) -> new Utilisateur(
+//				rs.getInt("noUtilisateur"),
+//				rs.getString("pseudo"),
+//				rs.getString("nom"),
+//				rs.getString("prenom"),
+//				rs.getString("email"),
+//				rs.getString("telephone"),
+//				rs.getString("rue"),
+//				rs.getString("codePostal"),
+//				rs.getString("ville"),
+//				rs.getString("motDePasse"),
+//				rs.getInt("credit"),
+//				rs.getBoolean("administrateur")
+//		);
+//		
+//	}
 }
