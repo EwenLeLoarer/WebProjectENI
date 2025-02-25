@@ -11,8 +11,6 @@ import lombok.*;
 @ToString(exclude = "motDePasse")
 public class Utilisateur {
 	
-	private Integer no_utilisateur;
-	
 	@NonNull
 	@NotBlank(message = "Le pseudo ne peut pas être vide")
 	@Size(min = 3, max = 30, message = "Le pseudo doit être compris entre 3 et 30 caractères")
@@ -20,19 +18,19 @@ public class Utilisateur {
 	
 	@NonNull
 	@NotBlank(message = "Le nom ne peut pas être vide")
-	@Max(value = 30, message = "Le nom ne peut dépasser 30 caractères")
+	@Max(value = 40, message = "Le nom ne peut dépasser 40 caractères")
 	@Pattern(regexp = "^[A-Za-zÀ-ÖØ-öø-ÿ\\s-]$", message = "Le nom n'est pas valide")
 	private String nom;
 	
 	@NonNull
 	@NotBlank(message = "Le prénom ne peut pas être vide")
-	@Max(value = 30, message = "Le nom ne peut dépasser 30 caractères")
+	@Max(value = 50, message = "Le nom ne peut dépasser 50 caractères")
 	@Pattern(regexp = "^[A-Za-zÀ-ÖØ-öø-ÿ\\s-]$", message = "Le nom n'est pas valide")
 	private String prenom;
 	
 	@NonNull
 	@NotBlank(message = "Le mail ne peut pas être vide")
-	@Max(value = 20, message = "Le mail ne peut dépasser 20 caractères")
+	@Max(value = 100, message = "Le mail ne peut dépasser 100 caractères")
 	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Le mail n'est pas valide")
 	private String email;
 	
@@ -41,22 +39,8 @@ public class Utilisateur {
 	private String telephone;
 	
 	@NonNull
-	@NotBlank(message = "L'adresse ne peut pas être vide")
-	@Max(value = 30, message = "L'adresse ne peut dépasser 30 caractères")
-	@Pattern(regexp = "^[0-9A-Za-zÀ-ÖØ-öø-ÿ\\s,'\\-]$", message = "L'adresse n'est pas valide")
-	private String rue;
-	
-	@NonNull
-	@NotBlank(message = "Le code postal ne peut pas être vide")
-	@Max(value = 10, message = "Le code postal ne peut dépasser 10 caractères")
-	@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Le code postal est invalide")
-	private String codePostal;
-	
-	@NonNull
-	@NotBlank(message = "La ville ne peut pas être vide")
-	@Max(value = 30, message = "La ville ne peut dépasser 30 caractères")
-	@Pattern(regexp = "^[A-Za-zÀ-ÖØ-öø-ÿ\\s-]$", message = "La ville n'est pas valide")
-	private String ville;
+	@NotBlank(message = "L'adresse ne peut rester vide")
+	private Integer no_adresse;
 	
 	@NonNull
 	@NotBlank(message = "Le mot de passe ne peut pas être vide")
