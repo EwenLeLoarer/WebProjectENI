@@ -1,33 +1,50 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Enchères en cours</title>
-    <link rel="stylesheet" href="/css/style.css">
+<meta charset="UTF-8">
+<title>Liste des Enchères</title>
+<link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <h1>Enchères en cours</h1>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Nom de l'article</th>
-                <th>Description</th>
-                <th>Date de fin</th>
-                <th>Prix initial</th>
-                <th>Vendeur</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="enchere : ${encheres}">
-                <td th:text="${enchere.nomArticle}"></td>
-                <td th:text="${enchere.description}"></td>
-                <td th:text="${#temporals.format(enchere.dateFin, 'dd/MM/yyyy HH:mm')}"></td>
-                <td th:text="${enchere.prixInitial} + ' €'"></td>
-                <td th:text="${enchere.vendeur}"></td>
-                <td><a th:href="@{'/enchere/' + ${enchere.id}}">Voir l'enchère</a></td>
-            </tr>
-        </tbody>
-    </table>
+	<h1>Liste des Enchères</h1>
+
+	<!-- Formulaire de recherche -->
+	<form th:action="@{/encheres}" method="post">
+		<input type="text" name="search" th:value="${search}"
+			placeholder="Rechercher un article"> <select name="categorie">
+			<option value="Toutes" th:selected="${categorie == 'Toutes'}">Toutes</option>
+			<option value="1" th:selected="${categorie == '1'}">Ameublement</option>
+			<option value="2" th:selected="${categorie == '2'}">Informatique</option>
+			<option value="3" th:selected="${categorie == '3'}">Sport &
+				Loisir</option>
+			<option value="4" th:selected="${categorie == '4'}">Vêtement</option>
+		</select>
+		<button type="submit">Filtrer</button>
+	</form>
+
+	<!-- Affichage des enchères -->
+	<table border="1">
+		<thead>
+			<tr>
+				<th>Nom de l'article</th>
+				<th>Description</th>
+				<!--  <th>Prix Initial</th> -->
+				<th>Prix Actuel</th>
+				<th>Fin de l'enchère</th>
+				<th>Vendeur</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="enchere : ${encheres}">
+				<td th:text="${enchere.nomArticle}"></td>
+				<td th:text="${enchere.description}"></td>
+				<!-- Vous pouvez afficher le prix initial si souhaité. Ici, on affiche uniquement le prix actuel -->
+				<!--  <td th:text="${enchere.prixInitial} + ' €'"></td> -->
+				<td th:text="${enchere.prixActuel} + ' €'"></td>
+				<td th:text="${#dates.format(enchere.dateFin, 'dd/MM/yyyy')}"></td>
+				<td th:text="${enchere.vendeur}"></td>
+			</tr>
+		</tbody>
+	</table>
 </body>
 </html>
