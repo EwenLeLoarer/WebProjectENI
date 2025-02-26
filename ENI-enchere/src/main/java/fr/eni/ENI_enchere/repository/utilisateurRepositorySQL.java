@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import fr.eni.ENI_enchere.bo.Utilisateur;
 
 @Repository
-public class utilisateurRepositorySQL implements utilisateurRepository {
+public class utilisateurRepositorySQL implements UtilisateurRepository {
 	private final JdbcTemplate jdbcTemplate;
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	
@@ -39,7 +39,7 @@ public class utilisateurRepositorySQL implements utilisateurRepository {
     
 	@Override
 	public void createUtilisateur(Utilisateur utilisateur) {
-		String sql = "insert into Utilisateurs (pseudo, nom, prenom, email, telephone, mot_de_passe, credit, administrateur, no_adresse, active)"
+		String sql = "insert into UTILISATEURS (pseudo, nom, prenom, email, telephone, mot_de_passe, credit, administrateur, no_adresse, active)"
 				+ "values (:pseudo, :nom, :prenom, :email, :telephone, :mot_de_passe, :credit, :administrateur, :no_adresse, :active) ";
 		
 		//la map se crée toute seule
