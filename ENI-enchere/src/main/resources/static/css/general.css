@@ -1,0 +1,123 @@
+/*********** RESET ***********/
+* {
+	margin : 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+ul {
+	text-decoration: none;
+	list-style: none;
+}
+a {
+	text-decoration: none;
+}
+html {
+	width: 100vw;
+	height: 100vh;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+}
+
+/*********** HEADER ***********/
+.main__header {
+	display: flex;
+	width: 100%;
+	line-height: 80px;
+	justify-content: space-between;
+}
+.home__link {
+	padding: 0 20px;
+	color: black;
+	font-weight: bold;
+	font-size: 20px;
+}
+.main__nav {
+	display: flex;
+}
+.nav__list {
+	display: flex;
+}
+.nav__item {
+	padding: 0 20px;
+}
+.li__link {
+	width: 100%;
+	height: 100%;
+	color: black;
+	font-weight: bold;
+	
+}
+.li__link:hover {
+	text-decoration: underline;
+}
+
+/*********** LOGIN ***********/
+.login__main {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.login__form {
+	width: 300px;
+	height: 250px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.login__list {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.login__item {
+	line-height: 60px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.login__field {
+	height: 30px;
+	border: 2px black solid;
+}
+.login__box {
+	display: flex;
+	justify-content: space-between;
+	align-items: end;
+}
+.login__button {
+	height: 50px;
+	padding: 0 20px;
+	background-color: white;
+	font-weight: bold;
+	box-shadow: 3px 3px 0px 0px rgba(0,0,0,1);
+	cursor: pointer;
+}
+.login__button:hover {
+	box-shadow: inset 2px 2px 0px 0px rgba(0,0,0,1);
+}
+.login__forgot {
+	margin-bottom: 10px;
+	color: blue;
+	text-decoration: underline;
+}
+.login__register {
+	line-height: 50px;
+	border: 2px black solid;
+	box-shadow: 3px 3px 0px 0px rgba(0,0,0,1);
+	color: black;
+	font-weight: bold;
+	display: flex;
+	justify-content: center;
+}
+
+.login__register:hover {
+	box-shadow: inset 2px 2px 0px 0px rgba(0,0,0,1);
+}
