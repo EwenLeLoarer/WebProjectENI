@@ -39,15 +39,11 @@ public class Utilisateur {
 	private String telephone;
 	
 	@NonNull
-	@NotBlank(message = "L'adresse ne peut rester vide")
-	private Integer no_adresse;
-	
-	@NonNull
 	@NotBlank(message = "Le mot de passe ne peut pas être vide")
 	@Size(min = 8, max = 30, message = "Le mot de passe doit contenir entre 8 et 30 caractères.")
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*(),.?\":{}|<>]).*$",
             message = "Le mot de passe doit contenir au moins une minuscule, une majuscule, un chiffre et un caractère spécial.")
-	private String motDePasse;
+	private String mot_de_passe;
 	
 	@NonNull
 	@NotNull(message = "Le crédit ne peut pas être nul.")
@@ -55,4 +51,10 @@ public class Utilisateur {
 	private Integer credit;
 	
 	private Boolean administrateur;
+	
+	@NonNull
+	@NotBlank(message = "L'adresse ne peut rester vide")
+	private Integer no_adresse;
+	
+	private Boolean active;
 }
