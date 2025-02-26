@@ -9,6 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Adresse {
 	
 	@NotBlank(message = "L'article doit être indiqué")
@@ -17,18 +18,18 @@ public class Adresse {
 	
 	@NonNull
 	@NotBlank(message = "L'addresse ne peut pas être vide")
-	@Pattern(regexp = "^[0-9A-Za-zÀ-ÖØ-öø-ÿ\\s,'\\-]$", message = "L'addresse n'est pas valide")
-	@Max(value = 100, message = "L'addresse ne peut dépasser 100 caractères")
+	@Pattern(regexp = "^[0-9A-Za-z\\s,'\\-]$", message = "L'addresse n'est pas valide")
+	@Size(max = 100, message = "L'addresse ne peut dépasser 100 caractères")
 	private String rue;
 	
 	@NonNull
 	@NotBlank(message = "Le code postal ne peut pas être vide")
-	@Max(value = 10, message = "Le code postal ne peut dépasser 10 caractères")
+	@Size(max = 10, message = "Le code postal ne peut dépasser 10 caractères")
 	private String codePostal;
 	
 	@NonNull
 	@NotBlank(message = "Le nom de la ville ne peut pas être vide")
-	@Pattern(regexp = "^[A-Za-zÀ-ÖØ-öø-ÿ\\s-]$", message = "Le nom de la ville n'est pas valide")
-	@Max(value = 50, message = "Le nom de la ville ne peut dépasser 50 caractères")
+	@Pattern(regexp = "^[A-Za-z\\s-]$", message = "Le nom de la ville n'est pas valide")
+	@Size(max = 50, message = "Le nom de la ville ne peut dépasser 50 caractères")
 	private String ville;
 }
