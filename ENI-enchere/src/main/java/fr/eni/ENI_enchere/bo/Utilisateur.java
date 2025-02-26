@@ -11,7 +11,8 @@ import lombok.*;
 @Builder
 @ToString(exclude = "mot_de_passe")
 public class Utilisateur {
-	
+	public static final String ROLE_EMPLOYE="ROLE_EMPLOYE";
+	public static final String ROLE_ADMIN="ROLE_ADMIN";
 	@NonNull
 	@NotBlank(message = "Le pseudo ne peut pas être vide")
 	@Size(min = 3, max = 30, message = "Le pseudo doit être compris entre 3 et 30 caractères")
@@ -47,8 +48,10 @@ public class Utilisateur {
             message = "Le mot de passe doit contenir au moins une minuscule, une majuscule, un chiffre et un caractère spécial.")
 	private String mot_de_passe;
 	
+
 	@NotNull(message = "Le crédit ne peut pas être nul.")
 	@Builder.Default
+    @Min(value = 0, message = "Les crédits ne peuvent être inférieurs à 0.")
 	private Integer credit = 10;
 	
 	private Boolean administrateur;

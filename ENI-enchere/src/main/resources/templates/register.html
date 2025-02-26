@@ -6,7 +6,7 @@
 <title>Connexion</title>		
 
 <main>
-	<form data-th-action="@{/register}" method="post">
+	<form data-th-action="#{/security/create}" method="post">
 	<ul class="flex-outer">
 		<li>
 			<label for="idPseudo">Pseudo</label>
@@ -16,7 +16,7 @@
 		<li>
 			<label for="idNom">Nom</label>
 			<!--  ne pas modifier le name utiliser username -->
-			<input id="idNom" type="text" placeholder="ton nom" name="name">
+			<input id="idNom" type="text" placeholder="ton nom" name="nom">
 		</li>
 		<li>
 			<label for="idPrenom">Prenom</label>

@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -13,6 +14,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 public class SecurityConfig {
+	
+	@Bean 
+	BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 	
 	@Bean
 	UserDetailsManager userDetailsManager(DataSource dataSource) {
@@ -34,14 +40,9 @@ public class SecurityConfig {
 		http.authorizeHttpRequests(
 				auth -> {
 					//authoriser l'accès à la liste uniquement au employé
-					auth.requestMatchers(HttpMethod.GET, "/security").hasRole("EMPLOYE");
-
-					//authoriser l'accès à la page de création uniquement au admin
-					auth.requestMatchers(HttpMethod.GET, "/security/create").hasRole("ADMIN");
-					
-					//authoriser l'accès à l'envoie de la requête post de création uniquement au admin
-					auth.requestMatchers(HttpMethod.POST, "/security/create").hasRole("ADMIN");
-
+					//auth.requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN");
+					auth.requestMatchers(HttpMethod.GET, "/users/register").hasRole("ADMIN");
+					auth.requestMatchers(HttpMethod.POST, "/users/register").hasRole("ADMIN");
 					//authorise l'accès à la page d'accueil du site à tout le monde
 					auth.requestMatchers("/*").permitAll();
 
@@ -50,7 +51,7 @@ public class SecurityConfig {
 					auth.requestMatchers("/image/*").permitAll();
 					
 					//refuse toutes autre url
-					auth.anyRequest().denyAll();	
+					auth.anyRequest().permitAll();	
 				});
 		
 		//customisation de ma page login

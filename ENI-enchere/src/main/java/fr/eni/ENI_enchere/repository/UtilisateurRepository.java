@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import fr.eni.ENI_enchere.bo.Utilisateur;
 
 
-public interface utilisateurRepository {
+public interface UtilisateurRepository {
 	void createUtilisateur(Utilisateur utilisateur);
 	void selectUtilisateurByPseudo(String pseudo);
 	void deleteByPseudo(String pseudo);
