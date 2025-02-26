@@ -60,4 +60,5 @@ public class Utilisateur {
 	@NotBlank(message = "Il doit être indiqué si le compte est actif ou non")
 	@Builder.Default
 	private Boolean active = true;
+
 }
