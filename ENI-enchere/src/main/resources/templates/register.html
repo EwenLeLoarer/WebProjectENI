@@ -1,9 +1,10 @@
- <!DOCTYPE html>
-
-
+<!DOCTYPE html>
+<html data-th-replace="~{layouts/fragment-layout :: layoutName (
+							title= ~{ :: title},
+							content = ~{ :: main})}">
 	
 <!--  tire passé en paramètre -->					
-<title>Connexion</title>		
+<title>Inscription</title>		
 
 <main>
 	<form data-th-action="@{/register}" method="post">
