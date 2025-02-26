@@ -6,9 +6,9 @@ import lombok.*;
 @Getter
 @Setter
 @AllArgsConstructor
-@Builder
 @NoArgsConstructor
 @RequiredArgsConstructor
+@Builder
 @ToString(exclude = "mot_de_passe")
 public class Utilisateur {
 	public static final String ROLE_EMPLOYE="ROLE_EMPLOYE";
@@ -16,23 +16,24 @@ public class Utilisateur {
 	@NonNull
 	@NotBlank(message = "Le pseudo ne peut pas être vide")
 	@Size(min = 3, max = 30, message = "Le pseudo doit être compris entre 3 et 30 caractères")
+	@Pattern(regexp = "^[A-Za-z0-9_]+$")
 	private String pseudo;
 	
 	@NonNull
 	@NotBlank(message = "Le nom ne peut pas être vide")
-	@Max(value = 40, message = "Le nom ne peut dépasser 40 caractères")
-	@Pattern(regexp = "^[A-Za-zÀ-ÖØ-öø-ÿ\\s-]$", message = "Le nom n'est pas valide")
+	@Size(max = 40, message = "Le nom ne peut dépasser 40 caractères")
+	@Pattern(regexp = "^[A-Za-z\\s-]+$", message = "Le nom n'est pas valide")
 	private String nom;
 	
 	@NonNull
 	@NotBlank(message = "Le prénom ne peut pas être vide")
-	@Max(value = 50, message = "Le nom ne peut dépasser 50 caractères")
-	@Pattern(regexp = "^[A-Za-zÀ-ÖØ-öø-ÿ\\s-]$", message = "Le nom n'est pas valide")
+	@Size(max = 50, message = "Le nom ne peut dépasser 50 caractères")
+	@Pattern(regexp = "^[A-Za-z-]+$", message = "Le nom n'est pas valide")
 	private String prenom;
 	
 	@NonNull
 	@NotBlank(message = "Le mail ne peut pas être vide")
-	@Max(value = 100, message = "Le mail ne peut dépasser 100 caractères")
+	@Size(max = 100, message = "Le mail ne peut dépasser 100 caractères")
 	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Le mail n'est pas valide")
 	private String email;
 	
@@ -59,5 +60,8 @@ public class Utilisateur {
 	@NotBlank(message = "L'adresse ne peut rester vide")
 	private Integer no_adresse;
 	
-	private Boolean active;
+	@NotBlank(message = "Il doit être indiqué si le compte est actif ou non")
+	@Builder.Default
+	private Boolean active = true;
+
 }

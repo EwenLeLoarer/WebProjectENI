@@ -10,17 +10,18 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @RequiredArgsConstructor
+@ToString
 public class Article {
 	private Integer no_article;
 	
 	@NonNull
 	@NotBlank(message = "Le nom de l'article ne peut pas être vide")
-	@Max(value = 30, message = "Le nom de l'article ne peut dépasser 30 caractères")
+	@Size(max = 30, message = "Le nom de l'article ne peut dépasser 30 caractères")
 	private String nom_article;
 	
 	@NonNull
 	@NotBlank(message = "La description de l'article ne peut pas être vide")
-	@Max(value = 300, message = "La description ne peut dépasser 300 caractères")
+	@Size(max = 300, message = "La description ne peut dépasser 300 caractères")
 	private String description;
 	
 	@NonNull
@@ -44,7 +45,7 @@ public class Article {
 	
 	@NotNull
 	@NotBlank(message = "Le pseudo de l'utilisateur ne peut pas être vide")
-	@Max(value = 30, message = "Le pseudo de l'utilisateur ne peut pas dépasser 30 caractères")
+	@Size(max = 30, message = "Le pseudo de l'utilisateur ne peut pas dépasser 30 caractères")
 	private String id_utilisateur;
 	
 	@NotNull
