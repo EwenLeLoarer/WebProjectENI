@@ -14,6 +14,6 @@ public class Categorie {
 	
 	@NonNull
 	@NotBlank(message = "Le libellé ne peut pas être vide")
-	@Max(value = 30, message = "Le libellé ne peut dépasser 30 caracères")
+	@Size(max = 30, message = "Le libellé ne peut dépasser 30 caracères")
 	private String libelle;
 }
