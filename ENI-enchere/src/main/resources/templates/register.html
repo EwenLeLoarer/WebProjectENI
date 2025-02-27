@@ -7,42 +7,57 @@
 <title>Inscription</title>		
 
 <main>
-	<form data-th-action="#{/security/create}" method="post">
+	<form data-th-action="#{/security/create}" method="post" data-th-object="${user}">
 	<ul class="flex-outer">
 		<li>
 			<label for="idPseudo">Pseudo</label>
 			<!--  ne pas modifier le name utiliser username -->
-			<input id="idPseudo" type="text" placeholder="ton pseudo" name="pseudo">
+			<input id="idPseudo" type="text" placeholder="ton pseudo" data-th-field="*{pseudo}">
 		</li>
 		<li>
 			<label for="idNom">Nom</label>
 			<!--  ne pas modifier le name utiliser username -->
-			<input id="idNom" type="text" placeholder="ton nom" name="nom">
+			<input id="idNom" type="text" placeholder="ton nom" data-th-field="*{nom}">
 		</li>
 		<li>
 			<label for="idPrenom">Prenom</label>
 			<!--  ne pas modifier le name utiliser username -->
-			<input id="idPrenom" type="text" placeholder="ton prenom" name="prenom">
+			<input id="idPrenom" type="text" placeholder="ton prenom" data-th-field="*{prenom}">
 		</li>
 		<li>
 			<label for="idEmail">Email</label>
 			<!--  ne pas modifier le name utiliser username -->
-			<input id="idEmail" type="text" placeholder="ton email" name="email">
+			<input id="idEmail" type="text" placeholder="ton email" data-th-field="*{email}">
 		</li>
 		<li>
 			<label for="idTelephone">Telephone</label>
 			<!--  ne pas modifier le name utiliser username -->
-			<input id="idTelephone" type="text" placeholder="ton telephone" name="telephone">
+			<input id="idTelephone" type="text" placeholder="ton telephone" data-th-field="*{telephone}">
 		</li>
 		<li>
 			<label for="idMotDePasse">Mot de Passe</label>
 			<!--  ne pas modifier le name utiliser username -->
-			<input id="idMotDePasse" type="text" placeholder="ton mot de passe" name="mot_de_passe">
+			<input id="idMotDePasse" type="text" placeholder="ton mot de passe" data-th-field="*{mot_de_passe}">
 		</li>
 		<li>
-			<label for="idAdresse">Adresse</label>
+			<label for="idRue">rue</label>
 			<!--  ne pas modifier le name utiliser username -->
-			<input id="idAdresse" type="text" placeholder="ton pseudo" name="no_adresse">
+			<input id="idRue" type="text" placeholder="ta rue" data-th-field="*{adresse.rue}">
+		</li>
+		<li>
+			<label for="idCodePostal">Code Postal</label>
+			<!--  ne pas modifier le name utiliser username -->
+			<input id="idCodePostal" type="text" placeholder="ton code postal" data-th-field="*{adresse.code_postal}">
+		</li>
+		<li>
+			<label for="idVille">Ville</label>
+			<!--  ne pas modifier le name utiliser username -->
+			<input id="idVille" type="text" placeholder="ta ville" data-th-field="*{adresse.ville}">
+		</li>
+		<li>
+			<label for="idAdresseEni">adresse eni</label>
+			<!--  ne pas modifier le name utiliser username -->
+			<input id="idAdresseEni" type="text" placeholder="est une adresse eni" data-th-field="*{adresse.adresseEni}">
 		</li>
 		
 		<li>

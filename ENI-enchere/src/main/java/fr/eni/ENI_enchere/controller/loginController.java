@@ -9,11 +9,9 @@ import jakarta.servlet.http.HttpServletRequest;
 
 
 @Controller
-@RequestMapping("/users")
 public class loginController {
 	@GetMapping("/login")
-	public String login(Model model, HttpServletRequest request) {
-		model.addAttribute("request", request);
+	public String login() {
 		return "login";
 	}
 }
