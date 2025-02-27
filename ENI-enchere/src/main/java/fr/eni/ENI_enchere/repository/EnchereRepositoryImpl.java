@@ -78,12 +78,10 @@ public class EnchereRepositoryImpl implements EnchereRepository {
         @Override
         public Enchere mapRow(ResultSet rs, int rowNum) throws SQLException {
             return new Enchere(
-                rs.getInt("no_article"),
-                rs.getString("nom_article"),
-                rs.getString("description"),
-                rs.getInt("prix_actuel"),
-                rs.getDate("date_fin_encheres"),
-                rs.getString("vendeur")
+                rs.getString("vendeur"), // Mapping de id_utilisateur depuis la colonne "vendeur"
+                rs.getInt("no_article"), // no_article
+                rs.getInt("prix_actuel"), // montant (prix_actuel)
+                rs.getTimestamp("date_debut_encheres").toLocalDateTime() // date convertie en LocalDateTime
             );
         }
     }

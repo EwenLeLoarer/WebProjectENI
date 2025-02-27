@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html data-th-replace="~{layouts/fragment-layout :: layoutName (
+							title= ~{ :: title},
+							content = ~{ :: main})}">
+	
+<!--  tire passé en paramètre -->					
+<title>Inscription</title>		
+
+<main>
+	<form data-th-action="#{/security/create}" method="post">
+	<ul class="flex-outer">
+		<li>
+			<label for="idPseudo">Pseudo</label>
+			<!--  ne pas modifier le name utiliser username -->
+			<input id="idPseudo" type="text" placeholder="ton pseudo" name="pseudo">
+		</li>
+		<li>
+			<label for="idNom">Nom</label>
+			<!--  ne pas modifier le name utiliser username -->
+			<input id="idNom" type="text" placeholder="ton nom" name="nom">
+		</li>
+		<li>
+			<label for="idPrenom">Prenom</label>
+			<!--  ne pas modifier le name utiliser username -->
+			<input id="idPrenom" type="text" placeholder="ton prenom" name="prenom">
+		</li>
+		<li>
+			<label for="idEmail">Email</label>
+			<!--  ne pas modifier le name utiliser username -->
+			<input id="idEmail" type="text" placeholder="ton email" name="email">
+		</li>
+		<li>
+			<label for="idTelephone">Telephone</label>
+			<!--  ne pas modifier le name utiliser username -->
+			<input id="idTelephone" type="text" placeholder="ton telephone" name="telephone">
+		</li>
+		<li>
+			<label for="idMotDePasse">Mot de Passe</label>
+			<!--  ne pas modifier le name utiliser username -->
+			<input id="idMotDePasse" type="text" placeholder="ton mot de passe" name="mot_de_passe">
+		</li>
+		<li>
+			<label for="idAdresse">Adresse</label>
+			<!--  ne pas modifier le name utiliser username -->
+			<input id="idAdresse" type="text" placeholder="ton pseudo" name="no_adresse">
+		</li>
+		
+		<li>
+			<button type="submit">Connexion</button>
+		</li>
+	</ul>
+	</form>
+</main>
+
+</html>

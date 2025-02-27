@@ -1,28 +1,31 @@
 <!DOCTYPE html>
+<html data-th-replace="~{layouts/fragment-layout :: layoutName (
+							title= ~{ :: title},
+							content = ~{ :: main})}">
+							
 
+	<title>Connexion</title>	
 
-	
-<!--  tire passé en paramètre -->					
-<title>Connexion</title>		
-
-<main>
-	<form data-th-action="@{/login}" method="post">
-	<ul class="flex-outer">
-		<li>
-			<label for="idUser">Pseudo</label>
-			<!--  ne pas modifier le name utiliser username -->
-			<input id="idUser" type="text" placeholder="ton pseudo" name="username">
-		</li>
-		<li>
-			<label for="idPass">Mot de passe</label>
-			<!--  ne pas modifier le name utiliser password -->
-			<input id="idPass" type="password" placeholder="ton mot de passe" name="password">
-		</li>
-		<li>
-			<button type="submit">Connexion</button>
-		</li>
-	</ul>
-	</form>
-</main>
+	<main class="login__main">
+		<form class="login__form" data-th-action="@{/login}" method="post">
+		<ul class="login__list">
+			<li class="login__item">
+				<label class="login__label" for="idUser">Identifiant :</label>
+				<!--  ne pas modifier le name utiliser username -->
+				<input class="login__field" id="idUser" type="text" name="username">
+			</li>
+			<li class="login__item">
+				<label class="login__label" for="idPass">Mot de passe :</label>
+				<!--  ne pas modifier le name utiliser password -->
+				<input class="login__field" id="idPass" type="password" name="password">
+			</li>
+		</ul>
+		<div class="login__box">
+			<button class="login__button" type="submit">Connexion</button>
+			<a class="login__forgot" href="/">Mot de passe oublié</a>
+		</div>
+		<a class="login__register" href=/register>Créer un compte</a>
+		</form>
+	</main>
 
 </html>
