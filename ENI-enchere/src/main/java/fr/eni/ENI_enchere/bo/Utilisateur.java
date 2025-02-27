@@ -58,7 +58,7 @@ public class Utilisateur {
 	
 	@NonNull
 	@NotBlank(message = "L'adresse ne peut rester vide")
-	private Integer no_adresse;
+	private Adresse adresse;
 	
 	@NotBlank(message = "Il doit être indiqué si le compte est actif ou non")
 	@Builder.Default

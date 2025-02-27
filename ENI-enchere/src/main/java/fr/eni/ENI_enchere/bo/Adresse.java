@@ -25,11 +25,13 @@ public class Adresse {
 	@NonNull
 	@NotBlank(message = "Le code postal ne peut pas être vide")
 	@Size(max = 10, message = "Le code postal ne peut dépasser 10 caractères")
-	private String codePostal;
+	private String code_postal;
 	
 	@NonNull
 	@NotBlank(message = "Le nom de la ville ne peut pas être vide")
 	@Pattern(regexp = "^[A-Za-z\\s-]$", message = "Le nom de la ville n'est pas valide")
 	@Size(max = 50, message = "Le nom de la ville ne peut dépasser 50 caractères")
 	private String ville;
+	
+	private Boolean adresseEni;
 }

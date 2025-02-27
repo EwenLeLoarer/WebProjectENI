@@ -1,13 +1,17 @@
 package fr.eni.ENI_enchere.repository;
 
+import java.util.Optional;
+
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.stereotype.Repository;
 
 import fr.eni.ENI_enchere.bo.Adresse;
 
+@Repository
 public class AdressesRepositorySQL implements AdressesRepository {
 
 	private final JdbcTemplate jdbcTemplate;
@@ -20,14 +24,14 @@ public class AdressesRepositorySQL implements AdressesRepository {
 	}
 
 	@Override
-	public void createAdresse(Adresse adresse) {
+	public int createAdresse(Adresse adresse) {
 		GeneratedKeyHolder key = new GeneratedKeyHolder();
-		String sql = "insert into Adresses (:rue, :code_costal, :ville, :adresse_eni)";
+		String sqlAdresse = "insert into Adresses (rue, code_postal, ville) values (:rue, :code_postal, :ville)";
 		BeanPropertySqlParameterSource map = new BeanPropertySqlParameterSource(adresse);
 		
-		this.namedParameterJdbcTemplate.update(sql, map);
+		this.namedParameterJdbcTemplate.update(sqlAdresse, map, key);
 		
-		adresse.setNo_adresse(key.getKey().intValue());
+		return key.getKey().intValue();
 		
 	}
 	
@@ -37,17 +41,10 @@ public class AdressesRepositorySQL implements AdressesRepository {
 		
 	}
 
-	@Override
-	public int selectAdresseNumber(String rue, String codePostal, String ville, Boolean adresse_eni) {
-		 String sql = "SELECT no_adresse FROM ADRESSES WHERE rue = ? AND code_postal = ? AND ville = ?";
-		 try {
-	            return jdbcTemplate.queryForObject(sql, Integer.class, rue, codePostal, ville);
-	        } catch (EmptyResultDataAccessException e) {
-	            return 0; // Return null if no address is found
-	        }
-		return 0;
-		
-	}
+	
+
+	        
+
 
 	@Override
 	public void deleteByPseudo(Integer no_adresse) {
@@ -59,6 +56,12 @@ public class AdressesRepositorySQL implements AdressesRepository {
 	public void ModifyById(Integer no_adresse) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Optional<Long> selectAdresseNumber(String rue, String CodePostal, String Ville, Boolean adresse_eni) {
+		// TODO Auto-generated method stub
+		return Optional.empty();
 	}
 
 }
