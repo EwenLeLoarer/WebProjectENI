@@ -9,17 +9,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import fr.eni.ENI_enchere.bo.Utilisateur;
-import fr.eni.ENI_enchere.repository.UtilisateurRepository;
+import fr.eni.ENI_enchere.bo.DTO.ChangePasswordDTO;
 import fr.eni.ENI_enchere.service.UtilisateurService;
 
+
+
 @Controller
+@RequestMapping("/profil")
 public class ProfilController {
     @Autowired
     private UtilisateurService utilisateurService;
 	
-	@GetMapping("/profil")
+    @GetMapping
 	public String profile(Model model) {
 		
 		String username = getCurrentUsername();
@@ -31,7 +35,20 @@ public class ProfilController {
 		return "profil";
 	}
 	
-	@PostMapping("/profil")
+    @GetMapping("/edit")
+	public String editProfile(Model model) {
+		
+		String username = getCurrentUsername();
+		Utilisateur user = utilisateurService.selectUtilisateurByPseudo(username);
+		System.out.println(user);
+        // Add the user to the model to display it in the view
+        model.addAttribute("user", user);
+		
+		return "profil-edit";
+	}
+	
+    
+	@PostMapping("/edit")
 	public String modifyProfile(@ModelAttribute("user") Utilisateur user) {
 		System.out.println(user);
 		this.utilisateurService.ModifyUser(user);
@@ -51,4 +68,18 @@ public class ProfilController {
         // If not authenticated, return null or throw an exception, depending on your use case
         return null;
     }
+	
+	@GetMapping("change-password")
+	private String changePasswordGet(Model model) {
+		ChangePasswordDTO passwordDTO = new ChangePasswordDTO();
+		model.addAttribute("passwordDTO", passwordDTO);
+		return "change-password";
+	}
+	
+	@PostMapping("change-password")
+	private String changePasswordPost(@ModelAttribute("passwordDTO") ChangePasswordDTO passwordDTO) {
+		this.utilisateurService.ModifyPassword(passwordDTO, getCurrentUsername());
+		
+		return "redirect:/";
+	}
 }

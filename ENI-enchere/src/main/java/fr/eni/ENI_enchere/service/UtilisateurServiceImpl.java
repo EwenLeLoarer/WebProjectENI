@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import fr.eni.ENI_enchere.bo.Adresse;
 import fr.eni.ENI_enchere.bo.Utilisateur;
+import fr.eni.ENI_enchere.bo.DTO.ChangePasswordDTO;
 import fr.eni.ENI_enchere.repository.UtilisateurRepository;
 
 @Service
@@ -66,9 +67,15 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 			user.getAdresse().setNo_adresse(idAdresse);
 		}
 		this.utilisateurRepository.modifyUser(user);
-		
-		
-		
+	}
+	
+	@Override
+	public void ModifyPassword(ChangePasswordDTO dto, String pseudo) {
+		Utilisateur user = this.selectUtilisateurByPseudo(pseudo);
+		System.out.println(user);
+		if(passwordEncoder.matches(dto.getOldPassword() , user.getMot_de_passe())) {
+			System.out.println(true);
+		}
 	}
 	
 }
