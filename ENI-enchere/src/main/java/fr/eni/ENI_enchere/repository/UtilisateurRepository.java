@@ -18,5 +18,6 @@ public interface UtilisateurRepository {
 	void modifyUser(Utilisateur utilisateur);
 	void deleteByPseudo(String pseudo);
 	void ModifyById(String pseudo);
+	String GetPasswordByPseudo(String pseudo);
 }
 
