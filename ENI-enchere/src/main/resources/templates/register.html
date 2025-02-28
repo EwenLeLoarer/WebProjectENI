@@ -11,46 +11,60 @@
 	<form class="register__form" data-th-action="#{/security/create}"
 		method="post" data-th-object="${user}">
 		<ul class="register__list">
-			<li class="register__item"><label for="idPseudo">Pseudo
-					:</label> <!--  ne pas modifier le name utiliser username --> <input
+			<li class="register__item"><label for="idPseudo">Pseudo(*):</label>
+				<!--  ne pas modifier le name utiliser username --> <input
 				class="register__field" id="idPseudo" type="text"
 				data-th-field="*{pseudo}"></li>
-			<li class="register__item"><label for="idNom">Nom :</label> <!--  ne pas modifier le name utiliser username -->
+
+			<li class="register__item"><label for="idNom">Nom(*):</label> <!--  ne pas modifier le name utiliser username -->
 				<input class="register__field" id="idNom" type="text"
 				data-th-field="*{nom}"></li>
-			<li class="register__item"><label for="idPrenom">Prenom
+
+			<li class="register__item"><label for="idPrenom">Prenom(*)
 					:</label> <!--  ne pas modifier le name utiliser username --> <input
 				class="register__field" id="idPrenom" type="text"
 				data-th-field="*{prenom}"></li>
-			<li class="register__item"><label for="idEmail">Email :</label>
+
+			<li class="register__item"><label for="idEmail">Email(*):</label>
 				<!--  ne pas modifier le name utiliser username --> <input
 				class="register__field" id="idEmail" type="text"
 				data-th-field="*{email}"></li>
-			<li class="register__item"><label for="idTelephone">Telephone
-					:</label> <!--  ne pas modifier le name utiliser username --> <input
+
+			<li class="register__item"><label for="idTelephone">Telephone:</label>
+				<!--  ne pas modifier le name utiliser username --> <input
 				class="register__field" id="idTelephone" type="text"
 				data-th-field="*{telephone}"></li>
-			<li class="register__item"><label for="idMotDePasse">Mot
-					de Passe :</label> <!--  ne pas modifier le name utiliser username --> <input
-				class="register__field" id="idMotDePasse" type="text"
-				data-th-field="*{mot_de_passe}">
-			</li>
-			<li class="register__item"><label for="idRue">Adresse :</label>
+		</ul>
+
+		<ul class="register__list--address">
+			<li class="register__item"><label for="idRue">Adresse(*):</label>
 				<!--  ne pas modifier le name utiliser username --> <input
 				class="register__field" id="idRue" type="text"
 				data-th-field="*{adresse.rue}"></li>
-			<li class="register__item"><label for="idCodePostal">Code
-					Postal :</label> <!--  ne pas modifier le name utiliser username --> <input
-				class="register__field" id="idCodePostal" type="text"
-				data-th-field="*{adresse.code_postal}">
-			</li>
-			<li class="register__item"><label for="idVille">Ville :</label>
+			<li class="register__item--address"><label for="idCodePostal">Code
+					Postal(*):</label> <!--  ne pas modifier le name utiliser username --> <input
+				class="register__field register__field" id="idCodePostal"
+				type="text" data-th-field="*{adresse.code_postal}"></li>
+			<li class="register__item--address"><label for="idVille">Ville(*):</label>
 				<!--  ne pas modifier le name utiliser username --> <input
-				class="register__field" id="idVille" type="text"
+				class="register__field register__field" id="idVille" type="text"
 				data-th-field="*{adresse.ville}"></li>
-
 		</ul>
-		<button class="register__button" type="submit">S'inscrire</button>
+		<ul class="register__list">
+			<li class="register__item"><label for="idMotDePasse">Mot
+					de Passe(*):</label> <!--  ne pas modifier le name utiliser username --> <input
+				class="register__field" id="idMotDePasse" type="password"
+				data-th-field="*{mot_de_passe}"></li>
+			<li class="register__item"><label for="idValidation">Confirmation(*):</label>
+				<!--  ne pas modifier le name utiliser username --> <input
+				class="register__field" id="idValidation" type="password"
+				data-th-field="*{mot_de_passe}"></li>
+		</ul>
+		<div class=register__buttons>
+			<button class="register__button" type="submit">S'inscrire</button>
+			<a class="register__button" href="/">Annuler</a>
+		</div>
+
 	</form>
 </main>
 
