@@ -26,4 +26,13 @@ public class AdressesServiceImpl implements AdressesService {
 		return adressesRepo.createAdresse(adresse);
 	}
 
+
+
+	@Override
+	public Adresse FindAdresseByID(int id) {
+		Adresse adresse = new Adresse();
+		adresse = this.adressesRepo.FindAdresseByID(id);
+		return adresse;
+	}
+
 }

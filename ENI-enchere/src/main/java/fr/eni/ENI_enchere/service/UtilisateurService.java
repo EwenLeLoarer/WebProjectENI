@@ -6,5 +6,7 @@ import fr.eni.ENI_enchere.bo.Utilisateur;
 
 
 public interface UtilisateurService {
-	public void SaveUser(Utilisateur userAuthority);
+	public void SaveUser(Utilisateur user);
+	public Utilisateur selectUtilisateurByPseudo(String pseudo);
+	public void ModifyUser(Utilisateur user);
 }
