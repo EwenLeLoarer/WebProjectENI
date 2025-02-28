@@ -22,7 +22,7 @@ public class EnchereController {
         this.enchereService = enchereService;
     }
 
-    @GetMapping("/encheres")
+    @GetMapping("/")
     public String afficherEncheres(
             @RequestParam(name = "search", required = false, defaultValue = "") String search,
             @RequestParam(name = "categorie", required = false, defaultValue = "Toutes") String categorie,
