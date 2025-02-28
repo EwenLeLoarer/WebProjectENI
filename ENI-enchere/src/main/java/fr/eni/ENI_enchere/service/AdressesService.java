@@ -4,4 +4,5 @@ import fr.eni.ENI_enchere.bo.Adresse;
 
 public interface AdressesService {
 	public int SaveAdresse(Adresse adresse);
+	public Adresse FindAdresseByID(int id);
 }

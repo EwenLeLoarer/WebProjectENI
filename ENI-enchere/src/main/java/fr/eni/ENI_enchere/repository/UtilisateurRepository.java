@@ -14,8 +14,10 @@ import fr.eni.ENI_enchere.bo.Utilisateur;
 
 public interface UtilisateurRepository {
 	void createUtilisateur(Utilisateur utilisateur);
-	void selectUtilisateurByPseudo(String pseudo);
+	Utilisateur selectUtilisateurByPseudo(String pseudo);
+	void modifyUser(Utilisateur utilisateur);
 	void deleteByPseudo(String pseudo);
 	void ModifyById(String pseudo);
+	void ModifyPasswordByPseudo(String pseudo, String newPassword);
 }
 

@@ -40,7 +40,6 @@ public class Article {
 	@NotBlank(message = "Le prix ne peut pas être vide")
 	private Integer prixInitial;
 	
-	
 	private Integer prixVente;
 	
 	@NotNull
