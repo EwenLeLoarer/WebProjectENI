@@ -1,0 +1,5 @@
+<!-- fragment date -->
+<div class="date__container" data-th-fragment="dateName" data-th-if="${currentPage != '/login'}">
+	<p class="date__text">Date du jour: <span data-th-text="${currentDate}"></span><p>
+	<p data-sec-authorize="isAuthenticated()">Participant: <span data-th-text="${#authentication.name}"></span></p>
+</div>

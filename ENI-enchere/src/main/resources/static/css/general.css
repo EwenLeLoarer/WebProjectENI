@@ -52,8 +52,16 @@ body {
 	text-decoration: underline;	
 }
 
+/*********** DATE ***********/
+.date__container {
+	position: absolute;
+	right: 20px;
+	top: 80px;
+	padding: 20px;
+	border: 2px black solid;
+}
 /*********** LOGIN ***********/
-.login__main, .register__main {
+main {
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -68,21 +76,42 @@ body {
 	gap: 30px;
 }
 .register__form {
-	width: 300px;
+	width: 700px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	gap: 30px;
 }
-.login__list, .register__list {
+.login__list {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	gap: 30px;
+}
+.register__list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 30px;
+	justify-content: space-between;
+}
+.register__list--address {
+	width: 700px;
+	display: flex;
+	justify-content: space-between;
+}
+label[for="idCodePostal"], label[for="idVille"] {
+	visibility: hidden;
+	width: 0px;
+	overflow: hidden;
 }
 .login__item, .register__item {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
+	width: 300px;
+}
+.register__item--address {
+	display: flex;
 	align-items: center;
 }
 .login__field, .register__field {
@@ -102,12 +131,22 @@ body {
 	box-shadow: 3px 3px 0px 0px rgba(0,0,0,1);
 	cursor: pointer;
 }
+.register__buttons {
+	display: flex;
+	justify-content: space-evenly;
+}
 .register__button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: black;
 	height: 50px;
+	width: 100px;
 	background-color: white;
 	font-weight: bold;
 	box-shadow: 3px 3px 0px 0px rgba(0,0,0,1);
 	cursor: pointer;
+	border: 2px black solid;
 }
 .login__button:hover, .register__button:hover {
 	box-shadow: inset 2px 2px 0px 0px rgba(0,0,0,1);
