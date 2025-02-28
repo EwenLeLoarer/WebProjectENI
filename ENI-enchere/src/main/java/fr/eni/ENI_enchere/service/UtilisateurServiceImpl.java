@@ -3,6 +3,7 @@ package fr.eni.ENI_enchere.service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import fr.eni.ENI_enchere.bo.Adresse;
 import fr.eni.ENI_enchere.bo.Utilisateur;
 import fr.eni.ENI_enchere.repository.UtilisateurRepository;
 
@@ -38,6 +39,35 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 		utilisateur.setAdministrateur(true);
 		utilisateur.getAdresse().setNo_adresse(idAdresse);
 		this.utilisateurRepository.createUtilisateur(utilisateur);
+		
+	}
+
+
+	@Override
+	public Utilisateur selectUtilisateurByPseudo(String pseudo) {
+		Utilisateur user = new Utilisateur();
+		user = this.utilisateurRepository.selectUtilisateurByPseudo(pseudo);
+		return user;
+	}
+
+
+	@Override
+	public void ModifyUser(Utilisateur user) {
+		Adresse oldAdresse = adresseService.FindAdresseByID((int)user.getAdresse().getNo_adresse());
+		System.out.println(oldAdresse);
+		System.out.println(user.getAdresse());
+		System.out.println(oldAdresse.getCode_postal().equals(user.getAdresse().getCode_postal()));
+		if(!oldAdresse.getCode_postal().equals(user.getAdresse().getCode_postal()) &&
+				!oldAdresse.getAdresseEni().equals(user.getAdresse().getAdresseEni()) &&
+				!oldAdresse.getRue().equals(user.getAdresse().getRue()) &&
+				!oldAdresse.getVille().equals(user.getAdresse().getVille()))
+		{
+			int idAdresse = adresseService.SaveAdresse(user.getAdresse());
+			user.getAdresse().setNo_adresse(idAdresse);
+		}
+		this.utilisateurRepository.modifyUser(user);
+		
+		
 		
 	}
 	
