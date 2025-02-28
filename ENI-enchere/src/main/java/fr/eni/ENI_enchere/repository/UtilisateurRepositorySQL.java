@@ -14,11 +14,11 @@ import org.springframework.stereotype.Repository;
 import fr.eni.ENI_enchere.bo.Utilisateur;
 
 @Repository
-public class UtilisateurRepositorySQL1 implements UtilisateurRepository {
+public class UtilisateurRepositorySQL implements UtilisateurRepository {
 	private final JdbcTemplate jdbcTemplate;
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	
-	public UtilisateurRepositorySQL1(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate)
+	public UtilisateurRepositorySQL(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate)
 	{
 		super();
 		this.jdbcTemplate = jdbcTemplate;
