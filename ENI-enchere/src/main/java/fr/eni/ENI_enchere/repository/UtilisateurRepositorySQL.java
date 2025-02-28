@@ -78,7 +78,7 @@ public class UtilisateurRepositorySQL implements UtilisateurRepository {
 	@Override
 	public Utilisateur selectUtilisateurByPseudo(String pseudo) {
 		Utilisateur user = null;
-		String sql = "SELECT pseudo, nom, prenom, email, telephone, mot_de_passe, credit, administrateur, mot_de_passe, "
+		String sql = "SELECT pseudo, nom, prenom, email, telephone, mot_de_passe, credit, administrateur, "
 				+ "       u.no_adresse, a.no_adresse, active, rue, code_postal, ville, adresse_eni "
 				+ " FROM utilisateurs u "
 				+ " JOIN ADRESSES a ON u.no_adresse = a.no_adresse "
@@ -133,21 +133,14 @@ public class UtilisateurRepositorySQL implements UtilisateurRepository {
 		this.namedParameterJdbcTemplate.update(sql, map);
 	}
 
-
 	@Override
-	public String GetPasswordByPseudo(String pseudo) {
-		String result = "";
-		String sql = "select mot_de_passe from utilisateur where pseudo = :pseudo";
+	public void ModifyPasswordByPseudo(String pseudo, String newPassword) {
+		String sql = "UPDATE Utilisateurs set mot_de_passe = :newPassword WHERE pseudo = :pseudo";
 		
 		MapSqlParameterSource map = new MapSqlParameterSource();
 		map.addValue("pseudo", pseudo);
+		map.addValue("newPassword", newPassword);
 		
-		try {
-			//result =  namedParameterJdbcTemplate.query(sql,map, new UtilisateurResultSetExtractor());
-		} catch (EmptyResultDataAccessException e) {
-			//System.out.println("pas de d'id : " + user + " dans la base de données");
-			result = null;
-		}
-		return null;
+		this.namedParameterJdbcTemplate.update(sql, map);	
 	}
 }

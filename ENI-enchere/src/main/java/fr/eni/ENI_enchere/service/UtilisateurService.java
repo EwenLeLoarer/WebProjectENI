@@ -10,5 +10,5 @@ public interface UtilisateurService {
 	public void SaveUser(Utilisateur user);
 	public Utilisateur selectUtilisateurByPseudo(String pseudo);
 	public void ModifyUser(Utilisateur user);
-	void ModifyPassword(ChangePasswordDTO dto, String pseudo);
+	int ModifyPassword(ChangePasswordDTO dto, String pseudo);
 }

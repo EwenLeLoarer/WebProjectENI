@@ -28,7 +28,6 @@ public class UtilisateurResultSetExtractor implements ResultSetExtractor<Utilisa
             user.setPrenom(rs.getString("prenom"));
             user.setPseudo(rs.getString("pseudo"));
             user.setTelephone(rs.getString("telephone"));
-            
 
             adresse = new Adresse();
             adresse.setNo_adresse(rs.getInt("no_adresse"));
