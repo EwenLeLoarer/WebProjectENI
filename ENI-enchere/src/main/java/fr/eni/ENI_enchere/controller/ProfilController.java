@@ -8,8 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.eni.ENI_enchere.bo.Utilisateur;
 import fr.eni.ENI_enchere.bo.DTO.ChangePasswordDTO;
@@ -22,18 +24,18 @@ import fr.eni.ENI_enchere.service.UtilisateurService;
 public class ProfilController {
     @Autowired
     private UtilisateurService utilisateurService;
-	
-    @GetMapping
-	public String profile(Model model) {
-		
-		String username = getCurrentUsername();
-		Utilisateur user = utilisateurService.selectUtilisateurByPseudo(username);
-		System.out.println(user);
-        // Add the user to the model to display it in the view
-        model.addAttribute("user", user);
-		
-		return "profil";
-	}
+    
+    @GetMapping("/{name}")
+    public String viewProfile(@PathVariable("name") String name, Model model) {
+    	String username = getCurrentUsername();
+    	
+    	Utilisateur user = utilisateurService.selectUtilisateurByPseudo(name); // Get the user being viewed
+    	Utilisateur loggedInUser = utilisateurService.selectUtilisateurByPseudo(username); // Get the logged-in user
+    	System.out.println(user);
+    	model.addAttribute("user", user);
+    	model.addAttribute("loggedInUser", loggedInUser);
+    	return "profil";
+    }
 	
     @GetMapping("/edit")
 	public String editProfile(Model model) {
@@ -57,17 +59,7 @@ public class ProfilController {
 		return "redirect:/";
 	}
 	
-	private String getCurrentUsername() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Object principal = authentication.getPrincipal();
 
-        // Check if the principal is an instance of UserDetails (which it should be for an authenticated user)
-        if (principal instanceof UserDetails) {
-            return ((UserDetails) principal).getUsername();
-        }
-        // If not authenticated, return null or throw an exception, depending on your use case
-        return null;
-    }
 	
 	@GetMapping("change-password")
 	private String changePasswordGet(Model model) {
@@ -82,4 +74,16 @@ public class ProfilController {
 		
 		return "redirect:/";
 	}
+	
+	private String getCurrentUsername() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+
+        // Check if the principal is an instance of UserDetails (which it should be for an authenticated user)
+        if (principal instanceof UserDetails) {
+            return ((UserDetails) principal).getUsername();
+        }
+        // If not authenticated, return null or throw an exception, depending on your use case
+        return null;
+    }
 }
