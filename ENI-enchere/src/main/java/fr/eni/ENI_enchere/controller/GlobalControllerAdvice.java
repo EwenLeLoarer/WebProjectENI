@@ -11,7 +11,6 @@ public class GlobalControllerAdvice {
 	@ModelAttribute("currentPage")
 	public String getCurrentPage(HttpServletRequest request) {
 		String uri = request.getRequestURI();
-		System.out.println("Current Page URI: " + uri);
 		return uri;
 	}
 }

@@ -5,9 +5,6 @@
 <link rel="stylesheet" href="/css/general.css">
 </head>
 <body>
-	<!--  insertion du fragment header -->
-	<!--<div data-th-insert="~{fragments/fragment-header :: headerName}"></div>-->
-	<!-- remplacement par le fragment header -->
 	<div data-th-replace="~{fragments/fragment-header :: headerName}"></div>
 	
 	<main data-th-replace=${content}></main>
