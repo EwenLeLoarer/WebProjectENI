@@ -18,6 +18,10 @@ tasks.withType(JavaCompile) {
     options.annotationProcessorPath = configurations.annotationProcessor
 }
 
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-parameters"
+}
+
 repositories {
 	mavenCentral()
 }

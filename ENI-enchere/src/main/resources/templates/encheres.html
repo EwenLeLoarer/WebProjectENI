@@ -1,78 +1,74 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="UTF-8">
-    <title>Liste des Enchères</title>
-    <style>
-        .article-card {
-            border: 1px solid #999;
-            padding: 10px;
-            margin: 10px;
-            display: inline-block;
-            width: 250px;
-            vertical-align: top;
-        }
-        .article-image {
-            width: 100px;
-            height: 100px;
-            background-color: lightgray;
-            margin-bottom: 10px;
-            text-align: center;
-            line-height: 100px;
-        }
-        .article-title {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .article-info {
-            margin-bottom: 5px;
-        }
-    </style>
+    <title>Liste des enchères</title>
+    <script src="/js/script.js" defer></script>
 </head>
 <body>
-    <!-- Section de filtrage -->
-    <section>
-        <form th:action="@{/encheres}" method="post">
-            <input type="text"
-                   name="search"
-                   th:value="${search}"
-                   placeholder="Le nom de l'article contient..." />
+    <h1>Liste des enchères</h1>
 
-            <select name="categorie">
-                <option value="Toutes" th:selected="${categorie=='Toutes'}">Toutes</option>
-                <option value="1" th:selected="${categorie=='1'}">Ameublement</option>
-                <option value="2" th:selected="${categorie=='2'}">Informatique</option>
-                <option value="3" th:selected="${categorie=='3'}">Sport &amp; Loisir</option>
-                <option value="4" th:selected="${categorie=='4'}">Vêtement</option>
-            </select>
+    <!-- Formulaire de recherche global -->
+    <form method="get" action="/encheres">
+        <input type="text" name="search" placeholder="Rechercher un article..." th:value="${search}" />
 
-            <button type="submit">Rechercher</button>
-            <button type="button" onclick="window.location.href='/encheres'">Annuler</button>
-        </form>
-    </section>
+        <!-- Filtrage par catégorie -->
+        <select name="categorie">
+            <option value="Toutes" th:selected="${categorie == 'Toutes'}">Toutes les catégories</option>
+            <option value="1" th:selected="${categorie == '1'}">Électronique</option>
+            <option value="2" th:selected="${categorie == '2'}">Mode</option>
+            <option value="3" th:selected="${categorie == '3'}">Maison</option>
+            <option value="4" th:selected="${categorie == '4'}">Loisirs</option>
+        </select>
 
-    <!-- Section d'affichage des articles sous forme de "cartes" -->
-    <section>
-        <div th:if="${#lists.isEmpty(encheres)}">
-            <p>Aucune enchère ne correspond à votre recherche.</p>
+        <!-- Tri -->
+        <select name="tri">
+            <option value="date" th:selected="${tri == 'date'}">Date de fin</option>
+            <option value="prixAsc" th:selected="${tri == 'prixAsc'}">Prix croissant</option>
+            <option value="prixDesc" th:selected="${tri == 'prixDesc'}">Prix décroissant</option>
+        </select>
+
+        <button type="submit">Filtrer</button>
+
+        <!-- Section de filtres spécifiques pour utilisateurs connectés -->
+        <div sec:authorize="isAuthenticated()">
+            <section id="filters">
+                <!-- Radio pour Achats -->
+                <label>
+                    <input type="radio" name="filterType" value="achats" 
+                           th:checked="${filterType == null or filterType == 'achats'}" /> Achats
+                </label>
+                <select id="achats-options" name="filterValue" 
+                        th:disabled="${filterType != null and filterType != 'achats'}">
+                    <option value="ouvertes" th:selected="${filterValue == null or filterValue == 'ouvertes'}">Enchères ouvertes</option>
+                    <option value="cours" th:selected="${filterValue == 'cours'}">Mes enchères en cours</option>
+                    <option value="remportees" th:selected="${filterValue == 'remportees'}">Mes enchères remportées</option>
+                </select>
+
+                <!-- Radio pour Ventes -->
+                <label>
+                    <input type="radio" name="filterType" value="ventes" 
+                           th:checked="${filterType == 'ventes'}" /> Mes ventes
+                </label>
+                <select id="ventes-options" name="filterValue" 
+                        th:disabled="${filterType != 'ventes'}">
+                    <option value="cours" th:selected="${filterValue == 'cours'}">Mes ventes en cours</option>
+                    <option value="non-debutees" th:selected="${filterValue == 'non-debutees'}">Mes ventes non débutées</option>
+                    <option value="terminees" th:selected="${filterValue == 'terminees'}">Mes ventes terminées</option>
+                </select>
+            </section>
         </div>
+    </form>
 
-        <div th:each="article : ${encheres}" class="article-card">
-            <div class="article-image">Image</div>
-            <div class="article-title" th:text="${article.nom_article}">Nom de l'article</div>
-            <div class="article-info">
-                Prix :
-                <span th:text="${article.prixVente}">0</span> point(s)
-            </div>
-            <div class="article-info">
-                Fin de l'enchère :
-                <span th:text="${#temporals.format(article.dateFinEncheres, 'dd/MM/yyyy')}">01/01/2025</span>
-            </div>
-            <div class="article-info">
-                Vendeur :
-                <span th:text="${article.id_utilisateur}">Pseudo vendeur</span>
-            </div>
+    <!-- Affichage des articles -->
+    <div>
+        <div th:each="article : ${encheres}">
+            <h3 th:text="${article.nom_article}"></h3>
+            <p th:text="${article.description}"></p>
+            <p>Prix actuel : <span th:text="${article.prixVente}"></span> €</p>
+            <p>Date fin : <span th:text="${article.dateFinEncheres}"></span></p>
+            <p>Vendeur : <span th:text="${article.id_utilisateur}"></span></p>
         </div>
-    </section>
+    </div>
 </body>
 </html>
