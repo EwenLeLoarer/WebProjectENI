@@ -11,7 +11,9 @@ import jakarta.servlet.http.HttpServletRequest;
 @Controller
 public class loginController {
 	@GetMapping("/login")
-	public String login() {
+	public String login(Model model) {
+		 model.addAttribute("title", "Login Page");
+	     model.addAttribute("content", "loginContent");
 		return "login";
 	}
 }

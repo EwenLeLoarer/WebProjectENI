@@ -51,6 +51,7 @@ public class SecurityConfig {
 					auth.requestMatchers("/image/*").permitAll();
 					
 					//refuse toutes autre url
+					//a re changer
 					auth.anyRequest().permitAll();	
 				});
 		
