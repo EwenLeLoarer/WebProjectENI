@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Enchères</title>
+    <style>
+        .article-card {
+            border: 1px solid #999;
+            padding: 10px;
+            margin: 10px;
+            display: inline-block;
+            width: 250px;
+            vertical-align: top;
+        }
+        .article-image {
+            width: 100px;
+            height: 100px;
+            background-color: lightgray;
+            margin-bottom: 10px;
+            text-align: center;
+            line-height: 100px;
+        }
+        .article-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .article-info {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Section de filtrage -->
+    <section>
+        <form th:action="@{/encheres}" method="post">
+            <input type="text"
+                   name="search"
+                   th:value="${search}"
+                   placeholder="Le nom de l'article contient..." />
+
+            <select name="categorie">
+                <option value="Toutes" th:selected="${categorie=='Toutes'}">Toutes</option>
+                <option value="1" th:selected="${categorie=='1'}">Ameublement</option>
+                <option value="2" th:selected="${categorie=='2'}">Informatique</option>
+                <option value="3" th:selected="${categorie=='3'}">Sport &amp; Loisir</option>
+                <option value="4" th:selected="${categorie=='4'}">Vêtement</option>
+            </select>
+
+            <button type="submit">Rechercher</button>
+            <button type="button" onclick="window.location.href='/encheres'">Annuler</button>
+        </form>
+    </section>
+
+    <!-- Section d'affichage des articles sous forme de "cartes" -->
+    <section>
+        <div th:if="${#lists.isEmpty(encheres)}">
+            <p>Aucune enchère ne correspond à votre recherche.</p>
+        </div>
+
+        <div th:each="article : ${encheres}" class="article-card">
+            <div class="article-image">Image</div>
+            <div class="article-title" th:text="${article.nom_article}">Nom de l'article</div>
+            <div class="article-info">
+                Prix :
+                <span th:text="${article.prixVente}">0</span> point(s)
+            </div>
+            <div class="article-info">
+                Fin de l'enchère :
+                <span th:text="${#temporals.format(article.dateFinEncheres, 'dd/MM/yyyy')}">01/01/2025</span>
+            </div>
+            <div class="article-info">
+                Vendeur :
+                <span th:text="${article.id_utilisateur}">Pseudo vendeur</span>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
