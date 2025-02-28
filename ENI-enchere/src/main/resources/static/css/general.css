@@ -20,7 +20,18 @@ body {
 	width: 100%;
 	height: 100%;
 }
-
+main {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 60px;
+}
+h1 {
+	font-size: 30px;
+}
 /*********** HEADER ***********/
 .main__header {
 	position: fixed;
@@ -60,14 +71,8 @@ body {
 	padding: 20px;
 	border: 2px black solid;
 }
-/*********** LOGIN ***********/
-main {
-	width: 100%;
-	height: 100%;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-}
+/*********** LOGIN AND REGISTER ***********/
+
 .login__form {
 	width: 300px;
 	display: flex;
@@ -75,7 +80,7 @@ main {
 	justify-content: space-between;
 	gap: 30px;
 }
-.register__form {
+.register__form, .profil__form {
 	width: 700px;
 	display: flex;
 	flex-direction: column;
@@ -169,3 +174,6 @@ label[for="idCodePostal"], label[for="idVille"] {
 .login__register:hover {
 	box-shadow: inset 2px 2px 0px 0px rgba(0,0,0,1);
 }
+
+/*********** PROFIL ***********/
+
