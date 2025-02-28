@@ -32,10 +32,19 @@ public class ArticleRepository {
     // Retourne les enchères remportées par l'utilisateur (exemple : statut = 2)
     public List<Article> getMesEncheresRemportees(String pseudo) {
         String sql = "SELECT * FROM ARTICLES_A_VENDRE " +
-                     "WHERE id_utilisateur <> ? AND statut_enchere = 2 " +
-                     "AND no_article IN (SELECT no_article FROM ENCHERES WHERE id_utilisateur = ?)";
-        return jdbcTemplate.query(sql, new ArticleRowMapper(), pseudo, pseudo);
+                     "WHERE statut_enchere = 2 " +  // L'enchère doit être clôturée
+                     "AND no_article IN (" +
+                     "    SELECT no_article FROM ENCHERES " +
+                     "    WHERE id_utilisateur = ? " +
+                     "    AND montant_enchere = (" +
+                     "        SELECT MAX(montant_enchere) " +
+                     "        FROM ENCHERES " +
+                     "        WHERE no_article = ARTICLES_A_VENDRE.no_article" +
+                     "    )" +
+                     ")";
+        return jdbcTemplate.query(sql, new ArticleRowMapper(), pseudo);
     }
+
 
     // Retourne les ventes actives créées par l'utilisateur
     public List<Article> getMesVentesEnCours(String pseudo) {
