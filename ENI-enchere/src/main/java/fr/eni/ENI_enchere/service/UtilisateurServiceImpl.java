@@ -70,12 +70,20 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 	}
 	
 	@Override
-	public void ModifyPassword(ChangePasswordDTO dto, String pseudo) {
+	public int ModifyPassword(ChangePasswordDTO dto, String pseudo) {
 		Utilisateur user = this.selectUtilisateurByPseudo(pseudo);
-		System.out.println(user);
-		if(passwordEncoder.matches(dto.getOldPassword() , user.getMot_de_passe())) {
-			System.out.println(true);
+		//faire le regex du nouveau mot de passe
+		if(dto.getNewPassword() != dto.getConfirmPassword())
+		{
+			//envoyer un erreur que les mot des passe de sont pas identiques
+			return 0;
 		}
+		
+		if(passwordEncoder.matches(dto.getOldPassword() , user.getMot_de_passe())) {
+			String bcryptPass = passwordEncoder.encode(dto.getNewPassword());
+			this.utilisateurRepository.ModifyPasswordByPseudo(pseudo, bcryptPass);
+		}
+		return 0;
 	}
 	
 }
