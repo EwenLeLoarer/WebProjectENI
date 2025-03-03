@@ -63,4 +63,29 @@ public class ArticleRepository {
         String sql = "SELECT * FROM ARTICLES_A_VENDRE WHERE id_utilisateur = ? AND statut_enchere = 2";
         return jdbcTemplate.query(sql, new ArticleRowMapper(), pseudo);
     }
+    
+    // CREATE new article
+    public void insertArticle(Article article) {
+        String sql = """
+            INSERT INTO ARTICLES_A_VENDRE
+            (nom_article, description, date_debut_encheres, date_fin_encheres, statut_enchere,
+             prix_initial, prix_vente, id_utilisateur, no_categorie, no_adresse_retrait)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """;
+        // prixVente peut être nul => on gère avec un check
+        Integer prixVente = article.getPrixInitial();
+
+        jdbcTemplate.update(sql,
+                article.getNom_article(),
+                article.getDescription(),
+                article.getDateDebutEncheres(),
+                article.getDateFinEncheres(),
+                article.getStatut(),
+                article.getPrixInitial(),
+                prixVente,
+                article.getId_utilisateur(),
+                article.getNo_categorie(),
+                article.getNo_adresse_retrait()
+        );
+    }
 }

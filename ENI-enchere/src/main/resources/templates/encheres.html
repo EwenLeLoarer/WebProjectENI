@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <title>Liste des enchères</title>
-    <script src="/js/script.js" defer></script>
-</head>
-<body>
+
+<html 
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      data-th-replace="~{layouts/fragment-layout :: layoutName (
+							title= ~{ :: title},
+							content = ~{ :: main})}">
+<title>Liste des encheres</title>
+<main>
     <h1>Liste des enchères</h1>
 
     <!-- Formulaire de recherche global -->
@@ -70,5 +71,5 @@
             <p>Vendeur : <span th:text="${article.id_utilisateur}"></span></p>
         </div>
     </div>
-</body>
+</main>
 </html>
