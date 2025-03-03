@@ -27,22 +27,33 @@
 					
 				</li>
 				<li>
-					<label for="idArticle">Vendeur: </label>
-					<input id="idArticle" type="text" data-th-field="*{utilisateur.pseudo}" disabled>
+					<label for="idVendeur">Vendeur: </label>
+					<input id="idVendeur" type="text" data-th-field="*{utilisateur.pseudo}" disabled>
 				</li>
 				<li>
-					<label for="idArticle">Mise a prix: </label>
+					<label for="idMiseAPrix">Mise a prix: </label>
 					<input id="idArticle" type="text" data-th-field="*{prixInitial}" disabled>
 				</li>
 				<li>
-					<label for="idArticle">Meilleur offre: </label>
+					<label for="idMeilleurOffre">Meilleur offre: </label>
 					<input id="idArticle" type="text" data-th-field="*{prixVente}" disabled>
 				</li>
 				<li>
-					<label for="idArticle">Fin de l'enchere: </label>
-					<input id="idArticle" type="text" data-th-field="*{dateFinEncheres}" disabled>
+					<label for="idFinDeLEnchere">Fin de l'enchere: </label>
+					<input id="idFinDeLEnchere" type="text" data-th-field="*{dateFinEncheres}" disabled>
 				</li>
 			</ul>
+		</form>
+		<form data-th-action="#{/enchere/miser}" method="POST" data-th-object="${article}">
+			<ul>
+				<li>
+					<label for="idEncherire">encherire: </label>
+					<input id="idEncherire" type="number" data-th-field="*{dateFinEncheres}">
+				</li>
+			</ul>
+			<div>
+				<button type="submit">miser</button>
+			</div>
 		</form>
 	</main>
 </html>
