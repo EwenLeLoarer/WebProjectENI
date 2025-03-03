@@ -4,6 +4,7 @@ import fr.eni.ENI_enchere.bo.Article;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -86,6 +87,40 @@ public class ArticleRepository {
                 article.getId_utilisateur(),
                 article.getNo_categorie(),
                 article.getNo_adresse_retrait()
+        );
+    }
+
+    public List<Article> findArticlesByDateDebutEncheresAndStatut(LocalDate dateDebutEncheres, int statut) {
+        String sql = "SELECT * FROM ARTICLES_A_VENDRE WHERE date_debut_encheres = ? AND statut_enchere = ?";
+        return jdbcTemplate.query(sql, new ArticleRowMapper(), dateDebutEncheres, statut);
+    }
+    
+    public List<Article> findArticlesByDateFinEncheresAndStatut(LocalDate dateFinEncheres, int statut) {
+        String sql = "SELECT * FROM ARTICLES_A_VENDRE WHERE date_fin_encheres = ? AND statut_enchere = ?";
+        return jdbcTemplate.query(sql, new ArticleRowMapper(), dateFinEncheres, statut);
+    }
+
+    public void save(Article article) {
+        String sql = """
+            UPDATE ARTICLES_A_VENDRE 
+            SET nom_article = ?, description = ?, date_debut_encheres = ?, date_fin_encheres = ?, 
+                statut_enchere = ?, prix_initial = ?, prix_vente = ?, id_utilisateur = ?, 
+                no_categorie = ?, no_adresse_retrait = ?
+            WHERE no_article = ?
+        """;
+
+        jdbcTemplate.update(sql,
+            article.getNom_article(),
+            article.getDescription(),
+            article.getDateDebutEncheres(),
+            article.getDateFinEncheres(),
+            article.getStatut(),
+            article.getPrixInitial(),
+            article.getPrixVente(),
+            article.getId_utilisateur(),
+            article.getNo_categorie(),
+            article.getNo_adresse_retrait(),
+            article.getNo_article()
         );
     }
 }
