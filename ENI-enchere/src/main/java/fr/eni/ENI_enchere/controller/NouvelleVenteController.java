@@ -2,6 +2,7 @@ package fr.eni.ENI_enchere.controller;
 
 import fr.eni.ENI_enchere.bo.Article;
 import fr.eni.ENI_enchere.bo.Categorie;
+import fr.eni.ENI_enchere.bo.Utilisateur;
 import fr.eni.ENI_enchere.bo.Adresse;
 import fr.eni.ENI_enchere.service.NouvelleVenteService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -137,15 +138,24 @@ public class NouvelleVenteController {
 
         // **Création et sauvegarde de l'article**
         Article article = new Article();
+        Categorie categorieArticle = new Categorie();
+        Adresse adresseArticle = new Adresse();
+        Utilisateur userArticle = new Utilisateur();
         article.setNom_article(nomArticle);
         article.setPrixInitial(prixInitial);
-        article.setNo_categorie(noCategorie);
+        //article.setNo_categorie(noCategorie);
+        categorieArticle.setNo_categorie(Long.parseLong(utilisateur));
         article.setDescription(description);
-        article.setNo_adresse_retrait(noAdresseRetrait);
+        adresseArticle.setNo_adresse(noAdresseRetrait);
+        //article.setNo_adresse_retrait(noAdresseRetrait);
         article.setDateDebutEncheres(debut);
         article.setDateFinEncheres(fin);
         article.setStatut(debut.isAfter(today) ? 0 : 1);
-        article.setId_utilisateur(utilisateur);
+        userArticle.setPseudo(utilisateur);
+        //article.setId_utilisateur(utilisateur);
+        article.setAdresse_retrait(adresseArticle);
+        article.setCategorie(categorieArticle);
+        article.setUtilisateur(userArticle);
 
         venteService.creerArticle(article);
 

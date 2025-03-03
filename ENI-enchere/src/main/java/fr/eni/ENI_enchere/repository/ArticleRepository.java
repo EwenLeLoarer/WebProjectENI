@@ -8,19 +8,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public class ArticleRepository {
-
-    private final JdbcTemplate jdbcTemplate;
-
-    public ArticleRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+public interface ArticleRepository {
 
     // Retourne toutes les enchères actives (statut = 1)
-    public List<Article> getAllEncheres() {
-        String sql = "SELECT * FROM ARTICLES_A_VENDRE WHERE statut_enchere = 1";
-        return jdbcTemplate.query(sql, new ArticleRowMapper());
-    }
+    public List<Article> getAllEncheres();
 
     // Retourne les enchères où l'utilisateur a enchéri et qui sont actives
     public List<Article> getMesEncheresEnCours(String pseudo) {
@@ -84,9 +75,9 @@ public class ArticleRepository {
                 article.getStatut(),
                 article.getPrixInitial(),
                 prixVente,
-                article.getId_utilisateur(),
-                article.getNo_categorie(),
-                article.getNo_adresse_retrait()
+                article.getUtilisateur().getPseudo(),
+                article.getCategorie().getNo_categorie(),
+                article.getAdresse_retrait().getNo_adresse()
         );
     }
 
@@ -117,9 +108,9 @@ public class ArticleRepository {
             article.getStatut(),
             article.getPrixInitial(),
             article.getPrixVente(),
-            article.getId_utilisateur(),
-            article.getNo_categorie(),
-            article.getNo_adresse_retrait(),
+            article.getUtilisateur().getPseudo(),
+            article.getCategorie().getNo_categorie(),
+            article.getAdresse_retrait().getNo_adresse(),
             article.getNo_article()
         );
     }

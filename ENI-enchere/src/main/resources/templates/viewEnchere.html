@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html data-th-replace="~{layouts/fragment-layout :: layoutName (
+							title= ~{ :: title},
+							content = ~{ :: main})}">
+	
+	<!--  tire passé en paramètre -->					
+	<title>Profile</title>		
+	
+	<main>
+		<form data-th-action="#{/enchere/miser}" method="POST" data-th-object="${article}">
+			<ul class="flex-outer">
+				<li>
+					<label for="idArticle">Article: </label>
+					<input id="idArticle" type="text" data-th-field="*{nom_article}" disabled>
+				</li>
+				<li>
+					<label for="Categorie">Categorie: </label>
+					<input id="idArticle" type="text" data-th-field="*{nom_article}" disabled>
+				</li>
+				<li>
+					<label for="idArticle">Article: </label>
+					<input id="idArticle" type="text" data-th-field="*{nom_article}" disabled>
+				</li>
+				<li>
+					<label for="idArticle">Article: </label>
+					<input id="idArticle" type="text" data-th-field="*{nom_article}" disabled>
+				</li>
+				<li>
+					<label for="idArticle">Article: </label>
+					<input id="idArticle" type="text" data-th-field="*{nom_article}" disabled>
+				</li>
+				<li>
+					<label for="idArticle">Article: </label>
+					<input id="idArticle" type="text" data-th-field="*{nom_article}" disabled>
+				</li>
+				<li>
+					<label for="idArticle">Article: </label>
+					<input id="idArticle" type="text" data-th-field="*{nom_article}" disabled>
+				</li>
+				<li>
+					<label for="idArticle">Article: </label>
+					<input id="idArticle" type="text" data-th-field="*{nom_article}" disabled>
+				</li>
+			</ul>
+		</form>
+	</main>
+</html>
