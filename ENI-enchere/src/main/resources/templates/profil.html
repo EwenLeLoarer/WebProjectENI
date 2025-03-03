@@ -8,116 +8,24 @@
 <title>Profile</title>
 
 <main>
-	<h1
-		data-th-if="${loggedInUser != null and user.pseudo == loggedInUser.pseudo}">Mon
-		Profil</h1>
-	<h1
-		data-th-if="${loggedInUser == null or user.pseudo != loggedInUser.pseudo}"
-		data-th-text="${user.pseudo}"></h1>
-	<ul class="profil__list--other"
-		data-th-if="${loggedInUser == null or user.pseudo != loggedInUser.pseudo}"
-		data-th-object="${user}">
+
+	<h1 data-th-text="${user.pseudo}"></h1>
+	<ul class="profil__list--other" data-th-object="${user}">
 		<li class="profil__item"><p class="profil__text">Prénom:</p> <!--  ne pas modifier le name utiliser username -->
 			<span class="profil__data--other" data-th-text="*{prenom}"></span></li>
-			<li class="profil__item"><p class="profil__text">Nom:</p> <!--  ne pas modifier le name utiliser username -->
+		<li class="profil__item"><p class="profil__text">Nom:</p> <!--  ne pas modifier le name utiliser username -->
 			<span class="profil__data--other" data-th-text="*{nom}"></span></li>
-			<li class="profil__item"><p class="profil__text">Email:</p> <!--  ne pas modifier le name utiliser username -->
+		<li class="profil__item"><p class="profil__text">Email:</p> <!--  ne pas modifier le name utiliser username -->
 			<span class="profil__data--other" data-th-text="*{email}"></span></li>
-			<li class="profil__item"><p class="profil__text">Téléphone:</p> <!--  ne pas modifier le name utiliser username -->
+		<li class="profil__item"><p class="profil__text">Téléphone:</p> <!--  ne pas modifier le name utiliser username -->
 			<span class="profil__data--other" data-th-text="*{telephone}"></span></li>
 	</ul>
-	<form
+	<a
 		data-th-if="${loggedInUser != null and user.pseudo == loggedInUser.pseudo}"
-		class="profil__form" data-th-action="@{/profil/edit}" method="post"
-		data-th-object="${user}">
-		<ul class="profil__list">
-			<li class="profil__item">
-				<p class="profil__text">Pseudo:</p> <!--  ne pas modifier le name utiliser username -->
-				<span class="profil__data" data-th-text="*{pseudo}"></span>
-			</li>
-			<li class="profil__item"><label for="idNom">Nom:</label> <!--  ne pas modifier le name utiliser username -->
-				<input class="profil__field" id="idNom" type="text"
-				data-th-field="*{nom}"></li>
-			<li class="profil__item"><label for="idPrenom">Prenom:</label> <!--  ne pas modifier le name utiliser username -->
-				<input class="profil__field" id="idPrenom" type="text"
-				data-th-field="*{prenom}"></li>
-			<li class="profil__item"><label for="idEmail">Email:</label> <!--  ne pas modifier le name utiliser username -->
-				<input class="profil__field" id="idEmail" type="text"
-				data-th-field="*{email}"></li>
-			<li class="profil__item"><label for="idTelephone">Telephone:</label>
-				<!--  ne pas modifier le name utiliser username --> <input
-				class="profil__field" id="idTelephone" type="text"
-				data-th-field="*{telephone}"></li>
-		</ul>
-		<ul class="profil__list--address">
-			<li class="profil__item"><label for="idRue">Adresse:</label> <!--  ne pas modifier le name utiliser username -->
-				<input class="profil__field" id="idRue" type="text"
-				placeholder="ta rue" data-th-field="*{adresse.rue}"></li>
-			<li class="profil__item--address"><label for="idCodePostal">Code
-					Postal</label> <!--  ne pas modifier le name utiliser username --> <input
-				class="profil__field" id="idCodePostal" type="text"
-				placeholder="ton code postal" data-th-field="*{adresse.code_postal}"></li>
-			<li class="profil__item--address"><label for="idVille">Ville</label>
-				<!--  ne pas modifier le name utiliser username --> <input
-				class="profil__field" id="idVille" type="text"
-				placeholder="ta ville" data-th-field="*{adresse.ville}"></li>
-		</ul>
-		<ul class="profil__list">
-			<li class="profil__item">
-				<p class="profil__text">Mon crédit:</p> <!--  ne pas modifier le name utiliser username -->
-				<span class="profil__data" data-th-text="*{credit}"></span>
-			</li>
-		</ul>
-		<ul>
-			<li class="profil__item">
-				<!--  ne pas modifier le name utiliser username --> <input
-				class="profil__field" id="idAdresseEni"
-				placeholder="est une adresse eni"
-				data-th-field="*{adresse.adresseEni}" type="hidden"
-				readonly="readonly">
-			</li>
-			<li class="profil__item">
-				<!--  ne pas modifier le name utiliser username --> <input
-				class="read-only" id="idnumero_eni" type="hidden" placeholder=""
-				data-th-field="*{adresse.no_adresse}">
-			</li>
-			<li class="profil__item">
-				<!--  ne pas modifier le name utiliser username --> <input
-				class="read-only" id="idmot_de_passe" type="hidden" placeholder=""
-				data-th-field="*{mot_de_passe}">
-			</li>
-			<li class="profil__item">
-				<!--  ne pas modifier le name utiliser username --> <input
-				class="read-only" id="idactive" type="hidden" placeholder=""
-				data-th-field="*{active}">
-			</li>
-
-			<li class="profil__item">
-				<!--  ne pas modifier le name utiliser username --> <input
-				class="read-only" id="idadministrateur" type="hidden" placeholder=""
-				data-th-field="*{administrateur}">
-			</li>
-			<li class="profil__item">
-				<!--  ne pas modifier le name utiliser username --> <input
-				class="read-only" id="idPseudo" type="hidden" placeholder=""
-				data-th-field="*{pseudo}">
-			</li>
-		</ul>
-		<div class="profil__buttons">
-			<button class="profil__button button" type="submit">Modifier</button>
-			<a class="profil__button button" href="/profil/change-password">Modifier
-				mot de passe</a>
-			<button class="profil__button button" type="submit"
-				formaction="/profil/delete" formmethod="post"
-				onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">
-				Supprimer mon compte</button>
-
-		</div>
-
-	</form>
-	<a class="profil__cancel profil__button button"
-		data-th-if="${loggedInUser != null and user.pseudo == loggedInUser.pseudo}"
-		data-th-href="@{'/profil/' + ${#authentication.name}}">Annuler</a>
+		href="/profil/edit" class="button profil__button">Modifier</a>
+		<a
+		data-th-if="${loggedInUser == null or user.pseudo != loggedInUser.pseudo}"
+		href="/" class="button profil__button">Retour</a>
 </main>
 
 </html>
