@@ -10,7 +10,7 @@
     <h1>Liste des enchères</h1>
 
     <!-- Formulaire de recherche global -->
-    <form method="get" action="/encheres">
+    <form method="get" action="/">
         <input type="text" name="search" placeholder="Rechercher un article..." th:value="${search}" />
 
         <!-- Filtrage par catégorie -->
@@ -64,11 +64,19 @@
     <!-- Affichage des articles -->
     <div>
         <div th:each="article : ${encheres}">
-            <h3 th:text="${article.nom_article}"></h3>
+	        <a  th:href="@{'/enchere/' + ${article.no_article}}">
+	        	<h3 th:text="${article.nom_article}"></h3>
+	        </a>
             <p th:text="${article.description}"></p>
             <p>Prix actuel : <span th:text="${article.prixVente}"></span> €</p>
             <p>Date fin : <span th:text="${article.dateFinEncheres}"></span></p>
-            <p>Vendeur : <span th:text="${article.id_utilisateur}"></span></p>
+            <p>Vendeur : 
+            	<a th:href="@{'/profil/' + ${article.utilisateur.pseudo}}">
+            		<span th:text="${article.utilisateur.pseudo}" ></span>
+            	</a>
+            </p>
+
+            
         </div>
     </div>
 </main>

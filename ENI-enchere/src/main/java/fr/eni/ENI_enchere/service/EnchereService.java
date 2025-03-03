@@ -1,7 +1,7 @@
 package fr.eni.ENI_enchere.service;
 
 import fr.eni.ENI_enchere.bo.Article;
-import fr.eni.ENI_enchere.repository.ArticleRepository;
+import fr.eni.ENI_enchere.repository.ArticleRepositorySQL;
 
 import org.springframework.stereotype.Service;
 
@@ -10,9 +10,9 @@ import java.util.List;
 @Service
 public class EnchereService {
 
-    private final ArticleRepository repository;
+    private final ArticleRepositorySQL repository;
 
-    public EnchereService(ArticleRepository repository) {
+    public EnchereService(ArticleRepositorySQL repository) {
         this.repository = repository;
     }
 

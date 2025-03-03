@@ -45,13 +45,13 @@ public class Article {
 	@NotNull
 	@NotBlank(message = "Le pseudo de l'utilisateur ne peut pas être vide")
 	@Size(max = 30, message = "Le pseudo de l'utilisateur ne peut pas dépasser 30 caractères")
-	private String id_utilisateur;
+	private Utilisateur utilisateur;
 	
 	@NotNull
 	@NotBlank(message = "Le catégorie ne peut pas être vide")
-	private Integer no_categorie;
+	private Categorie categorie;
 	
 	@NotNull
 	@NotBlank(message = "L'adresse pour retirer l'article ne peut pas être vide")
-	private Integer no_adresse_retrait;
+	private Adresse adresse_retrait;
 }
