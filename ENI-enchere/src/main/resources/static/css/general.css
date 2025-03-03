@@ -32,6 +32,12 @@ main {
 h1 {
 	font-size: 30px;
 }
+label {
+	width: 100px;
+}
+input {
+	padding-left: 3px;
+}
 /*********** HEADER ***********/
 .main__header {
 	position: fixed;
@@ -93,13 +99,13 @@ h1 {
 	justify-content: space-between;
 	gap: 30px;
 }
-.register__list {
+.register__list, .profil__list {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 30px;
 	justify-content: space-between;
 }
-.register__list--address {
+.register__list--address, .profil__list--address {
 	width: 700px;
 	display: flex;
 	justify-content: space-between;
@@ -109,17 +115,19 @@ label[for="idCodePostal"], label[for="idVille"] {
 	width: 0px;
 	overflow: hidden;
 }
-.login__item, .register__item {
+.login__item, .register__item, .profil__item {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	width: 300px;
+	gap: 30px;
 }
-.register__item--address {
+.register__item--address, .profil__item--address {
 	display: flex;
 	align-items: center;
 }
-.login__field, .register__field {
+.login__field, .register__field, .profil__field {
+	flex-grow: 2;
 	height: 30px;
 	border: 2px black solid;
 }
@@ -128,13 +136,20 @@ label[for="idCodePostal"], label[for="idVille"] {
 	justify-content: space-between;
 	align-items: end;
 }
-.login__button {
+.button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	height: 50px;
-	padding: 0 20px;
 	background-color: white;
 	font-weight: bold;
 	box-shadow: 3px 3px 0px 0px rgba(0,0,0,1);
 	cursor: pointer;
+	color: black;
+	border: 2px black solid;
+}
+.login__button {
+	padding: 0 20px;
 }
 .register__buttons {
 	display: flex;
@@ -144,16 +159,10 @@ label[for="idCodePostal"], label[for="idVille"] {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	color: black;
-	height: 50px;
 	width: 100px;
-	background-color: white;
-	font-weight: bold;
-	box-shadow: 3px 3px 0px 0px rgba(0,0,0,1);
-	cursor: pointer;
-	border: 2px black solid;
 }
-.login__button:hover, .register__button:hover {
+
+.button:hover {
 	box-shadow: inset 2px 2px 0px 0px rgba(0,0,0,1);
 }
 .login__forgot {
@@ -176,4 +185,24 @@ label[for="idCodePostal"], label[for="idVille"] {
 }
 
 /*********** PROFIL ***********/
-
+.profil__text {
+	width: 100px;
+}
+.profil__data {
+	font-weight: bold;
+	flex-grow: 2;
+}
+li:has(input[type="hidden"]) {
+	display: none;
+}
+.profil__buttons {
+	display: flex;
+	justify-content: space-between;
+}
+.profil__button {
+	width: 200px;
+}
+.profil__cancel {
+	align-self: flex-end;
+	margin-right: 20px;
+	}

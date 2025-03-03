@@ -1,14 +1,9 @@
 package fr.eni.ENI_enchere.repository;
 
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSourceExtensionsKt;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 
 import fr.eni.ENI_enchere.bo.Utilisateur;
@@ -90,7 +85,6 @@ public class UtilisateurRepositorySQL implements UtilisateurRepository {
 		try {
 			user =  namedParameterJdbcTemplate.query(sql,map, new UtilisateurResultSetExtractor());
 		} catch (EmptyResultDataAccessException e) {
-			System.out.println("pas de d'id : " + user + " dans la base de données");
 			user = null;
 		}
 		return user;

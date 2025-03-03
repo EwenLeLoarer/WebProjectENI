@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.eni.ENI_enchere.bo.Utilisateur;
 import fr.eni.ENI_enchere.bo.DTO.ChangePasswordDTO;
@@ -31,7 +30,7 @@ public class ProfilController {
     	
     	Utilisateur user = utilisateurService.selectUtilisateurByPseudo(name); // Get the user being viewed
     	Utilisateur loggedInUser = utilisateurService.selectUtilisateurByPseudo(username); // Get the logged-in user
-    	System.out.println(user);
+
     	model.addAttribute("user", user);
     	model.addAttribute("loggedInUser", loggedInUser);
     	return "profil";
@@ -42,7 +41,6 @@ public class ProfilController {
 		
 		String username = getCurrentUsername();
 		Utilisateur user = utilisateurService.selectUtilisateurByPseudo(username);
-		System.out.println(user);
         // Add the user to the model to display it in the view
         model.addAttribute("user", user);
 		
@@ -52,10 +50,9 @@ public class ProfilController {
     
 	@PostMapping("/edit")
 	public String modifyProfile(@ModelAttribute("user") Utilisateur user) {
-		System.out.println(user);
+
 		this.utilisateurService.ModifyUser(user);
-		
-		System.out.println("utilisateur modifié");
+	
 		return "redirect:/";
 	}
 	

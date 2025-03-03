@@ -51,7 +51,6 @@ public class AdressesRepositorySQL implements AdressesRepository {
 			adresse = namedParameterJdbcTemplate.queryForObject(sql, map, 
 					new BeanPropertyRowMapper<>(Adresse.class));
 		}catch (EmptyResultDataAccessException e) {
-			System.out.println("pas de d'id : " + adresse + " dans la base de données");
 			adresse = null;
 		}
 		
