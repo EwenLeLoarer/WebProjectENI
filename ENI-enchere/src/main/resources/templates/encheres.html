@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html 
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      data-th-replace="~{layouts/fragment-layout :: layoutName (
+							title= ~{ :: title},
+							content = ~{ :: main})}">
+<title>Liste des encheres</title>
+<main>
+    <h1>Liste des enchères</h1>
+
+    <!-- Formulaire de recherche global -->
+    <form method="get" action="/encheres">
+        <input type="text" name="search" placeholder="Rechercher un article..." th:value="${search}" />
+
+        <!-- Filtrage par catégorie -->
+        <select name="categorie">
+            <option value="Toutes" th:selected="${categorie == 'Toutes'}">Toutes les catégories</option>
+            <option value="1" th:selected="${categorie == '1'}">Ameublement</option>
+            <option value="2" th:selected="${categorie == '2'}">Informatique</option>
+            <option value="3" th:selected="${categorie == '3'}">Sport&Loisirs</option>
+            <option value="4" th:selected="${categorie == '4'}">Vêtements</option>
+        </select>
+
+        <!-- Tri -->
+        <select name="tri">
+            <option value="date" th:selected="${tri == 'date'}">Date de fin</option>
+            <option value="prixAsc" th:selected="${tri == 'prixAsc'}">Prix croissant</option>
+            <option value="prixDesc" th:selected="${tri == 'prixDesc'}">Prix décroissant</option>
+        </select>
+
+        <button type="submit">Filtrer</button>
+
+        <!-- Section de filtres spécifiques pour utilisateurs connectés -->
+        <div sec:authorize="isAuthenticated()">
+            <section id="filters">
+                <!-- Radio pour Achats -->
+                <label>
+                    <input type="radio" name="filterType" value="achats" 
+                           th:checked="${filterType == null or filterType == 'achats'}" /> Achats
+                </label>
+                <select id="achats-options" name="filterValue" 
+                        th:disabled="${filterType != null and filterType != 'achats'}">
+                    <option value="ouvertes" th:selected="${filterValue == null or filterValue == 'ouvertes'}">Enchères ouvertes</option>
+                    <option value="cours" th:selected="${filterValue == 'cours'}">Mes enchères en cours</option>
+                    <option value="remportees" th:selected="${filterValue == 'remportees'}">Mes enchères remportées</option>
+                </select>
+
+                <!-- Radio pour Ventes -->
+                <label>
+                    <input type="radio" name="filterType" value="ventes" 
+                           th:checked="${filterType == 'ventes'}" /> Mes ventes
+                </label>
+                <select id="ventes-options" name="filterValue" 
+                        th:disabled="${filterType != 'ventes'}">
+                    <option value="cours" th:selected="${filterValue == 'cours'}">Mes ventes en cours</option>
+                    <option value="non-debutees" th:selected="${filterValue == 'non-debutees'}">Mes ventes non débutées</option>
+                    <option value="terminees" th:selected="${filterValue == 'terminees'}">Mes ventes terminées</option>
+                </select>
+            </section>
+        </div>
+    </form>
+
+    <!-- Affichage des articles -->
+    <div>
+        <div th:each="article : ${encheres}">
+            <h3 th:text="${article.nom_article}"></h3>
+            <p th:text="${article.description}"></p>
+            <p>Prix actuel : <span th:text="${article.prixVente}"></span> €</p>
+            <p>Date fin : <span th:text="${article.dateFinEncheres}"></span></p>
+            <p>Vendeur : <span th:text="${article.id_utilisateur}"></span></p>
+        </div>
+    </div>
+</main>
+</html>

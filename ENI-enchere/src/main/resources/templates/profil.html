@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html data-th-replace="~{layouts/fragment-layout :: layoutName (
+							title= ~{ :: title},
+							content = ~{ :: main})}">
+	
+<!--  tire passé en paramètre -->					
+<title>Profile</title>		
+
+<main>
+	<form data-th-action="#{/profil/modify}" method="post" data-th-object="${user}">
+	<ul class="flex-outer">
+		<li>
+			<label for="idPseudo">Pseudo</label>
+			<!--  ne pas modifier le name utiliser username -->
+			<input id="idPseudo" type="text" placeholder="ton pseudo" data-th-field="*{pseudo}" disabled >
+		</li>
+				<li>
+			<label for="idPseudo">Credits</label>
+			<!--  ne pas modifier le name utiliser username -->
+			<input id="idPseudo" type="text" placeholder="ton pseudo" data-th-field="*{credit}" disabled >
+		</li>
+		<li>
+			<label for="idNom">Nom</label>
+			<!--  ne pas modifier le name utiliser username -->
+			<input id="idNom" type="text" placeholder="ton nom" data-th-field="*{nom}" disabled>
+		</li>
+		<li>
+			<label for="idPrenom">Prenom</label>
+			<!--  ne pas modifier le name utiliser username -->
+			<input id="idPrenom" type="text" placeholder="ton prenom" data-th-field="*{prenom}" disabled>
+		</li>
+		<li>
+			<label for="idEmail">Email</label>
+			<!--  ne pas modifier le name utiliser username -->
+			<input id="idEmail" type="text" placeholder="ton email" data-th-field="*{email}" disabled>
+		</li>
+		<li>
+			<label for="idTelephone">Telephone</label>
+			<!--  ne pas modifier le name utiliser username -->
+			<input id="idTelephone" type="text" placeholder="ton telephone" data-th-field="*{telephone}" disabled>
+		</li>
+		<div data-th-if="${user.pseudo == loggedInUser.pseudo}">
+			<li>
+				<label for="idRue">rue</label>
+				<!--  ne pas modifier le name utiliser username -->
+				<input id="idRue" type="text" placeholder="ta rue" data-th-field="*{adresse.rue}" disabled>
+			</li>
+			<li>
+				<label for="idCodePostal">Code Postal</label>
+				<!--  ne pas modifier le name utiliser username -->
+				<input id="idCodePostal" type="text" placeholder="ton code postal" data-th-field="*{adresse.code_postal}" disabled>
+			</li>
+			<li>
+				<label for="idVille">Ville</label>
+				<!--  ne pas modifier le name utiliser username -->
+				<input id="idVille" type="text" placeholder="ta ville" data-th-field="*{adresse.ville}" disabled>
+			</li>
+			<li>
+				<label for="idAdresseEni">adresse eni</label>
+				<!--  ne pas modifier le name utiliser username -->
+				<input id="idAdresseEni" type="text" placeholder="est une adresse eni" data-th-field="*{adresse.adresseEni}" disabled>
+			</li>
+			<li>
+				<!--  ne pas modifier le name utiliser username -->
+				<input class="read-only" id="idnumero_eni" type="hidden" placeholder="" data-th-field="*{adresse.no_adresse}">
+			</li>
+			<li>
+				<!--  ne pas modifier le name utiliser username -->
+				<input class="read-only" id="idmot_de_passe" type="hidden" placeholder="" data-th-field="*{mot_de_passe}">
+			</li>
+			<li>
+				<!--  ne pas modifier le name utiliser username -->
+				<input class="read-only" id="idactive" type="hidden" placeholder="" data-th-field="*{active}">
+			</li>
+			
+			<li>
+				<!--  ne pas modifier le name utiliser username -->
+				<input class="read-only" id="idadministrateur" type="hidden" placeholder="" data-th-field="*{administrateur}">
+			</li>
+			<li>
+				<!--  ne pas modifier le name utiliser username -->
+				<input class="read-only" id="idPseudo" type="hidden" placeholder="" data-th-field="*{pseudo}">
+			</li>
+		
+		</div>
+	</ul>
+	<div data-th-if="${user.pseudo == loggedInUser.pseudo}">
+		<a href="/profil/edit">modifier profile</a>
+	<a href="/profil/change-password">modifier mot de passe</a>
+	
+
+	</form>
+</main>
+
+</html>

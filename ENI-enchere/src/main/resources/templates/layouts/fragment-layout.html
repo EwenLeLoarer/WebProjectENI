@@ -3,13 +3,11 @@
 <meta charset="UTF-8">
 <title data-th-replace=${title}></title>
 <link rel="stylesheet" href="/css/general.css">
+    <script src="/js/script.js" defer></script>
 </head>
 <body>
-	<!--  insertion du fragment header -->
-	<!--<div data-th-insert="~{fragments/fragment-header :: headerName}"></div>-->
-	<!-- remplacement par le fragment header -->
 	<div data-th-replace="~{fragments/fragment-header :: headerName}"></div>
-	
+	<div data-th-replace="~{fragments/fragment-date :: dateName}"></div>
 	<main data-th-replace=${content}></main>
 	
 	<footer>

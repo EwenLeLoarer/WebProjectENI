@@ -23,10 +23,12 @@ body {
 
 /*********** HEADER ***********/
 .main__header {
+	position: fixed;
 	display: flex;
 	width: 100%;
 	line-height: 80px;
 	justify-content: space-between;
+	background-color: white;
 }
 .home__link {
 	padding: 0 20px;
@@ -46,19 +48,20 @@ body {
 .li__link {
 	width: 100%;
 	height: 100%;
-	color: black;
-	font-weight: bold;
-	
-}
-.li__link:hover {
-	text-decoration: underline;
+	color: blue;
+	text-decoration: underline;	
 }
 
-/*********** LOGIN ***********/
-.login__main {
+/*********** DATE ***********/
+.date__container {
 	position: absolute;
-	top: 0;
-	left: 0;
+	right: 20px;
+	top: 80px;
+	padding: 20px;
+	border: 2px black solid;
+}
+/*********** LOGIN ***********/
+main {
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -67,23 +70,51 @@ body {
 }
 .login__form {
 	width: 300px;
-	height: 250px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	gap: 30px;
+}
+.register__form {
+	width: 700px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 30px;
 }
 .login__list {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	gap: 30px;
 }
-.login__item {
-	line-height: 60px;
+.register__list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 30px;
+	justify-content: space-between;
+}
+.register__list--address {
+	width: 700px;
+	display: flex;
+	justify-content: space-between;
+}
+label[for="idCodePostal"], label[for="idVille"] {
+	visibility: hidden;
+	width: 0px;
+	overflow: hidden;
+}
+.login__item, .register__item {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	width: 300px;
 }
-.login__field {
+.register__item--address {
+	display: flex;
+	align-items: center;
+}
+.login__field, .register__field {
 	height: 30px;
 	border: 2px black solid;
 }
@@ -100,7 +131,24 @@ body {
 	box-shadow: 3px 3px 0px 0px rgba(0,0,0,1);
 	cursor: pointer;
 }
-.login__button:hover {
+.register__buttons {
+	display: flex;
+	justify-content: space-evenly;
+}
+.register__button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: black;
+	height: 50px;
+	width: 100px;
+	background-color: white;
+	font-weight: bold;
+	box-shadow: 3px 3px 0px 0px rgba(0,0,0,1);
+	cursor: pointer;
+	border: 2px black solid;
+}
+.login__button:hover, .register__button:hover {
 	box-shadow: inset 2px 2px 0px 0px rgba(0,0,0,1);
 }
 .login__forgot {

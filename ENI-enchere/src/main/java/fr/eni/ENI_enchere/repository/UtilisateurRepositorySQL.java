@@ -1,9 +1,12 @@
 package fr.eni.ENI_enchere.repository;
 
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSourceExtensionsKt;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
@@ -73,9 +76,24 @@ public class UtilisateurRepositorySQL implements UtilisateurRepository {
 
 
 	@Override
-	public void selectUtilisateurByPseudo(String pseudo) {
-		// TODO Auto-generated method stub
+	public Utilisateur selectUtilisateurByPseudo(String pseudo) {
+		Utilisateur user = null;
+		String sql = "SELECT pseudo, nom, prenom, email, telephone, mot_de_passe, credit, administrateur, "
+				+ "       u.no_adresse, a.no_adresse, active, rue, code_postal, ville, adresse_eni "
+				+ " FROM utilisateurs u "
+				+ " JOIN ADRESSES a ON u.no_adresse = a.no_adresse "
+				+ " WHERE pseudo = :pseudo";
 		
+		MapSqlParameterSource map = new MapSqlParameterSource();
+		map.addValue("pseudo", pseudo);
+		
+		try {
+			user =  namedParameterJdbcTemplate.query(sql,map, new UtilisateurResultSetExtractor());
+		} catch (EmptyResultDataAccessException e) {
+			System.out.println("pas de d'id : " + user + " dans la base de données");
+			user = null;
+		}
+		return user;
 	}
 
 
@@ -88,7 +106,41 @@ public class UtilisateurRepositorySQL implements UtilisateurRepository {
 
 	@Override
 	public void ModifyById(String pseudo) {
-		// TODO Auto-generated method stub
+
+	}
+
+
+	@Override
+	public void modifyUser(Utilisateur utilisateur) {
+		String sql = "update UTILISATEURS set nom = :nom, prenom = :prenom,"
+				+ " email = :email, telephone = :telephone, mot_de_passe = :mot_de_passe,"
+				+ " credit = :credit, administrateur = :administrateur, no_adresse = :no_adresse, "
+				+ " active = :active where pseudo = :pseudo";
 		
+		MapSqlParameterSource map = new MapSqlParameterSource();
+		map.addValue("pseudo", utilisateur.getPseudo());
+		map.addValue("nom", utilisateur.getNom());
+		map.addValue("prenom", utilisateur.getPrenom());
+		map.addValue("email", utilisateur.getEmail());
+		map.addValue("telephone", utilisateur.getTelephone());
+		map.addValue("mot_de_passe", utilisateur.getMot_de_passe());
+		map.addValue("credit", utilisateur.getCredit());
+		map.addValue("administrateur", utilisateur.getAdministrateur());
+		map.addValue("no_adresse", utilisateur.getAdresse().getNo_adresse());
+		map.addValue("active", utilisateur.getActive());
+		
+		
+		this.namedParameterJdbcTemplate.update(sql, map);
+	}
+
+	@Override
+	public void ModifyPasswordByPseudo(String pseudo, String newPassword) {
+		String sql = "UPDATE Utilisateurs set mot_de_passe = :newPassword WHERE pseudo = :pseudo";
+		
+		MapSqlParameterSource map = new MapSqlParameterSource();
+		map.addValue("pseudo", pseudo);
+		map.addValue("newPassword", newPassword);
+		
+		this.namedParameterJdbcTemplate.update(sql, map);	
 	}
 }
