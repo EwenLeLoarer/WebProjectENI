@@ -55,7 +55,7 @@ public class NouvelleVenteController {
     public String creerNouvelleVente(
             @RequestParam(name = "nom_article") String nomArticle,
             @RequestParam(name = "prix_initial") Integer prixInitial,
-            @RequestParam(name = "no_categorie") Integer noCategorie,
+            @RequestParam(name = "no_categorie") Long noCategorie,
             @RequestParam(name = "date_debut_encheres") String dateDebutEncheres,
             @RequestParam(name = "date_fin_encheres") String dateFinEncheres,
             @RequestParam(name = "description") String description,
@@ -95,16 +95,19 @@ public class NouvelleVenteController {
         // 1️⃣ Empêcher une date de début ou de fin déjà passée
         if (debut.isBefore(today)) {
             model.addAttribute("errorMessage", "La date de début ne peut pas être dans le passé.");
+            System.out.println("erreur");
             return "nouvelle_vente";
         }
         if (fin.isBefore(debut)) {
             model.addAttribute("errorMessage", "La date de fin ne peut pas être avant la date de début.");
+            System.out.println("erreur");
             return "nouvelle_vente";
         }
 
         // 2️⃣ Empêcher un prix négatif ou zéro
         if (prixInitial == null || prixInitial <= 0) {
             model.addAttribute("errorMessage", "Le prix initial doit être supérieur à 0.");
+            System.out.println("erreur");
             return "nouvelle_vente";
         }
 
@@ -114,6 +117,7 @@ public class NouvelleVenteController {
                 .anyMatch(cat -> cat.getNo_categorie().equals(noCategorie));
         if (!categorieExistante) {
             model.addAttribute("errorMessage", "Catégorie invalide.");
+            System.out.println("Catégorie invalide.");
             return "nouvelle_vente";
         }
 
@@ -123,6 +127,7 @@ public class NouvelleVenteController {
                 .anyMatch(adr -> adr.getNo_adresse().equals(noAdresseRetrait));
         if (!adresseExistante) {
             model.addAttribute("errorMessage", "Adresse de retrait invalide.");
+            System.out.println("Adresse de retrait invalide.");
             return "nouvelle_vente";
         }
         
@@ -144,7 +149,7 @@ public class NouvelleVenteController {
         article.setNom_article(nomArticle);
         article.setPrixInitial(prixInitial);
         //article.setNo_categorie(noCategorie);
-        categorieArticle.setNo_categorie(Long.parseLong(utilisateur));
+        categorieArticle.setNo_categorie(noCategorie);
         article.setDescription(description);
         adresseArticle.setNo_adresse(noAdresseRetrait);
         //article.setNo_adresse_retrait(noAdresseRetrait);
