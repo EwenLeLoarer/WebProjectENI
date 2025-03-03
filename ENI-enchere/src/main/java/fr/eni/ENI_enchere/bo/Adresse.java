@@ -9,7 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @AllArgsConstructor
-@ToString
 public class Adresse {
 	
 	@NotBlank(message = "L'article doit être indiqué")
@@ -34,4 +33,9 @@ public class Adresse {
 	private String ville;
 	
 	private Boolean adresseEni;
+	@Override
+	public String toString() {
+		return no_adresse.toString() + " " + rue + " " + code_postal + " " + ville;
+		
+	}
 }

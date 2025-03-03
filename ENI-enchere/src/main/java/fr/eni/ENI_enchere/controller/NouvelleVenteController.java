@@ -164,6 +164,6 @@ public class NouvelleVenteController {
 
         venteService.creerArticle(article);
 
-        return "redirect:/encheres"; // Redirection après la création
+        return "redirect:/"; // Redirection après la création
     }
 }
