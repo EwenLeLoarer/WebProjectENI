@@ -205,4 +205,14 @@ li:has(input[type="hidden"]) {
 .profil__cancel {
 	align-self: flex-end;
 	margin-right: 20px;
-	}
+}
+.profil__list--other {
+	height: 200px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+.profil__data--other {
+	font-weight: bold;
+}

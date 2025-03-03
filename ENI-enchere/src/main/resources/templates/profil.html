@@ -8,11 +8,28 @@
 <title>Profile</title>
 
 <main>
-	<h1 data-th-if="${user.pseudo == loggedInUser.pseudo}">Mon Profil</h1>
-	<h1 data-th-if="${user.pseudo != loggedInUser.pseudo}"
+	<h1
+		data-th-if="${loggedInUser != null and user.pseudo == loggedInUser.pseudo}">Mon
+		Profil</h1>
+	<h1
+		data-th-if="${loggedInUser == null or user.pseudo != loggedInUser.pseudo}"
 		data-th-text="${user.pseudo}"></h1>
-	<form class="profil__form" data-th-action="@{/profil/edit}"
-		method="post" data-th-object="${user}">
+	<ul class="profil__list--other"
+		data-th-if="${loggedInUser == null or user.pseudo != loggedInUser.pseudo}"
+		data-th-object="${user}">
+		<li class="profil__item"><p class="profil__text">Prénom:</p> <!--  ne pas modifier le name utiliser username -->
+			<span class="profil__data--other" data-th-text="*{prenom}"></span></li>
+			<li class="profil__item"><p class="profil__text">Nom:</p> <!--  ne pas modifier le name utiliser username -->
+			<span class="profil__data--other" data-th-text="*{nom}"></span></li>
+			<li class="profil__item"><p class="profil__text">Email:</p> <!--  ne pas modifier le name utiliser username -->
+			<span class="profil__data--other" data-th-text="*{email}"></span></li>
+			<li class="profil__item"><p class="profil__text">Téléphone:</p> <!--  ne pas modifier le name utiliser username -->
+			<span class="profil__data--other" data-th-text="*{telephone}"></span></li>
+	</ul>
+	<form
+		data-th-if="${loggedInUser != null and user.pseudo == loggedInUser.pseudo}"
+		class="profil__form" data-th-action="@{/profil/edit}" method="post"
+		data-th-object="${user}">
 		<ul class="profil__list">
 			<li class="profil__item">
 				<p class="profil__text">Pseudo:</p> <!--  ne pas modifier le name utiliser username -->
@@ -20,24 +37,19 @@
 			</li>
 			<li class="profil__item"><label for="idNom">Nom:</label> <!--  ne pas modifier le name utiliser username -->
 				<input class="profil__field" id="idNom" type="text"
-				data-th-field="*{nom}"
-				data-th-readonly="${user.pseudo != loggedInUser.pseudo}"></li>
+				data-th-field="*{nom}"></li>
 			<li class="profil__item"><label for="idPrenom">Prenom:</label> <!--  ne pas modifier le name utiliser username -->
 				<input class="profil__field" id="idPrenom" type="text"
-				data-th-field="*{prenom}"
-				data-th-readonly="${user.pseudo != loggedInUser.pseudo}"></li>
+				data-th-field="*{prenom}"></li>
 			<li class="profil__item"><label for="idEmail">Email:</label> <!--  ne pas modifier le name utiliser username -->
 				<input class="profil__field" id="idEmail" type="text"
-				data-th-field="*{email}"
-				data-th-readonly="${user.pseudo != loggedInUser.pseudo}"></li>
+				data-th-field="*{email}"></li>
 			<li class="profil__item"><label for="idTelephone">Telephone:</label>
 				<!--  ne pas modifier le name utiliser username --> <input
 				class="profil__field" id="idTelephone" type="text"
-				data-th-field="*{telephone}"
-				data-th-readonly="${user.pseudo != loggedInUser.pseudo}"></li>
+				data-th-field="*{telephone}"></li>
 		</ul>
-		<ul class="profil__list--address"
-			data-th-if="${user.pseudo == loggedInUser.pseudo}">
+		<ul class="profil__list--address">
 			<li class="profil__item"><label for="idRue">Adresse:</label> <!--  ne pas modifier le name utiliser username -->
 				<input class="profil__field" id="idRue" type="text"
 				placeholder="ta rue" data-th-field="*{adresse.rue}"></li>
@@ -91,20 +103,21 @@
 				data-th-field="*{pseudo}">
 			</li>
 		</ul>
-		<div class="profil__buttons"
-			data-th-if="${user.pseudo == loggedInUser.pseudo}">
+		<div class="profil__buttons">
 			<button class="profil__button button" type="submit">Modifier</button>
-			<a class="profil__button button" data-th-if="${user.pseudo == loggedInUser.pseudo}"
-				href="/profil/change-password">Modifier mot de passe</a>
-			<button class="profil__button button" type="submit" formaction="/profil/delete" formmethod="post"
+			<a class="profil__button button" href="/profil/change-password">Modifier
+				mot de passe</a>
+			<button class="profil__button button" type="submit"
+				formaction="/profil/delete" formmethod="post"
 				onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">
 				Supprimer mon compte</button>
 
 		</div>
-		
+
 	</form>
 	<a class="profil__cancel profil__button button"
-			data-th-href="@{'/profil/' + ${#authentication.name}}">Annuler</a>
+		data-th-if="${loggedInUser != null and user.pseudo == loggedInUser.pseudo}"
+		data-th-href="@{'/profil/' + ${#authentication.name}}">Annuler</a>
 </main>
 
 </html>
