@@ -1,5 +1,6 @@
 package fr.eni.ENI_enchere.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -51,15 +52,25 @@ public class AdressesRepositorySQL implements AdressesRepository {
 			adresse = namedParameterJdbcTemplate.queryForObject(sql, map, 
 					new BeanPropertyRowMapper<>(Adresse.class));
 		}catch (EmptyResultDataAccessException e) {
-			System.out.println("pas de d'id : " + adresse + " dans la base de données");
 			adresse = null;
 		}
 		
 		return adresse;
 	}
 
-	
-
+	@Override
+	public List<Adresse> findAll() {
+        String sql = "SELECT no_adresse, rue, code_postal, ville, adresse_eni FROM ADRESSES";
+        return jdbcTemplate.query(sql, (rs, rowNum) -> {
+            Adresse adr = new Adresse();
+            adr.setNo_adresse(rs.getInt("no_adresse"));
+            adr.setRue(rs.getString("rue"));
+            adr.setCode_postal(rs.getString("code_postal"));
+            adr.setVille(rs.getString("ville"));
+            adr.setAdresseEni(rs.getBoolean("adresse_eni"));
+            return adr;
+        });
+    }
 	        
 
 

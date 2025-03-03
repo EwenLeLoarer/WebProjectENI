@@ -30,10 +30,8 @@ public class registerController {
 	
 	@PostMapping("/register")
 	public String add(@ModelAttribute("user") Utilisateur utilisateur) {
-		System.out.println(utilisateur);
+	
 		this.utilisateurService.SaveUser(utilisateur);
-		
-		System.out.println("utilisateur Créé");
 		return "redirect:/";
 	}
 }

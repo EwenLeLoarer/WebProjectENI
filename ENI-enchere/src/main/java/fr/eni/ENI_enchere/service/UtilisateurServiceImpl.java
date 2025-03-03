@@ -33,8 +33,6 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 		int idAdresse = adresseService.SaveAdresse(utilisateur.getAdresse());
 		String bcryptPass = passwordEncoder.encode(utilisateur.getMot_de_passe());
 		
-		System.out.println("bcryptPass :" + bcryptPass );
-		
 		utilisateur.setMot_de_passe(bcryptPass);
 		utilisateur.setActive(true);
 		utilisateur.setAdministrateur(true);
@@ -55,9 +53,6 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 	@Override
 	public void ModifyUser(Utilisateur user) {
 		Adresse oldAdresse = adresseService.FindAdresseByID((int)user.getAdresse().getNo_adresse());
-		System.out.println(oldAdresse);
-		System.out.println(user.getAdresse());
-		System.out.println(oldAdresse.getCode_postal().equals(user.getAdresse().getCode_postal()));
 		if(!oldAdresse.getCode_postal().equals(user.getAdresse().getCode_postal()) &&
 				!oldAdresse.getAdresseEni().equals(user.getAdresse().getAdresseEni()) &&
 				!oldAdresse.getRue().equals(user.getAdresse().getRue()) &&

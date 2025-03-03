@@ -1,6 +1,5 @@
 package fr.eni.ENI_enchere.service;
 
-import org.springframework.stereotype.Service;
 
 import fr.eni.ENI_enchere.bo.Utilisateur;
 import fr.eni.ENI_enchere.bo.DTO.ChangePasswordDTO;
