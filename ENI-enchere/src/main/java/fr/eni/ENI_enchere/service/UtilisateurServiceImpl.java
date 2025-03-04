@@ -76,7 +76,7 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 		
 		if(passwordEncoder.matches(dto.getOldPassword() , user.getMot_de_passe())) {
 			String bcryptPass = passwordEncoder.encode(dto.getNewPassword());
-			this.utilisateurRepository.ModifyPasswordByPseudo(pseudo, bcryptPass);
+			this.utilisateurRepository.modifyPasswordByPseudo(pseudo, bcryptPass);
 		}
 		return 0;
 	}

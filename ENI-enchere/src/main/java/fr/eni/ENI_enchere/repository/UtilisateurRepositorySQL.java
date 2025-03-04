@@ -99,7 +99,7 @@ public class UtilisateurRepositorySQL implements UtilisateurRepository {
 
 
 	@Override
-	public void ModifyById(String pseudo) {
+	public void modifyById(String pseudo) {
 
 	}
 
@@ -128,7 +128,7 @@ public class UtilisateurRepositorySQL implements UtilisateurRepository {
 	}
 
 	@Override
-	public void ModifyPasswordByPseudo(String pseudo, String newPassword) {
+	public void modifyPasswordByPseudo(String pseudo, String newPassword) {
 		String sql = "UPDATE Utilisateurs set mot_de_passe = :newPassword WHERE pseudo = :pseudo";
 		
 		MapSqlParameterSource map = new MapSqlParameterSource();
