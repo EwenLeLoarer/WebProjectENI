@@ -30,13 +30,15 @@
 
 
 		<!-- Section de filtres spécifiques pour utilisateurs connectés -->
-		<div sec:authorize="isAuthenticated()">
-			<section id="filters">
+
+		<section sec:authorize="isAuthenticated()" class="radio__filters"
+			id="filters">
+			<div class="radio__container">
 				<!-- Radio pour Achats -->
 				<label> <input type="radio" name="filterType" value="achats"
 					th:checked="${filterType == null or filterType == 'achats'}" />
 					Achats
-				</label> <select id="achats-options" name="filterValue"
+				</label> <select class="radio__list" id="achats-options" name="filterValue"
 					th:disabled="${filterType != null and filterType != 'achats'}">
 					<option value="ouvertes"
 						th:selected="${filterValue == null or filterValue == 'ouvertes'}">Enchères
@@ -47,11 +49,12 @@
 						th:selected="${filterValue == 'remportees'}">Mes enchères
 						remportées</option>
 				</select>
-
+			</div>
+			<div class="radio__container">
 				<!-- Radio pour Ventes -->
 				<label> <input type="radio" name="filterType" value="ventes"
 					th:checked="${filterType == 'ventes'}" /> Mes ventes
-				</label> <select id="ventes-options" name="filterValue"
+				</label> <select class="radio__list" id="ventes-options" name="filterValue"
 					th:disabled="${filterType != 'ventes'}">
 					<option value="cours" th:selected="${filterValue == 'cours'}">Mes
 						ventes en cours</option>
@@ -62,37 +65,38 @@
 						th:selected="${filterValue == 'terminees'}">Mes ventes
 						terminées</option>
 				</select>
-			</section>
-		</div>
+			</div>
+		</section>
+
 	</form>
 
 	<!-- Affichage des articles -->
 	<div class="article__container">
 		<div class="article__card" th:each="article : ${encheres}">
-			 <a class="article__link"
-				th:href="@{'/enchere/' + ${article.no_article}}"></a>
-				<img class="article__image" src="" />
-				<div class="article__infos">
-					<h3 class="article__name" th:text="${article.nom_article}"></h3>
-			
-			<p class="article__description" th:text="${article.description}"></p>
-			<p class="article__prix--text">
-				Prix actuel : <span clas="article__prix"
-					th:text="${article.prixVente}"></span> €
-			</p>
-			<p class="article__date--text">
-				Date fin : <span class="article__vente"
-					th:text="${article.dateFinEncheres}"></span>
-			</p>
-			<p class="article__vendeur">
-				Vendeur : <a class="article__vendeur--link"
-					th:href="@{'/profil/' + ${article.utilisateur.pseudo}}"> <span
-					class="article__vendeur--name"
-					th:text="${article.utilisateur.pseudo}"></span>
-				</a>
-			</p>
+
+			<img class="article__image" src="" />
+			<div class="article__infos">
+				<a class="article__link"
+					th:href="@{'/enchere/' + ${article.no_article}}" th:text="${article.nom_article}"></a>
+
+				<p class="article__description" th:text="${article.description}"></p>
+				<p class="article__prix--text">
+					Prix actuel : <span clas="article__prix"
+						th:text="${article.prixVente}"></span> €
+				</p>
+				<p class="article__date--text">
+					Date fin : <span class="article__vente"
+						th:text="${article.dateFinEncheres}"></span>
+				</p>
+				<p class="article__vendeur">
+					Vendeur : <a class="article__vendeur--link"
+						th:href="@{'/profil/' + ${article.utilisateur.pseudo}}"> <span
+						class="article__vendeur--name"
+						th:text="${article.utilisateur.pseudo}"></span>
+					</a>
+				</p>
+			</div>
 		</div>
-	</div>
 	</div>
 </main>
 </html>
