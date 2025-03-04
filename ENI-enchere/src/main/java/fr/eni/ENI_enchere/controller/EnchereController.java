@@ -79,7 +79,7 @@ public class EnchereController {
 			this.enchereService.saveEnchere(enchere);
 			this.articleService.Save(article);
 		}
-		return "redirect:/";
+		return "redirect:/enchere/"+id;
 	}
 	
     @GetMapping("/")

@@ -1,5 +1,6 @@
 package fr.eni.ENI_enchere.bo;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.validation.constraints.*;
@@ -29,5 +30,5 @@ public class Enchere {
 	
 	@NonNull
 	@NotBlank(message = "La date de début de l'enchère doit être indiquée")
-	private LocalDateTime date;
+	private LocalDate date;
 }
