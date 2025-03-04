@@ -1,6 +1,7 @@
 package fr.eni.ENI_enchere.repository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -48,5 +49,10 @@ public class EnchereRepositorySQL implements EnchereRepository{
         map.addValue("date_enchere", LocalDateTime.now());
         
         this.namedParameterJdbcTemplate.update(sql, map);	
+	}
+	
+	public List<Enchere> getEncheresByNoArticle(String no_article) {
+		String sql = "select * from encheres where no_article = ? ORDER BY date_enchere DESC";
+		return jdbcTemplate.query(sql,new EnchereRowMapper(),no_article );		
 	}
 }
