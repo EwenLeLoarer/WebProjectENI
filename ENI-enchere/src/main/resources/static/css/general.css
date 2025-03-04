@@ -306,3 +306,25 @@ li:has(input[type="hidden"]) {
 .radio__list {
 	width: 60%;
 }
+/*********** INDEX ***********/
+.article__list {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	width: 40%;
+	gap: 40px;
+	align-items: center;
+}
+.article__data--line {
+	grid-column: 2 / span 3;
+}
+.article__text {
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+}
+.mise__input {
+	height: 20px;
+}
+.encherir__button {
+	padding: 0 40px;
+}
