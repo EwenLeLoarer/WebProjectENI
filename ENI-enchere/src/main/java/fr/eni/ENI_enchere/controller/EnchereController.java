@@ -1,12 +1,14 @@
 package fr.eni.ENI_enchere.controller;
 
 import fr.eni.ENI_enchere.bo.Article;
+import fr.eni.ENI_enchere.service.ArticleService;
 import fr.eni.ENI_enchere.service.EnchereService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Comparator;
@@ -17,11 +19,21 @@ import java.util.stream.Collectors;
 public class EnchereController {
 
     private final EnchereService enchereService;
+    private final ArticleService articleService;
 
-    public EnchereController(EnchereService enchereService) {
-        this.enchereService = enchereService;
+    public EnchereController(EnchereService enchereService, ArticleService articleService) {
+		super();
+		this.enchereService = enchereService;
+		this.articleService = articleService;
+	}
+
+	@GetMapping("/enchere/{id}")
+    public String viewEnchere(@PathVariable("id") String id, Model model) {
+    	Article article = this.articleService.getArticleById(id);
+    	model.addAttribute("article" ,article);
+    	return "viewEnchere";
     }
-
+    
     @GetMapping("/")
     public String afficherEncheres(
             @RequestParam(name = "search", required = false, defaultValue = "") String search,
@@ -37,6 +49,7 @@ public class EnchereController {
         String utilisateur = (auth != null) ? auth.getName() : null;
 
         List<Article> articles;
+        
 
         // 🏷️ Appliquer les filtres d'achats et ventes si l'utilisateur est connecté
         if (utilisateur != null && filterType != null) {
@@ -83,7 +96,9 @@ public class EnchereController {
             try {
                 int catId = Integer.parseInt(categorie);
                 articles = articles.stream()
-                        .filter(article -> article.getNo_categorie().equals(catId))
+                        .filter(article -> article.getCategorie() != null && 
+                                           article.getCategorie().getNo_categorie() != null &&
+                                           article.getCategorie().getNo_categorie().intValue() == catId) // ✅ Correction
                         .collect(Collectors.toList());
             } catch (NumberFormatException e) {
                 System.err.println("Erreur : Catégorie invalide.");

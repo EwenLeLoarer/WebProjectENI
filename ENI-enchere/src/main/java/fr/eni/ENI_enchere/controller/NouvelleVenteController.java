@@ -2,6 +2,7 @@ package fr.eni.ENI_enchere.controller;
 
 import fr.eni.ENI_enchere.bo.Article;
 import fr.eni.ENI_enchere.bo.Categorie;
+import fr.eni.ENI_enchere.bo.Utilisateur;
 import fr.eni.ENI_enchere.bo.Adresse;
 import fr.eni.ENI_enchere.service.NouvelleVenteService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -54,7 +55,7 @@ public class NouvelleVenteController {
     public String creerNouvelleVente(
             @RequestParam(name = "nom_article") String nomArticle,
             @RequestParam(name = "prix_initial") Integer prixInitial,
-            @RequestParam(name = "no_categorie") Integer noCategorie,
+            @RequestParam(name = "no_categorie") Long noCategorie,
             @RequestParam(name = "date_debut_encheres") String dateDebutEncheres,
             @RequestParam(name = "date_fin_encheres") String dateFinEncheres,
             @RequestParam(name = "description") String description,
@@ -94,16 +95,19 @@ public class NouvelleVenteController {
         // 1️⃣ Empêcher une date de début ou de fin déjà passée
         if (debut.isBefore(today)) {
             model.addAttribute("errorMessage", "La date de début ne peut pas être dans le passé.");
+            System.out.println("erreur");
             return "nouvelle_vente";
         }
         if (fin.isBefore(debut)) {
             model.addAttribute("errorMessage", "La date de fin ne peut pas être avant la date de début.");
+            System.out.println("erreur");
             return "nouvelle_vente";
         }
 
         // 2️⃣ Empêcher un prix négatif ou zéro
         if (prixInitial == null || prixInitial <= 0) {
             model.addAttribute("errorMessage", "Le prix initial doit être supérieur à 0.");
+            System.out.println("erreur");
             return "nouvelle_vente";
         }
 
@@ -113,6 +117,7 @@ public class NouvelleVenteController {
                 .anyMatch(cat -> cat.getNo_categorie().equals(noCategorie));
         if (!categorieExistante) {
             model.addAttribute("errorMessage", "Catégorie invalide.");
+            System.out.println("Catégorie invalide.");
             return "nouvelle_vente";
         }
 
@@ -122,6 +127,7 @@ public class NouvelleVenteController {
                 .anyMatch(adr -> adr.getNo_adresse().equals(noAdresseRetrait));
         if (!adresseExistante) {
             model.addAttribute("errorMessage", "Adresse de retrait invalide.");
+            System.out.println("Adresse de retrait invalide.");
             return "nouvelle_vente";
         }
         
@@ -137,18 +143,27 @@ public class NouvelleVenteController {
 
         // **Création et sauvegarde de l'article**
         Article article = new Article();
+        Categorie categorieArticle = new Categorie();
+        Adresse adresseArticle = new Adresse();
+        Utilisateur userArticle = new Utilisateur();
         article.setNom_article(nomArticle);
         article.setPrixInitial(prixInitial);
-        article.setNo_categorie(noCategorie);
+        //article.setNo_categorie(noCategorie);
+        categorieArticle.setNo_categorie(noCategorie);
         article.setDescription(description);
-        article.setNo_adresse_retrait(noAdresseRetrait);
+        adresseArticle.setNo_adresse(noAdresseRetrait);
+        //article.setNo_adresse_retrait(noAdresseRetrait);
         article.setDateDebutEncheres(debut);
         article.setDateFinEncheres(fin);
         article.setStatut(debut.isAfter(today) ? 0 : 1);
-        article.setId_utilisateur(utilisateur);
+        userArticle.setPseudo(utilisateur);
+        //article.setId_utilisateur(utilisateur);
+        article.setAdresse_retrait(adresseArticle);
+        article.setCategorie(categorieArticle);
+        article.setUtilisateur(userArticle);
 
         venteService.creerArticle(article);
 
-        return "redirect:/encheres"; // Redirection après la création
+        return "redirect:/"; // Redirection après la création
     }
 }
