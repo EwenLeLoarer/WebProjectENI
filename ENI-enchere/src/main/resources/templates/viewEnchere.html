@@ -42,13 +42,17 @@
 
 		<p class="article__text">Vendeur :</p>
 		<span class="article__data--line" data-th-text="*{utilisateur.pseudo}"></span>
+		
+	</form>
+	<form data-th-action="@{/enchere/miser/{id}(id=${article.no_article})}" method="POST">
 		<div class="article__input-container"
-			data-th-if="${loggedInUser != null and articleUser.pseudo != loggedInUser.pseudo}">
-			<label class="article__text" for="idEncherire">Mon enchère: </label>
-			<input class="mise__input" id="idEncherire" type="number">
-			<button class="button encherir__button" type="submit">Enchérir</button>
+		data-th-if="${loggedInUser != null and articleUser.pseudo != loggedInUser.pseudo}">
+		<label class="article__text" for="idEncherire">Mon enchère: </label>
+		<input class="mise__input" id="idEncherire" name="mise" type="number" th:min="*{prixVente}" th:max="${loggedInUser.credit}">
+		<button class="button encherir__button" type="submit">Enchérir</button>
 		</div>
 	</form>
+	
 
 	<a
 		data-th-if="${loggedInUser == null or articleUser.pseudo == loggedInUser.pseudo}"

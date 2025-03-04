@@ -137,4 +137,29 @@ public class UtilisateurRepositorySQL implements UtilisateurRepository {
 		
 		this.namedParameterJdbcTemplate.update(sql, map);	
 	}
+
+
+	@Override
+	public void addCreditToUserByPseudo(String pseudo, int value) {
+		String sql = "UPDATE Utilisateurs set credit = credit + :value where pseudo = :pseudo";
+		
+		MapSqlParameterSource map = new MapSqlParameterSource();
+		map.addValue("pseudo", pseudo);
+		map.addValue("value", value);
+		
+		this.namedParameterJdbcTemplate.update(sql, map);	
+	}
+
+
+	@Override
+	public void removeCreditToUserByPseudo(String pseudo, int value) {
+		String sql = "UPDATE Utilisateurs set credit = credit - :value where pseudo = :pseudo";
+		
+		MapSqlParameterSource map = new MapSqlParameterSource();
+		map.addValue("pseudo", pseudo);
+		map.addValue("value", value);
+		
+		this.namedParameterJdbcTemplate.update(sql, map);	
+		
+	}
 }
