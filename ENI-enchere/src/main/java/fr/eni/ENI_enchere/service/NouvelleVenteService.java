@@ -2,9 +2,11 @@ package fr.eni.ENI_enchere.service;
 
 import fr.eni.ENI_enchere.bo.Article;
 import fr.eni.ENI_enchere.bo.Categorie;
+import fr.eni.ENI_enchere.bo.Utilisateur;
 import fr.eni.ENI_enchere.bo.Adresse;
 import fr.eni.ENI_enchere.repository.ArticleRepository;
 import fr.eni.ENI_enchere.repository.CategorieRepository;
+import fr.eni.ENI_enchere.repository.EncheresRepository;
 import fr.eni.ENI_enchere.repository.AdressesRepositorySQL;
 
 import org.springframework.scheduling.annotation.Scheduled;
@@ -19,13 +21,16 @@ public class NouvelleVenteService {
     private final ArticleRepository articleRepository;
     private final CategorieRepository categorieRepository;
     private final AdressesRepositorySQL adresseRepository;
+    private final EncheresRepository encheresRepository;
 
     public NouvelleVenteService(ArticleRepository articleRepository,
                                 CategorieRepository categorieRepository,
-                                AdressesRepositorySQL adresseRepository) {
+                                AdressesRepositorySQL adresseRepository,
+                                EncheresRepository encheresRepository) {
         this.articleRepository = articleRepository;
         this.categorieRepository = categorieRepository;
         this.adresseRepository = adresseRepository;
+        this.encheresRepository = encheresRepository;
     }
 
     public List<Categorie> getAllCategories() {
@@ -60,18 +65,17 @@ public class NouvelleVenteService {
     /**
      * Tâche planifiée : tous les jours à minuit, on clôture les enchères dont la date de fin est atteinte.
      */
-    @Scheduled(cron = "0 0 0 * * *") // S'exécute chaque jour à 00:00:00
+    @Scheduled(cron = "0 0 0 * * *") // Exécution tous les jours à minuit
     public void cloturerEncheresExpirees() {
         LocalDate today = LocalDate.now();
         List<Article> articles = articleRepository.findArticlesByDateFinEncheresAndStatut(today, 1);
 
         for (Article article : articles) {
-            article.setStatut(2); // Passer en statut "CLOTURÉE"
+            // Changer le statut à "Clôturée"
+            article.setStatut(2);
             articleRepository.save(article);
         }
 
-        System.out.println("Enchères clôturées pour le " + today + " : " + articles.size());
-    }
-
-    
+        System.out.println("❌ enchères clôturées et acquéreur attribué pour " + articles.size() + " : " + today);
+    }    
 }
