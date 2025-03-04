@@ -27,10 +27,12 @@ main {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 60px;
+	gap: 50px;
 }
 h1 {
 	font-size: 30px;
+	position: absolute;
+	top: 160px;
 }
 label {
 	width: 100px;
@@ -211,12 +213,16 @@ li:has(input[type="hidden"]) {
 }
 .profil__list--other {
 	width: 300px;
-	height: 200px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
+	gap: 30px;
 }
 .profil__data--other {
 	font-weight: bold;
+}
+.changepass__box {
+	display: flex;
+	justify-content: space-evenly;
 }
