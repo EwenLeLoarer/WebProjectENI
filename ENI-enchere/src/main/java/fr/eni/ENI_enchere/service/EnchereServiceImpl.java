@@ -1,8 +1,11 @@
 package fr.eni.ENI_enchere.service;
 
 import fr.eni.ENI_enchere.bo.Article;
-import fr.eni.ENI_enchere.repository.ArticleRepositorySQL;
+import fr.eni.ENI_enchere.bo.Enchere;
+import fr.eni.ENI_enchere.repository.ArticleRepository;
+import fr.eni.ENI_enchere.repository.EnchereRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,11 +13,10 @@ import java.util.List;
 @Service
 public class EnchereServiceImpl implements EnchereService {
 
-    private final ArticleRepositorySQL repository;
-
-    public EnchereServiceImpl(ArticleRepositorySQL repository) {
-        this.repository = repository;
-    }
+	@Autowired
+    private ArticleRepository repository;
+	@Autowired
+    private EnchereRepository enchereRepository;
 
     // Retourne toutes les enchères actives (statut = 1)
     @Override
@@ -51,4 +53,17 @@ public class EnchereServiceImpl implements EnchereService {
     public List<Article> getMesVentesTerminees(String pseudo, String search, String categorie) {
         return repository.getMesVentesTerminees(pseudo);
     }
+    
+    @Override
+    public String getPseudoLastMiseByIdEnchere(String idEnchere) {
+    	return this.enchereRepository.getPseudoLastMiseByIdEnchere(idEnchere);
+    }
+
+	@Override
+	public void saveEnchere(Enchere enchere) {
+		this.enchereRepository.saveEnchere(enchere);
+		
+	}
+    
+    
 }

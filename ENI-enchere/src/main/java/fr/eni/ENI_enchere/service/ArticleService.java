@@ -5,5 +5,5 @@ import fr.eni.ENI_enchere.bo.Article;
 public interface ArticleService {
 
 	Article getArticleById(String id);
-
+	public void Save(Article article);
 }

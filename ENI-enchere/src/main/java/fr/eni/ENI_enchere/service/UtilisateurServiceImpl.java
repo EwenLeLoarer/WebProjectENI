@@ -80,5 +80,21 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 		}
 		return 0;
 	}
+
+
+	@Override
+	public void addCreditToUserByPseudo(String pseudo, int value) {
+		if(value > 0) {
+			this.utilisateurRepository.addCreditToUserByPseudo(pseudo, value);
+		}
+	}
+
+
+	@Override
+	public void removeCreditToUserByPseudo(String pseudo, int value) {
+		if(value > 0) {
+			this.utilisateurRepository.removeCreditToUserByPseudo(pseudo, value);
+		}
+	}
 	
 }

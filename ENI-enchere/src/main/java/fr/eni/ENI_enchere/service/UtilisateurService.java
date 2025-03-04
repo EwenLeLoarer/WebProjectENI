@@ -10,4 +10,6 @@ public interface UtilisateurService {
 	public Utilisateur selectUtilisateurByPseudo(String pseudo);
 	public void ModifyUser(Utilisateur user);
 	int ModifyPassword(ChangePasswordDTO dto, String pseudo);
+	public void addCreditToUserByPseudo(String pseudo, int value);
+	public void removeCreditToUserByPseudo(String pseudo, int value);
 }
