@@ -19,13 +19,14 @@
 			<span class="profil__data--other" data-th-text="*{email}"></span></li>
 		<li class="profil__item"><p class="profil__text">Téléphone:</p> <!--  ne pas modifier le name utiliser username -->
 			<span class="profil__data--other" data-th-text="*{telephone}"></span></li>
-	</ul>
-	<a
+			<li  class="profil__item"><a
 		data-th-if="${loggedInUser != null and user.pseudo == loggedInUser.pseudo}"
 		href="/profil/edit" class="button profil__button">Modifier</a>
 		<a
 		data-th-if="${loggedInUser == null or user.pseudo != loggedInUser.pseudo}"
-		href="/" class="button profil__button">Retour</a>
+		href="/" class="button profil__button">Retour</a></li>
+	</ul>
+	
 </main>
 
 </html>

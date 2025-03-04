@@ -53,7 +53,7 @@ public class ProfilController {
 
 		this.utilisateurService.ModifyUser(user);
 	
-		return "redirect:/";
+		return "redirect:/profil/" + user.getPseudo();
 	}
 	
 
