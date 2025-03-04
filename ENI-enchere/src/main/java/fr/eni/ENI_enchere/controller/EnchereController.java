@@ -1,10 +1,14 @@
 package fr.eni.ENI_enchere.controller;
 
 import fr.eni.ENI_enchere.bo.Article;
+import fr.eni.ENI_enchere.bo.Utilisateur;
 import fr.eni.ENI_enchere.service.ArticleService;
 import fr.eni.ENI_enchere.service.EnchereService;
+import fr.eni.ENI_enchere.service.UtilisateurService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,18 +24,26 @@ public class EnchereController {
 
     private final EnchereService enchereService;
     private final ArticleService articleService;
-
-    public EnchereController(EnchereService enchereService, ArticleService articleService) {
+    private final UtilisateurService utilisateurService;
+    public EnchereController(EnchereService enchereService, ArticleService articleService, UtilisateurService utilisateurService) {
 		super();
 		this.enchereService = enchereService;
 		this.articleService = articleService;
+		this.utilisateurService = utilisateurService;
 	}
 
 	@GetMapping("/enchere/{id}")
-    public String viewEnchere(@PathVariable("id") String id, Model model) {
-    	Article article = this.articleService.getArticleById(id);
-    	model.addAttribute("article" ,article);
-    	return "viewEnchere";
+	 public String viewEnchere(@PathVariable("id") String id, Model model) {
+        String username = getCurrentUsername();
+
+        Utilisateur loggedInUser = utilisateurService.selectUtilisateurByPseudo(username);
+
+        Article article = this.articleService.getArticleById(id);
+        Utilisateur articleUser = article.getUtilisateur();
+        model.addAttribute("loggedInUser", loggedInUser);
+        model.addAttribute("articleUser",articleUser);
+        model.addAttribute("article" ,article);
+        return "viewEnchere";
     }
     
     @GetMapping("/")
@@ -128,5 +140,16 @@ public class EnchereController {
         model.addAttribute("filterValue", filterValue);
 
         return "encheres";
+    }
+    private String getCurrentUsername() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+
+        // Check if the principal is an instance of UserDetails (which it should be for an authenticated user)
+        if (principal instanceof UserDetails) {
+            return ((UserDetails) principal).getUsername();
+        }
+        // If not authenticated, return null or throw an exception, depending on your use case
+        return null;
     }
 }

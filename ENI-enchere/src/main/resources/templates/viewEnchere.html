@@ -17,7 +17,8 @@
 
 
 		<p class="article__text">Mise à prix :</p>
-		<span data-th-text="@{*{prixInitial}+' point(s)'}"></span>
+		<span data-th-text="*{prixInitial} + ' point(s)'"></span>
+
 
 
 		<p class="article__text">Categorie :</p>
@@ -25,7 +26,7 @@
 
 
 		<p class="article__text">Meilleure offre :</p>
-		<span data-th-text="@{*{prixVente}+' point(s)'}"></span>
+		<span data-th-text="*{prixVente}+' point(s)'"></span>
 
 
 
@@ -33,22 +34,25 @@
 		<span data-th-text="*{description}"></span>
 
 		<p class="article__text">Fin de l'enchère :</p>
-		<span data-th-text="*{#temporals.format(dateFinEncheres, 'dd/MM/yyyy')}"></span>
+		<span
+			data-th-text="*{#temporals.format(dateFinEncheres, 'dd/MM/yyyy')}"></span>
 
 		<p class="article__text">Retrait :</p>
 		<span class="article__data--line" data-th-text="*{adresse_retrait}"></span>
 
 		<p class="article__text">Vendeur :</p>
 		<span class="article__data--line" data-th-text="*{utilisateur.pseudo}"></span>
-
-		<label class="article__text" for="idEncherire">Mon enchère: </label> <input class="mise__input" id="idEncherire"
-			type="number" data-th-field="*{dateFinEncheres}">
-
-		<div>
+		<div class="article__input-container"
+			data-th-if="${loggedInUser != null and articleUser.pseudo != loggedInUser.pseudo}">
+			<label class="article__text" for="idEncherire">Mon enchère: </label>
+			<input class="mise__input" id="idEncherire" type="number">
 			<button class="button encherir__button" type="submit">Enchérir</button>
 		</div>
 	</form>
 
+	<a
+		data-th-if="${loggedInUser == null or articleUser.pseudo == loggedInUser.pseudo}"
+		class="button encherir__button encherir__button--retour" href="/">Retour</a>
 
 </main>
 </html>

@@ -32,7 +32,7 @@ main {
 h1 {
 	font-size: 30px;
 	position: absolute;
-	top: 160px;
+	top: 15vh;
 }
 label {
 	width: 100px;
@@ -321,6 +321,14 @@ li:has(input[type="hidden"]) {
 	width: 100%;
 	display: flex;
 	justify-content: flex-end;
+}
+.article__input-container {
+	grid-column: 1 / span 4;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	width: 100%;
+	gap: 40px;
+	align-items: center;
 }
 .mise__input {
 	height: 20px;
