@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,6 +47,8 @@ public class EnchereController {
         model.addAttribute("loggedInUser", loggedInUser);
         model.addAttribute("articleUser",articleUser);
         model.addAttribute("article" ,article);
+		String pseudoLastEnchere = this.enchereService.getPseudoLastMiseByIdEnchere(article.getNo_article().toString());
+		model.addAttribute("pseudoLastEnchere", pseudoLastEnchere);
         return "viewEnchere";
     }
     
@@ -52,9 +56,17 @@ public class EnchereController {
 	public String Encherire(@PathVariable("id") String id, @RequestParam("mise") Integer mise, Model model)
 	{
 		String username = getCurrentUsername();
+		
+
 		String errorMessage = "";
 		Article article = this.articleService.getArticleById(id);
+
 		Utilisateur loggedInUser = utilisateurService.selectUtilisateurByPseudo(username);
+		if(article.getStatut() != 1 || article.getDateFinEncheres().isBefore(LocalDate.now()))
+		{
+			model.addAttribute("enchereTerminer", "true");
+			return "redirect:/enchere/"+id;
+		}
 		//pas asser de credits pour l'encheres
 		if(loggedInUser.getCredit() < article.getPrixVente()){
 			model.addAttribute("creditLowerThanLastEnchere", "true");
@@ -63,12 +75,14 @@ public class EnchereController {
 			model.addAttribute("miseTooSmall", "true");
 			//mise au dessus des credits que possede l'utilisateurs
 		} else if(mise > loggedInUser.getCredit()){
-	
+			
 			model.addAttribute("miseBiggerThanCredits", "true");
+			return "redirect:/enchere/"+id;
 		} else {
 			String pseudoLastEnchere = this.enchereService.getPseudoLastMiseByIdEnchere(article.getNo_article().toString());
 			if(pseudoLastEnchere != "" || pseudoLastEnchere != null) {
 				this.utilisateurService.addCreditToUserByPseudo(pseudoLastEnchere, article.getPrixVente());
+
 			}
 			this.utilisateurService.removeCreditToUserByPseudo(username, mise);
 			article.setPrixVente(mise);
