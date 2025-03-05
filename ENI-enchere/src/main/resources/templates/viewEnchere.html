@@ -8,7 +8,7 @@
 
 <main>
     <h1 class="article__title">Détail d'une vente</h1>
-    <form data-th-action="#{/enchere/miser}" method="POST" data-th-object="${article}" class="article__list">
+    <form data-th-if="${articleUser.pseudo != loggedInUser.pseudo or notStarted != true}" data-th-action="#{/enchere/miser}" method="POST" data-th-object="${article}" class="article__list">
 
 
         <p class="article__text" data-th-text="#{profile.article}">Article :</p>
@@ -37,6 +37,59 @@
         <p class="article__text" data-th-text="#{enchere.dernierEncherisseur}">dernier encherisseur :</p>
 		<span class="article__data--line" data-th-text="${pseudoLastEnchere}"></span>
 	</form>
+
+    <form  data-th-if="${articleUser.pseudo == loggedInUser.pseudo and notStarted == true}" data-th-action="@{/enchere/update}" method="POST" data-th-object="${article}" class="article__list">
+
+        <ul class="profil__list" >
+            <input hidden name="*{no_article}" data-th-field="*{no_article}" readonly>
+            <input hidden name="*{dateDebutEncheres}" data-th-field="*{dateDebutEncheres}" readonly>
+            <input hidden name="*{statut}" data-th-field="*{statut}" readonly>
+            <input hidden name="*{PrixVente}" data-th-field="*{PrixVente}" readonly>
+            <input hidden name="*{utilisateur.pseudo}" data-th-field="*{utilisateur.pseudo}" readonly>
+            <li class="profil__item">
+                <p class="article__text"  data-th-text="#{profile.article}">Article :</p>
+                <input name="nom_article" data-th-field="*{nom_article}">
+            </li>
+            
+            <li class="profil__item">
+                <p class="article__text" data-th-text="#{profile.meilleurOffre}">Mise à prix :</p>
+                <input name="prixInitial" data-th-field="*{prixInitial}">
+            </li>
+            <li class="profil__item">
+                <p class="article__text" data-th-text="#{profile.categorie}">Categorie :</p>
+                <select
+				id="categorie" name="categorie" required>
+				<option th:each="cat : ${categories}" th:value="${cat.no_categorie}"
+					th:text="${cat.libelle}"></option>
+			</select>
+            </li>
+            <li class="profil__item">
+                <p class="article__text" data-th-text="#{profile.description}">Description :</p>
+                <textarea class="article__textarea" id="description"
+				name="description" data-th-field="*{description}" required></textarea>
+            </li>
+            <li class="profil__item">
+                <p class="article__text" data-th-text="#{profile.finEnchere}">Fin de l'enchère :</p>
+                <input name="dateFinEnchere" data-th-field="*{dateFinEncheres}">
+            </li>
+            <li>
+                <label class="article__text" for="retrait"  data-th-text="#{vente.retrait}">Retrait(*) :</label> <select
+				class="vente__retrait" id="retrait" name="adresse_retrait"
+				required>
+				<option th:each="adr : ${adresses}" th:value="${adr.no_adresse}"
+					th:text="${adr.rue}"></option>
+			</select>
+            </li>
+            <li>
+                <button class="button vente__button" type="submit" name="action"
+				value="suivant"  data-th-text="#{vente.suivant}">Suivant</button>
+            </li>
+        </ul>
+
+        
+	</form>
+
+
 	<form data-th-action="@{/enchere/miser/{id}(id=${article.no_article})}" method="POST">
 		<div class="article__input-container"
 		data-th-if="${loggedInUser != null and articleUser.pseudo != loggedInUser.pseudo}">

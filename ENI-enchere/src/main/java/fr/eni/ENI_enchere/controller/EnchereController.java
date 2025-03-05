@@ -1,11 +1,14 @@
 package fr.eni.ENI_enchere.controller;
 
+import fr.eni.ENI_enchere.bo.Adresse;
 import fr.eni.ENI_enchere.bo.Article;
+import fr.eni.ENI_enchere.bo.Categorie;
 import fr.eni.ENI_enchere.bo.Enchere;
 import fr.eni.ENI_enchere.bo.Utilisateur;
 import fr.eni.ENI_enchere.bo.DTO.EnchereMiseDTO;
 import fr.eni.ENI_enchere.service.ArticleService;
 import fr.eni.ENI_enchere.service.EnchereService;
+import fr.eni.ENI_enchere.service.NouvelleVenteService;
 import fr.eni.ENI_enchere.service.UtilisateurService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -34,11 +37,13 @@ public class EnchereController {
     private final EnchereService enchereService;
     private final ArticleService articleService;
     private final UtilisateurService utilisateurService;
-    public EnchereController(EnchereService enchereService, ArticleService articleService, UtilisateurService utilisateurService) {
+    private final NouvelleVenteService venteService;
+    public EnchereController(EnchereService enchereService, ArticleService articleService, UtilisateurService utilisateurService, NouvelleVenteService venteService ) {
 		super();
 		this.enchereService = enchereService;
 		this.articleService = articleService;
 		this.utilisateurService = utilisateurService;
+		this.venteService = venteService;
 	}
 
 	@GetMapping("/enchere/{id}")
@@ -48,15 +53,29 @@ public class EnchereController {
 
         Article article = this.articleService.getArticleById(id);
         Utilisateur articleUser = article.getUtilisateur();
+        Boolean notStarted = article.getDateDebutEncheres().isAfter(LocalDate.now());
         model.addAttribute("loggedInUser", loggedInUser);
         model.addAttribute("articleUser",articleUser);
         model.addAttribute("article" ,article);
         model.addAttribute("miseDTO", new EnchereMiseDTO());
+        model.addAttribute("notStarted", notStarted);
+        List<Categorie> categories = venteService.getAllCategories();
+        List<Adresse> adresses = venteService.getAllAdresses();
+
+        model.addAttribute("categories", categories);
+        model.addAttribute("adresses", adresses);
 		String pseudoLastEnchere = this.enchereService.getPseudoLastMiseByIdEnchere(article.getNo_article().toString());
 		model.addAttribute("pseudoLastEnchere", pseudoLastEnchere);
+		System.out.println(article);
         return "viewEnchere";
     }
-    
+    @PostMapping("/enchere/update")
+    public String updateEnchere(@ModelAttribute("article")Article article) {
+		this.articleService.Save(article);
+    	return "redirect:/";
+    	
+    }
+	
 	@PostMapping("/enchere/miser/{id}")
 	public String Encherire(@PathVariable("id") String id,     @Valid @ModelAttribute EnchereMiseDTO miseDTO,
 		    BindingResult bindingResult, Model model)
