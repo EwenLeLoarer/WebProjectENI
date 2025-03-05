@@ -19,10 +19,10 @@ public class ArticleRepositorySQL implements ArticleRepository{
     // Retourne toutes les enchères actives (statut = 1)
     @Override
     public List<Article> getAllEncheres() {
-        String sql = "SELECT * FROM ARTICLES_A_VENDRE ar \r\n"
-        		+ "        		 INNER JOIN utilisateurs ut on ut.pseudo = ar.id_utilisateur \r\n"
-        		+ "        		 INNER JOIN adresses ad on ar.no_adresse_retrait = ad.no_adresse \r\n"
-        		+ "        		 RIGHT JOIN CATEGORIES cat on ar.no_categorie = cat.no_categorie \r\n"
+        String sql = "SELECT * FROM ARTICLES_A_VENDRE ar "
+        		+ "        		 INNER JOIN utilisateurs ut on ut.pseudo = ar.id_utilisateur "
+        		+ "        		 INNER JOIN adresses ad on ar.no_adresse_retrait = ad.no_adresse "
+        		+ "        		 RIGHT JOIN CATEGORIES cat on ar.no_categorie = cat.no_categorie "
         		+ "        		 WHERE  statut_enchere = 1";
         return jdbcTemplate.query(sql, new ArticleRowMapper());
     }

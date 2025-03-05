@@ -56,7 +56,7 @@ data-th-replace="~{layouts/fragment-layout :: layoutName (
                            th:checked="${filterType == 'ventes'}" /> 
                     <span data-th-text="#{enchere.ventes}">Mes ventes</span>
                 </label>
-				select id="ventes-options" name="filterValue" 
+				<select id="ventes-options" name="filterValue" 
 				th:disabled="${filterType != 'ventes'}">
 			<option value="cours" th:selected="${filterValue == 'cours'}" data-th-text="#{enchere.ventes.cours}">Mes ventes en cours</option>
 			<option value="non-debutees" th:selected="${filterValue == 'non-debutees'}" data-th-text="#{enchere.ventes.nonDebutees}">Mes ventes non débutées</option>

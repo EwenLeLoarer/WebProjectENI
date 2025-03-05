@@ -3,6 +3,7 @@ package fr.eni.ENI_enchere.controller;
 import fr.eni.ENI_enchere.bo.Article;
 import fr.eni.ENI_enchere.bo.Enchere;
 import fr.eni.ENI_enchere.bo.Utilisateur;
+import fr.eni.ENI_enchere.bo.DTO.EnchereMiseDTO;
 import fr.eni.ENI_enchere.service.ArticleService;
 import fr.eni.ENI_enchere.service.EnchereService;
 import fr.eni.ENI_enchere.service.UtilisateurService;
@@ -39,7 +40,6 @@ public class EnchereController {
 	@GetMapping("/enchere/{id}")
 	 public String viewEnchere(@PathVariable("id") String id, Model model) {
         String username = getCurrentUsername();
-
         Utilisateur loggedInUser = utilisateurService.selectUtilisateurByPseudo(username);
 
         Article article = this.articleService.getArticleById(id);
@@ -47,6 +47,7 @@ public class EnchereController {
         model.addAttribute("loggedInUser", loggedInUser);
         model.addAttribute("articleUser",articleUser);
         model.addAttribute("article" ,article);
+        model.addAttribute("miseDTO", new EnchereMiseDTO());
 		String pseudoLastEnchere = this.enchereService.getPseudoLastMiseByIdEnchere(article.getNo_article().toString());
 		model.addAttribute("pseudoLastEnchere", pseudoLastEnchere);
         return "viewEnchere";
@@ -64,19 +65,20 @@ public class EnchereController {
 		Utilisateur loggedInUser = utilisateurService.selectUtilisateurByPseudo(username);
 		if(article.getStatut() != 1 || article.getDateFinEncheres().isBefore(LocalDate.now()))
 		{
-			model.addAttribute("enchereTerminer", "true");
+			model.addAttribute("enchereTerminer", true);
 			return "redirect:/enchere/"+id;
 		}
 		//pas asser de credits pour l'encheres
 		if(loggedInUser.getCredit() < article.getPrixVente()){
-			model.addAttribute("creditLowerThanLastEnchere", "true");
+			System.out.println(true);
+			model.addAttribute("creditLowerThanLastEnchere", true);
 			//mise en dessous de la derniere enchere
 		} else if(mise < article.getPrixVente()) {
-			model.addAttribute("miseTooSmall", "true");
+			model.addAttribute("miseTooSmall", true);
 			//mise au dessus des credits que possede l'utilisateurs
 		} else if(mise > loggedInUser.getCredit()){
 			
-			model.addAttribute("miseBiggerThanCredits", "true");
+			model.addAttribute("miseBiggerThanCredits", true);
 			return "redirect:/enchere/"+id;
 		} else {
 			String pseudoLastEnchere = this.enchereService.getPseudoLastMiseByIdEnchere(article.getNo_article().toString());

@@ -32,17 +32,22 @@
         <p class="article__text" data-th-text="#{profile.adresse}">Retrait :</p>
         <span class="article__data--line" data-th-text="*{adresse_retrait}"></span>
 
-		<p class="article__text">Vendeur :</p>
+		<p class="article__text" data-th-text="#{profile.vendeur}">Vendeur :</p>
 		<span class="article__data--line" data-th-text="*{utilisateur.pseudo}"></span>
-        <p class="article__text">dernier encherisseur :</p>
+        <p class="article__text" data-th-text="#{enchere.dernierEncherisseur}">dernier encherisseur :</p>
 		<span class="article__data--line" data-th-text="${pseudoLastEnchere}"></span>
 	</form>
-	<form data-th-action="@{/enchere/miser/{id}(id=${article.no_article})}" method="POST">
+	
+	<form data-th-action="@{/enchere/miser/{id}(id=${article.no_article})}" data-th-object="miseDTO" method="POST">
 		<div class="article__input-container"
 		data-th-if="${loggedInUser != null and articleUser.pseudo != loggedInUser.pseudo}">
-		<label class="article__text" for="idEncherire">Mon enchère: </label>
+		<label class="article__text" for="idEncherire" data-th-text="#{enchere.monEnchere}">Mon enchère: </label>
 		<input class="mise__input" id="idEncherire" name="mise" type="number" th:min="*{prixVente}" th:max="${loggedInUser.credit}">
 		<button class="button encherir__button" type="submit"  data-th-text="#{profile.encherire}">Enchérir</button>
+		
+		<div th:if="${#fields.hasErrors('mise')}" class="alert alert-danger mt-2">
+            <span th:errors="*{mise}"></span>
+        </div>
 		</div>
 	</form>
 	
