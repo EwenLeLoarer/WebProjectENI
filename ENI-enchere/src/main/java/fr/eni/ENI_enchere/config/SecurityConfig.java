@@ -36,34 +36,31 @@ public class SecurityConfig {
 	}
 	
 	@Bean
-	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.authorizeHttpRequests(
-				auth -> {
-					//authoriser l'accès à la liste uniquement au employé
-					//auth.requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN");
-					auth.requestMatchers(HttpMethod.GET, "/users/register").hasRole("ADMIN");
-					auth.requestMatchers(HttpMethod.POST, "/users/register").hasRole("ADMIN");
-					//authorise l'accès à la page d'accueil du site à tout le monde
-					auth.requestMatchers("/*").permitAll();
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests(
+                auth -> {
+                    // Authorize the access to the register page only for ADMIN role
+                    auth.requestMatchers(HttpMethod.GET, "/users/register").hasRole("ADMIN");
+                    auth.requestMatchers(HttpMethod.POST, "/users/register").hasRole("ADMIN");
+                    
+                    // Permit access to the homepage and other public pages
+                    auth.requestMatchers("/*").permitAll();
 
-					//accès au ressource pour tous
-					auth.requestMatchers("/css/*").permitAll();
-					auth.requestMatchers("/image/*").permitAll();
-					
-					//refuse toutes autre url
-					//a re changer
-					auth.anyRequest().permitAll();	
-				});
-		
-		//customisation de ma page login
-		http.formLogin(form -> {
-					//définir la nouvelle page de login
-					form.loginPage("/login").permitAll();
-					//définir la page sur laquelle on arrive après la connexion
-					form.defaultSuccessUrl("/");
-				});
-		
-		http.logout( logout -> {
+                    // Allow access to static resources (CSS, Images) for all users
+                    auth.requestMatchers("/css/*").permitAll();
+                    auth.requestMatchers("/image/*").permitAll();
+                    
+                    // Refuse all other URLs
+                    auth.anyRequest().authenticated();  
+                });
+
+        // Customize the login page
+        http.formLogin(form -> {
+            form.loginPage("/login").permitAll();  // Set custom login page
+            form.defaultSuccessUrl("/");  // Redirect to home page after login
+        });
+
+        http.logout( logout -> {
 			//supprimer la session du côté serveur
 			logout.invalidateHttpSession(true);
 			logout.clearAuthentication(true);
@@ -75,25 +72,18 @@ public class SecurityConfig {
 			logout.logoutSuccessUrl("/");
 			logout.permitAll();
 		});
-		
-		http
-        .sessionManagement(session -> session
-            .maximumSessions(1) // Allow only one session per user
-            .expiredUrl("/login?expired") // Redirect when session expires
-        )
-        .sessionManagement(session -> session
-            .invalidSessionUrl("/login?timeout") // Redirect when session is invalid
-        )
-        .logout(logout -> logout
-            .logoutUrl("/logout") // URL for logout
-            .invalidateHttpSession(true) // Invalidate session on logout
-            .deleteCookies("JSESSIONID") // Remove cookies
-            .logoutSuccessUrl("/login?logout") // Redirect after logout
-        );
-		
-		return http.build();
-		
-	}
+        
+        httpSecurity.sessionManagement(
+	  			session -> session
+	  			    .sessionFixation().migrateSession()
+	  			    .invalidSessionUrl("/utilisateur/signin-utilisateur?invalid")
+	  			    .maximumSessions(1) // une  session active
+	  			    .expiredUrl("/utilisateur/signin-utilisateur?expired")
+	  			);
+ 
+
+        return http.build();
+    }
 	
 
 
