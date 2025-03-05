@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-
-<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-	data-th-replace="~{layouts/fragment-layout :: layoutName (
-							title= ~{ :: title},
-							content = ~{ :: main})}">
-<title>Liste des encheres</title>
+<!DOCTYPE html><html 
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+data-th-replace="~{layouts/fragment-layout :: layoutName (
+					  title= ~{ :: title},
+					  content = ~{ :: main})}">
+<title data-th-text="#{enchere.liste}">Liste des encheres</title>
 <main class="index__main">
-	<h1 class="index__title">Liste des enchères</h1>
+	<h1 class="index__title" data-th-text="#{enchere.liste}">Liste des enchères</h1>
 
 	<!-- Formulaire de recherche global -->
 	<form class="enchere__form" method="get" action="/">
@@ -20,11 +19,11 @@
 		<!-- Filtrage par catégorie -->
 		<p class="categorie__text">Catégorie :</p>
 		<select class="categorie__list" name="categorie">
-			<option value="Toutes" th:selected="${categorie == 'Toutes'}">Toutes</option>
-			<option value="1" th:selected="${categorie == '1'}">Ameublement</option>
-			<option value="2" th:selected="${categorie == '2'}">Informatique</option>
-			<option value="3" th:selected="${categorie == '3'}">Sport&Loisirs</option>
-			<option value="4" th:selected="${categorie == '4'}">Vêtements</option>
+			<option value="Toutes" th:selected="${categorie == 'Toutes'}" data-th-text="#{enchere.toutes}">Toutes</option>
+			<option value="1" th:selected="${categorie == '1'}" data-th-text="#{enchere.ameublement}">Ameublement</option>
+			<option value="2" th:selected="${categorie == '2'}" data-th-text="#{enchere.informatique}">Informatique</option>
+			<option value="3" th:selected="${categorie == '3'}" data-th-text="#{enchere.sport}">Sport&Loisirs</option>
+			<option value="4" th:selected="${categorie == '4'}" data-th-text="#{enchere.vetements}">Vêtements</option>
 		</select> <a class="filter__button button" href="/">Annuler</a>
 
 
@@ -36,35 +35,33 @@
 			<div class="radio__container">
 				<!-- Radio pour Achats -->
 				<label> <input type="radio" name="filterType" value="achats"
-					th:checked="${filterType == null or filterType == 'achats'}" />
+					th:checked="${filterType == null or filterType == 'achats'}" data-th-text="#{enchere.achats}"/>
 					Achats
 				</label> <select class="radio__list" id="achats-options" name="filterValue"
 					th:disabled="${filterType != null and filterType != 'achats'}">
 					<option value="ouvertes"
-						th:selected="${filterValue == null or filterValue == 'ouvertes'}">Enchères
+						th:selected="${filterValue == null or filterValue == 'ouvertes'}" data-th-text="#enchere.ouvertes">Enchères
 						ouvertes</option>
-					<option value="cours" th:selected="${filterValue == 'cours'}">Mes
+					<option value="cours" th:selected="${filterValue == 'cours'}" data-th-text="#enchere.cours">Mes
 						enchères en cours</option>
 					<option value="remportees"
-						th:selected="${filterValue == 'remportees'}">Mes enchères
+						th:selected="${filterValue == 'remportees'}" data-th-text="#{enchere.remportees}">Mes enchères
 						remportées</option>
 				</select>
 			</div>
 			<div class="radio__container">
 				<!-- Radio pour Ventes -->
-				<label> <input type="radio" name="filterType" value="ventes"
-					th:checked="${filterType == 'ventes'}" /> Mes ventes
-				</label> <select class="radio__list" id="ventes-options" name="filterValue"
-					th:disabled="${filterType != 'ventes'}">
-					<option value="cours" th:selected="${filterValue == 'cours'}">Mes
-						ventes en cours</option>
-					<option value="non-debutees"
-						th:selected="${filterValue == 'non-debutees'}">Mes ventes
-						non débutées</option>
-					<option value="terminees"
-						th:selected="${filterValue == 'terminees'}">Mes ventes
-						terminées</option>
-				</select>
+                <label>
+                    <input type="radio" name="filterType" value="ventes" 
+                           th:checked="${filterType == 'ventes'}" /> 
+                    <span data-th-text="#{enchere.ventes}">Mes ventes</span>
+                </label>
+				select id="ventes-options" name="filterValue" 
+				th:disabled="${filterType != 'ventes'}">
+			<option value="cours" th:selected="${filterValue == 'cours'}" data-th-text="#{enchere.ventes.cours}">Mes ventes en cours</option>
+			<option value="non-debutees" th:selected="${filterValue == 'non-debutees'}" data-th-text="#{enchere.ventes.nonDebutees}">Mes ventes non débutées</option>
+			<option value="terminees" th:selected="${filterValue == 'terminees'}" data-th-text="#{enchere.ventes.terminees}">Mes ventes terminées</option>
+		</select>
 			</div>
 		</section>
 
@@ -81,18 +78,17 @@
 
 				<p class="article__description" th:text="${article.description}"></p>
 				<p class="article__prix--text">
-					Prix actuel : <span clas="article__prix"
-						th:text="${article.prixVente}"></span> €
+					<span data-th-text="#{enchere.prixActuel}">Prix actuel :</span> 
+					<span th:text="${article.prixVente}"></span> €
 				</p>
 				<p class="article__date--text">
-					Date fin : <span class="article__vente"
-						th:text="${article.dateFinEncheres}"></span>
+					<span data-th-text="#{enchere.dateFin}">Date fin :</span> 
+					<span th:text="${article.dateFinEncheres}"></span>
 				</p>
 				<p class="article__vendeur">
-					Vendeur : <a class="article__vendeur--link"
-						th:href="@{'/profil/' + ${article.utilisateur.pseudo}}"> <span
-						class="article__vendeur--name"
-						th:text="${article.utilisateur.pseudo}"></span>
+					<span data-th-text="#{enchere.vendeur}">Vendeur :</span>
+					<a th:href="@{'/profil/' + ${article.utilisateur.pseudo}}">
+						<span th:text="${article.utilisateur.pseudo}"></span>
 					</a>
 				</p>
 			</div>

@@ -4,29 +4,37 @@
 							title= ~{ :: title},
 							content = ~{ :: main})}">
 
-<!--  tire passé en paramètre -->
-<title>Profile</title>
+<!--  titre passé en paramètre -->
+<title data-th-text="#{profile.title}">Profil</title>
 
 <main>
-
 	<h1 data-th-text="${user.pseudo}"></h1>
 	<ul class="profil__list--other" data-th-object="${user}">
-		<li class="profil__item"><p class="profil__text">Prénom:</p> <!--  ne pas modifier le name utiliser username -->
-			<span class="profil__data--other" data-th-text="*{prenom}"></span></li>
-		<li class="profil__item"><p class="profil__text">Nom:</p> <!--  ne pas modifier le name utiliser username -->
-			<span class="profil__data--other" data-th-text="*{nom}"></span></li>
-		<li class="profil__item"><p class="profil__text">Email:</p> <!--  ne pas modifier le name utiliser username -->
-			<span class="profil__data--other" data-th-text="*{email}"></span></li>
-		<li class="profil__item"><p class="profil__text">Téléphone:</p> <!--  ne pas modifier le name utiliser username -->
-			<span class="profil__data--other" data-th-text="*{telephone}"></span></li>
-			<li  class="profil__item"><a
-		data-th-if="${loggedInUser != null and user.pseudo == loggedInUser.pseudo}"
-		href="/profil/edit" class="button profil__button">Modifier</a>
-		<a
-		data-th-if="${loggedInUser == null or user.pseudo != loggedInUser.pseudo}"
-		href="/" class="button profil__button">Retour</a></li>
+		<li class="profil__item">
+			<p class="profil__text" data-th-text="#{profile.prenom}">Prénom:</p>
+			<span class="profil__data--other" data-th-text="*{prenom}"></span>
+		</li>
+		<li class="profil__item">
+			<p class="profil__text" data-th-text="#{profile.nom}">Nom:</p>
+			<span class="profil__data--other" data-th-text="*{nom}"></span>
+		</li>
+		<li class="profil__item">
+			<p class="profil__text" data-th-text="#{profile.email}">Email:</p>
+			<span class="profil__data--other" data-th-text="*{email}"></span>
+		</li>
+		<li class="profil__item">
+			<p class="profil__text" data-th-text="#{profile.telephone}">Téléphone:</p>
+			<span class="profil__data--other" data-th-text="*{telephone}"></span>
+		</li>
+		<li class="profil__item">
+			<a data-th-if="${loggedInUser != null and user.pseudo == loggedInUser.pseudo}"
+				href="/profil/edit" class="button profil__button"
+				data-th-text="#{profile.modifier}">Modifier</a>
+			<a data-th-if="${loggedInUser == null or user.pseudo != loggedInUser.pseudo}"
+				href="/" class="button profil__button"
+				data-th-text="#{profile.retour}">Retour</a>
+		</li>
 	</ul>
-	
 </main>
 
 </html>
