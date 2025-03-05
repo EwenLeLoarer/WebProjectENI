@@ -76,6 +76,21 @@ public class SecurityConfig {
 			logout.permitAll();
 		});
 		
+		http
+        .sessionManagement(session -> session
+            .maximumSessions(1) // Allow only one session per user
+            .expiredUrl("/login?expired") // Redirect when session expires
+        )
+        .sessionManagement(session -> session
+            .invalidSessionUrl("/login?timeout") // Redirect when session is invalid
+        )
+        .logout(logout -> logout
+            .logoutUrl("/logout") // URL for logout
+            .invalidateHttpSession(true) // Invalidate session on logout
+            .deleteCookies("JSESSIONID") // Remove cookies
+            .logoutSuccessUrl("/login?logout") // Redirect after logout
+        );
+		
 		return http.build();
 		
 	}
