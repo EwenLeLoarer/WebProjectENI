@@ -1,59 +1,59 @@
 <!DOCTYPE html>
 <html data-th-replace="~{layouts/fragment-layout :: layoutName (
-							title= ~{ :: title},
-							content = ~{ :: main})}">
-	
-	<!--  tire passé en paramètre -->					
-	<title>Profile</title>		
-	
-	<main>
-		<form data-th-action="#{/enchere/miser}" method="POST" data-th-object="${article}">
-			<ul class="flex-outer">
-				<li>
-					<label for="idArticle">Article: </label>
-					<input id="idArticle" type="text" data-th-field="*{nom_article}" disabled>
-				</li>
-				<li>
-					<label for="idCategorie">Categorie: </label>
-					<input id="idCategorie" type="text" data-th-field="*{categorie.libelle}" disabled>
-				</li>
-				<li>
-					<label for="idDescription">Description: </label>
-					<input id="idDescription" type="text" data-th-field="*{description}" disabled>
-				</li>
-				<li>
-					<label for="idRetrait">adresse: </label>
-					<input id="idRetrait" type="text" data-th-field="*{adresse_retrait}" disabled>
-					
-				</li>
-				<li>
-					<label for="idVendeur">Vendeur: </label>
-					<input id="idVendeur" type="text" data-th-field="*{utilisateur.pseudo}" disabled>
-				</li>
-				<li>
-					<label for="idMiseAPrix">Mise a prix: </label>
-					<input id="idArticle" type="text" data-th-field="*{prixInitial}" disabled>
-				</li>
-				<li>
-					<label for="idMeilleurOffre">Meilleur offre: </label>
-					<input id="idArticle" type="text" data-th-field="*{prixVente}" disabled>
-				</li>
-				<li>
-					<label for="idFinDeLEnchere">Fin de l'enchere: </label>
-					<input id="idFinDeLEnchere" type="text" data-th-field="*{dateFinEncheres}" disabled>
-				</li>
-			</ul>
-		</form>
-		<form data-th-action="#{/enchere/miser}" method="POST" data-th-object="${article}">
-			<ul>
-				<li>
-					<label for="idEncherire">encherire: </label>
-					<input id="idEncherire" type="number" data-th-field="*{dateFinEncheres}">
-				</li>
-			</ul>
-			<div>
-				<button type="submit">miser</button>
-			</div>
-		</form>
-	</main>
+                            title= ~{ :: title},
+                            content = ~{ :: main})}">
+
+    <!--  titre passé en paramètre -->
+    <title data-th-text="#{profile.title}">Profil</title>    
+
+    <main>
+        <form data-th-action="#{/enchere/miser}" method="POST" data-th-object="${article}">
+            <ul class="flex-outer">
+                <li>
+                    <label for="idArticle" data-th-text="#{profile.article}">Article:</label>
+                    <input id="idArticle" type="text" data-th-field="*{nom_article}" disabled>
+                </li>
+                <li>
+                    <label for="idCategorie" data-th-text="#{profile.categorie}">Categorie:</label>
+                    <input id="idCategorie" type="text" data-th-field="*{categorie.libelle}" disabled>
+                </li>
+                <li>
+                    <label for="idDescription" data-th-text="#{profile.description}">Description:</label>
+                    <input id="idDescription" type="text" data-th-field="*{description}" disabled>
+                </li>
+                <li>
+                    <label for="idRetrait" data-th-text="#{profile.adresse}">Adresse:</label>
+                    <input id="idRetrait" type="text" data-th-field="*{adresse_retrait}" disabled>
+                </li>
+                <li>
+                    <label for="idVendeur" data-th-text="#{profile.vendeur}">Vendeur:</label>
+                    <input id="idVendeur" type="text" data-th-field="*{utilisateur.pseudo}" disabled>
+                </li>
+                <li>
+                    <label for="idMiseAPrix" data-th-text="#{profile.miseAPrix}">Mise à prix:</label>
+                    <input id="idMiseAPrix" type="text" data-th-field="*{prixInitial}" disabled>
+                </li>
+                <li>
+                    <label for="idMeilleurOffre" data-th-text="#{profile.meilleurOffre}">Meilleure offre:</label>
+                    <input id="idMeilleurOffre" type="text" data-th-field="*{prixVente}" disabled>
+                </li>
+                <li>
+                    <label for="idFinDeLEnchere" data-th-text="#{profile.finEnchere}">Fin de l'enchère:</label>
+                    <input id="idFinDeLEnchere" type="text" data-th-field="*{dateFinEncheres}" disabled>
+                </li>
+            </ul>
+        </form>
+
+        <form data-th-action="#{/enchere/miser}" method="POST" data-th-object="${article}">
+            <ul>
+                <li>
+                    <label for="idEncherire" data-th-text="#{profile.encherire}">Enchérir:</label>
+                    <input id="idEncherire" type="number" data-th-field="*{dateFinEncheres}">
+                </li>
+            </ul>
+            <div>
+                <button type="submit" data-th-text="#{profile.miser}">Miser</button>
+            </div>
+        </form>
+    </main>
 </html>
