@@ -8,7 +8,15 @@ import lombok.Setter;
 public class EnchereMiseDTO {
 	@NotNull(message="la mise ne peut pas etre null")
 	@Min(value = 1, message = "La mise doit être supérieure à 0")
-	@Getter
-	@Setter
 	private Integer mise;
+
+	public Integer getMise() {
+		return mise;
+	}
+
+	public void setMise(Integer mise) {
+		this.mise = mise;
+	}
+	
+	
 }
