@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html
 	data-th-replace="~{layouts/fragment-layout :: layoutName (
 							title= ~{ :: title},
 							content = ~{ :: main})}">
-
-<!--  tire passé en paramètre -->
+  
 <title>Profile</title>
+
 <main>
 	<h1 class="title">Nouvelle vente</h1>
 
@@ -13,40 +14,40 @@
 	<form class="vente__form" th:action="@{/nouvelle-vente}" method="post">
 		<div class="vente__form-container">
 			<!-- Nom de l'article -->
-			<label class="article__text" for="nomArticle">Article(*) :</label> <input
+			<label class="article__text" for="nomArticle"  data-th-text="#{vente.article}">Article(*) :</label> <input
 				type="text" id="nomArticle" name="nom_article" required />
 
 			<!-- Mise à prix -->
-			<label class="article__text" for="prixInitial">Mise à prix(*)
+			<label class="article__text" for="prixInitial"  data-th-text="#{vente.prix}">Mise à prix(*)
 				:</label> <input type="number" id="prixInitial" name="prix_initial" min="0"
 				required />
 
 			<!-- Catégorie -->
-			<label class="article__text" for="categorie">Catégorie(*) :</label> <select
+			<label class="article__text" for="categorie"  data-th-text="#{vente.categorie}">Catégorie(*) :</label> <select
 				id="categorie" name="no_categorie" required>
 				<option th:each="cat : ${categories}" th:value="${cat.no_categorie}"
 					th:text="${cat.libelle}"></option>
 			</select>
 
 			<!-- Date de début -->
-			<label class="article__text" for="dateDebut">Début de
+			<label class="article__text" for="dateDebut"  data-th-text="#{vente.debut}">Début de
 				l'enchère(*) :</label> <input type="date" id="dateDebut"
 				name="date_debut_encheres" required />
 
 			<!-- Description -->
-			<label class="article__text--description" for="description">Description(*)
+			<label class="article__text--description" for="description"  data-th-text="#{vente.description}">Description(*)
 				:</label>
 			<textarea class="article__textarea" id="description"
 				name="description" required></textarea>
 
 			<!-- Date de fin -->
-			<label class="article__text" for="dateFin">Fin de l'enchère(*) :</label>
+			<label class="article__text" for="dateFin"  data-th-text="#{vente.fin}">Fin de l'enchère(*) :</label>
 			<input type="date" id="dateFin" name="date_fin_encheres" required />
 
 
 
 			<!-- Adresse de retrait -->
-			<label class="article__text" for="retrait">Retrait(*) :</label> <select
+			<label class="article__text" for="retrait"  data-th-text="#{vente.retrait}">Retrait(*) :</label> <select
 				class="vente__retrait" id="retrait" name="no_adresse_retrait"
 				required>
 				<option th:each="adr : ${adresses}" th:value="${adr.no_adresse}"
@@ -56,13 +57,12 @@
 		<div class="vente__buttons">
 			<!-- Boutons -->
 			<button class="button vente__button" type="submit" name="action"
-				value="suivant">Suivant</button>
+				value="suivant"  data-th-text="#{vente.suivant}">Suivant</button>
 			<a href="/" class="button vente__button" type="submit" name="action"
-				value="annulerVente">Annuler la vente</a>
+				value="annulerVente"  data-th-text="#{vente.annulerVente}">Annuler la vente</a>
 			<a href="/" class="button vente__button" type="submit" name="action"
-				value="annuler">Annuler</a>
+				value="annuler"  data-th-text="#{vente.annuler}">Annuler</a>
 		</div>
 	</form>
 </main>
-</body>
 </html>

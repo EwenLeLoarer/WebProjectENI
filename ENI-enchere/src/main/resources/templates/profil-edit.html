@@ -1,103 +1,103 @@
 <!DOCTYPE html>
 <html data-th-replace="~{layouts/fragment-layout :: layoutName (
-							title= ~{ :: title},
-							content = ~{ :: main})}">
-	
-<!--  tire passé en paramètre -->					
-<title>Profile</title>		
+                            title= ~{ :: title},
+                            content = ~{ :: main})}">
 
-<main>
-		<h1 class="title">Mon Profil</h1>
-	<form
-		class="profil__form" data-th-action="@{/profil/edit}" method="post"
-		data-th-object="${user}">
-		<ul class="profil__list">
-			<li class="profil__item">
-				<p class="profil__text">Pseudo:</p> <!--  ne pas modifier le name utiliser username -->
-				<span class="profil__data" data-th-text="*{pseudo}"></span>
-			</li>
-			<li class="profil__item"><label for="idNom">Nom:</label> <!--  ne pas modifier le name utiliser username -->
-				<input class="profil__field" id="idNom" type="text"
-				data-th-field="*{nom}"></li>
-			<li class="profil__item"><label for="idPrenom">Prenom:</label> <!--  ne pas modifier le name utiliser username -->
-				<input class="profil__field" id="idPrenom" type="text"
-				data-th-field="*{prenom}"></li>
-			<li class="profil__item"><label for="idEmail">Email:</label> <!--  ne pas modifier le name utiliser username -->
-				<input class="profil__field" id="idEmail" type="text"
-				data-th-field="*{email}"></li>
-			<li class="profil__item"><label for="idTelephone">Telephone:</label>
-				<!--  ne pas modifier le name utiliser username --> <input
-				class="profil__field" id="idTelephone" type="text"
-				data-th-field="*{telephone}"></li>
-		</ul>
-		<ul class="profil__list--address">
-			<li class="profil__item"><label for="idRue">Adresse:</label> <!--  ne pas modifier le name utiliser username -->
-				<input class="profil__field" id="idRue" type="text"
-				placeholder="ta rue" data-th-field="*{adresse.rue}"></li>
-			<li class="profil__item--address"><label for="idCodePostal">Code
-					Postal</label> <!--  ne pas modifier le name utiliser username --> <input
-				class="profil__field" id="idCodePostal" type="text"
-				placeholder="ton code postal" data-th-field="*{adresse.code_postal}"></li>
-			<li class="profil__item--address"><label for="idVille">Ville</label>
-				<!--  ne pas modifier le name utiliser username --> <input
-				class="profil__field" id="idVille" type="text"
-				placeholder="ta ville" data-th-field="*{adresse.ville}"></li>
-		</ul>
-		<ul class="profil__list">
-			<li class="profil__item">
-				<p class="profil__text">Mon crédit:</p> <!--  ne pas modifier le name utiliser username -->
-				<span class="profil__data" data-th-text="*{credit}"></span>
-			</li>
-		</ul>
-		<ul>
-			<li class="profil__item">
-				<!--  ne pas modifier le name utiliser username --> <input
-				class="profil__field" id="idAdresseEni"
-				placeholder="est une adresse eni"
-				data-th-field="*{adresse.adresseEni}" type="hidden"
-				readonly="readonly">
-			</li>
-			<li class="profil__item">
-				<!--  ne pas modifier le name utiliser username --> <input
-				class="read-only" id="idnumero_eni" type="hidden" placeholder=""
-				data-th-field="*{adresse.no_adresse}">
-			</li>
-			<li class="profil__item">
-				<!--  ne pas modifier le name utiliser username --> <input
-				class="read-only" id="idmot_de_passe" type="hidden" placeholder=""
-				data-th-field="*{mot_de_passe}">
-			</li>
-			<li class="profil__item">
-				<!--  ne pas modifier le name utiliser username --> <input
-				class="read-only" id="idactive" type="hidden" placeholder=""
-				data-th-field="*{active}">
-			</li>
+  
+    <!--  titre passé en paramètre -->
+    <title data-th-text="#{profile.title}">Profil</title>    
 
-			<li class="profil__item">
-				<!--  ne pas modifier le name utiliser username --> <input
-				class="read-only" id="idadministrateur" type="hidden" placeholder=""
-				data-th-field="*{administrateur}">
-			</li>
-			<li class="profil__item">
-				<!--  ne pas modifier le name utiliser username --> <input
-				class="read-only" id="idPseudo" type="hidden" placeholder=""
-				data-th-field="*{pseudo}">
-			</li>
-		</ul>
-		<div class="profil-edit__buttons">
-			<button class="profil-edit__button button" type="submit">Modifier</button>
-			<a class="profil-edit__button button" href="/profil/change-password">Modifier
-				mot de passe</a>
-			<button class="profil-edit__button button" type="submit"
-				formaction="/profil/delete" formmethod="post"
-				onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">
-				Supprimer mon compte</button>
 
-		</div>
+    <main>
+        <h1 class="title" data-th-text="#{profile.heading}">Mon Profil</h1>
+        <form class="profil__form" data-th-action="@{/profil/edit}" method="post" data-th-object="${user}">
+            <ul class="profil__list">
+                <li class="profil__item">
+                    <p class="profil__text" data-th-text="#{profile.pseudo}">Pseudo:</p>
+                    <span class="profil__data" data-th-text="*{pseudo}"></span>
+                </li>
+                <li class="profil__item">
+                    <label for="idNom" data-th-text="#{profile.nom}">Nom:</label>
+                    <input class="profil__field" id="idNom" type="text" data-th-field="*{nom}">
+                </li>
+                <li class="profil__item">
+                    <label for="idPrenom" data-th-text="#{profile.prenom}">Prénom:</label>
+                    <input class="profil__field" id="idPrenom" type="text" data-th-field="*{prenom}">
+                </li>
+                <li class="profil__item">
+                    <label for="idEmail" data-th-text="#{profile.email}">Email:</label>
+                    <input class="profil__field" id="idEmail" type="text" data-th-field="*{email}">
+                </li>
+                <li class="profil__item">
+                    <label for="idTelephone" data-th-text="#{profile.telephone}">Téléphone:</label>
+                    <input class="profil__field" id="idTelephone" type="text" data-th-field="*{telephone}">
+                </li>
+            </ul>
+            <ul class="profil__list--address">
+                <li class="profil__item">
+                    <label for="idRue" data-th-text="#{profile.adresse}">Adresse:</label>
+                    <input class="profil__field" id="idRue" type="text" placeholder="ta rue" data-th-field="*{adresse.rue}">
+                </li>
+                <li class="profil__item--address">
+                    <label for="idCodePostal" data-th-text="#{profile.codePostal}">Code Postal:</label>
+                    <input class="profil__field" id="idCodePostal" type="text" placeholder="ton code postal" data-th-field="*{adresse.code_postal}">
+                </li>
+                <li class="profil__item--address">
+                    <label for="idVille" data-th-text="#{profile.ville}">Ville:</label>
+                    <input class="profil__field" id="idVille" type="text" placeholder="ta ville" data-th-field="*{adresse.ville}">
+                </li>
+            </ul>
+            <ul class="profil__list">
+                <li class="profil__item">
+                    <p class="profil__text" data-th-text="#{profile.credit}">Mon crédit:</p>
+                    <span class="profil__data" data-th-text="*{credit}"></span>
+                </li>
+            </ul>
+            <ul>
+                <li class="profil__item">
+                  <!--  ne pas modifier le name utiliser username --> <input
+                  class="profil__field" id="idAdresseEni"
+                  placeholder="est une adresse eni"
+                  data-th-field="*{adresse.adresseEni}" type="hidden"
+                  readonly="readonly">
+                </li>
+                <li class="profil__item">
+                  <!--  ne pas modifier le name utiliser username --> <input
+                  class="read-only" id="idnumero_eni" type="hidden" placeholder=""
+                  data-th-field="*{adresse.no_adresse}">
+                </li>
+                <li class="profil__item">
+                  <!--  ne pas modifier le name utiliser username --> <input
+                  class="read-only" id="idmot_de_passe" type="hidden" placeholder=""
+                  data-th-field="*{mot_de_passe}">
+                </li>
+                <li class="profil__item">
+                  <!--  ne pas modifier le name utiliser username --> <input
+                  class="read-only" id="idactive" type="hidden" placeholder=""
+                  data-th-field="*{active}">
+                </li>
 
-	</form>
-	<a class="profil__cancel profil-edit__button button"
-		data-th-href="@{'/profil/' + ${#authentication.name}}">Annuler</a>
-</main>
+                <li class="profil__item">
+                  <!--  ne pas modifier le name utiliser username --> <input
+                  class="read-only" id="idadministrateur" type="hidden" placeholder=""
+                  data-th-field="*{administrateur}">
+                </li>
+                <li class="profil__item">
+                  <!--  ne pas modifier le name utiliser username --> <input
+                  class="read-only" id="idPseudo" type="hidden" placeholder=""
+                  data-th-field="*{pseudo}">
+                </li>
+		       </ul>
+            <div class="profil-edit__buttons">
+                <button class="profil-edit__button button" type="submit" data-th-text="#{profile.modifier}">Modifier</button>
+                <a class="profil-edit__button button" href="/profil/change-password" data-th-text="#{profile.changePassword}">Modifier mot de passe</a>
+                <button class="profil-edit__button button" type="submit" formaction="/profil/delete" formmethod="post"
+                    onclick="return confirm('#{profile.confirmDelete}');">
+                    <span data-th-text="#{profile.deleteAccount}">Supprimer mon compte</span>
+                </button>
+            </div>
+        </form>
+        <a class="profil__cancel profil-edit__button button" data-th-href="@{'/profil/' + ${#authentication.name}}" data-th-text="#{profile.annuler}">Annuler</a>
+    </main>
 
 </html>
