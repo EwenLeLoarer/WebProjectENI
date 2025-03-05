@@ -1,72 +1,67 @@
 <!DOCTYPE html>
-<html
-	data-th-replace="~{layouts/fragment-layout :: layoutName (
-							title= ~{ :: title},
-							content = ~{ :: main})}">
+<html data-th-replace="~{layouts/fragment-layout :: layoutName (
+                            title= ~{ :: title},
+                            content= ~{ :: main})}">
 
-<!--  titre passé en paramètre -->
-<title>Inscription</title>
+<title data-th-text="#{register.title}">Inscription</title>
 
 <main class="register__main">
-<h1>Nouveau Profil</h1>
-	<form class="register__form" data-th-action="#{/security/create}"
-		method="post" data-th-object="${user}">
-		<ul class="register__list">
-			<li class="register__item"><label for="idPseudo">Pseudo(*):</label>
-				<!--  ne pas modifier le name utiliser username --> <input
-				class="register__field" id="idPseudo" type="text"
-				data-th-field="*{pseudo}"></li>
+    <h1 data-th-text="#{register.heading}">Nouveau Profil</h1>
+    <form class="register__form" data-th-action="@{/security/create}" method="post" data-th-object="${user}">
+        <ul class="register__list">
+            <li class="register__item">
+                <label for="idPseudo" data-th-text="#{register.pseudo}">Pseudo(*):</label>
+                <input class="register__field" id="idPseudo" type="text" data-th-field="*{pseudo}">
+            </li>
+            <li class="register__item">
+                <label for="idNom" data-th-text="#{register.nom}">Nom(*):</label>
+                <input class="register__field" id="idNom" type="text" data-th-field="*{nom}">
+            </li>
+            <li class="register__item">
+                <label for="idPrenom" data-th-text="#{register.prenom}">Prénom(*):</label>
+                <input class="register__field" id="idPrenom" type="text" data-th-field="*{prenom}">
+            </li>
+            <li class="register__item">
+                <label for="idEmail" data-th-text="#{register.email}">Email(*):</label>
+                <input class="register__field" id="idEmail" type="text" data-th-field="*{email}">
+            </li>
+            <li class="register__item">
+                <label for="idTelephone" data-th-text="#{register.telephone}">Téléphone:</label>
+                <input class="register__field" id="idTelephone" type="text" data-th-field="*{telephone}">
+            </li>
+        </ul>
 
-			<li class="register__item"><label for="idNom">Nom(*):</label> <!--  ne pas modifier le name utiliser username -->
-				<input class="register__field" id="idNom" type="text"
-				data-th-field="*{nom}"></li>
+        <ul class="register__list--address">
+            <li class="register__item">
+                <label for="idRue" data-th-text="#{register.adresse}">Adresse(*):</label>
+                <input class="register__field" id="idRue" type="text" data-th-field="*{adresse.rue}">
+            </li>
+            <li class="register__item--address">
+                <label for="idCodePostal" data-th-text="#{register.codepostal}">Code Postal(*):</label>
+                <input class="register__field" id="idCodePostal" type="text" data-th-field="*{adresse.code_postal}">
+            </li>
+            <li class="register__item--address">
+                <label for="idVille" data-th-text="#{register.ville}">Ville(*):</label>
+                <input class="register__field" id="idVille" type="text" data-th-field="*{adresse.ville}">
+            </li>
+        </ul>
 
-			<li class="register__item"><label for="idPrenom">Prenom(*)
-					:</label> <!--  ne pas modifier le name utiliser username --> <input
-				class="register__field" id="idPrenom" type="text"
-				data-th-field="*{prenom}"></li>
+        <ul class="register__list">
+            <li class="register__item">
+                <label for="idMotDePasse" data-th-text="#{register.motdepasse}">Mot de Passe(*):</label>
+                <input class="register__field" id="idMotDePasse" type="password" data-th-field="*{mot_de_passe}">
+            </li>
+            <li class="register__item">
+                <label for="idValidation" data-th-text="#{register.confirmation}">Confirmation(*):</label>
+                <input class="register__field" id="idValidation" type="password" data-th-field="*{mot_de_passe}">
+            </li>
+        </ul>
 
-			<li class="register__item"><label for="idEmail">Email(*):</label>
-				<!--  ne pas modifier le name utiliser username --> <input
-				class="register__field" id="idEmail" type="text"
-				data-th-field="*{email}"></li>
-
-			<li class="register__item"><label for="idTelephone">Telephone:</label>
-				<!--  ne pas modifier le name utiliser username --> <input
-				class="register__field" id="idTelephone" type="text"
-				data-th-field="*{telephone}"></li>
-		</ul>
-
-		<ul class="register__list--address">
-			<li class="register__item"><label for="idRue">Adresse(*):</label>
-				<!--  ne pas modifier le name utiliser username --> <input
-				class="register__field" id="idRue" type="text"
-				data-th-field="*{adresse.rue}"></li>
-			<li class="register__item--address"><label for="idCodePostal">Code
-					Postal(*):</label> <!--  ne pas modifier le name utiliser username --> <input
-				class="register__field register__field" id="idCodePostal"
-				type="text" data-th-field="*{adresse.code_postal}"></li>
-			<li class="register__item--address"><label for="idVille">Ville(*):</label>
-				<!--  ne pas modifier le name utiliser username --> <input
-				class="register__field register__field" id="idVille" type="text"
-				data-th-field="*{adresse.ville}"></li>
-		</ul>
-		<ul class="register__list">
-			<li class="register__item"><label for="idMotDePasse">Mot
-					de Passe(*):</label> <!--  ne pas modifier le name utiliser username --> <input
-				class="register__field" id="idMotDePasse" type="password"
-				data-th-field="*{mot_de_passe}"></li>
-			<li class="register__item"><label for="idValidation">Confirmation(*):</label>
-				<!--  ne pas modifier le name utiliser username --> <input
-				class="register__field" id="idValidation" type="password"
-				data-th-field="*{mot_de_passe}"></li>
-		</ul>
-		<div class=register__buttons>
-			<button class="register__button button" type="submit">S'inscrire</button>
-			<a class="register__button button" href="/">Annuler</a>
-		</div>
-
-	</form>
+        <div class="register__buttons">
+            <button class="register__button button" type="submit" data-th-text="#{register.submit}">S'inscrire</button>
+            <a class="register__button button" href="/" data-th-text="#{register.cancel}">Annuler</a>
+        </div>
+    </form>
 </main>
 
 </html>

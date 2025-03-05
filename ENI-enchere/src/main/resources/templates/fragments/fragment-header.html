@@ -1,12 +1,28 @@
 <!-- fragment header -->
 <header class="main__header" data-th-fragment="headerName">
-<a class="home__link" href="/">Eni-Encheres</a>
+	<a class="home__link" href="/">Eni-Encheres</a>
 	<nav class="main__nav">
 		<ul class="nav__list">
-      <li class="nav__item"><a class="li__link" href="/">Accueil</a></li>
-			<li data-th-if="${#authorization.expression('isAuthenticated')}" class="nav__item"><a class="li__link" data-th-href="@{'/profil/' + ${#authentication.name}}">Mon profil</a></li>
-			<li data-sec-authorize="!isAuthenticated()" data-th-if="${currentPage != '/login'}" class="nav__item"><a class="li__link" href="/login">S'inscrire - Se connecter</a></li>
-			<li data-th-if="${#authorization.expression('isAuthenticated')}" class="nav__item"><a class="li__link" href="/logout">Deconnexion</a></li>
+			<li class="nav__item"><a class="li__link" href="/">Accueil</a></li>
+			<li data-th-if="${#authorization.expression('isAuthenticated')}"
+				class="nav__item"><a class="li__link"
+				data-th-href="@{'/profil/' + ${#authentication.name}}"
+				data-th-text="#{nav.profil}">Mon profil</a></li>
+			<li data-sec-authorize="!isAuthenticated()"
+				data-th-if="${currentPage != '/login'}" class="nav__item"><a
+				class="li__link" href="/login" data-th-text="#{nav.login}">S'inscrire
+					- Se connecter</a></li>
+			<li data-th-if="${#authorization.expression('isAuthenticated')}"
+				class="nav__item"><a class="li__link" href="/logout"
+				data-th-text="#{nav.logout}">Deconnexion</a></li>
+			<!-- Liens pour changer la langue (affiche uniquement l'autre option) -->
+			<li><a th:href="@{?lang=en}"
+				th:if="${#locale.language == 'fr' or #locale.language == 'fr_FR'}">English</a>
+				<a th:href="@{?lang=fr}"
+				th:if="${#locale.language == 'en' or #locale.language == 'en_US'}">Français</a>
+			</li>
+
+
 		</ul>
 	</nav>
 </header>

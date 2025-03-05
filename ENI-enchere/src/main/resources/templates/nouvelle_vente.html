@@ -2,24 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>Nouvelle vente</title>
+    <title data-th-text="#{vente.nouvelle}">Nouvelle vente</title>
     <meta charset="UTF-8"/>
 </head>
 <body>
-<h1>Nouvelle vente</h1>
+<h1 data-th-text="#{vente.nouvelle}">Nouvelle vente</h1>
 
 <!-- Formulaire de création d'article -->
 <form th:action="@{/nouvelle-vente}" method="post">
     <!-- Nom de l'article -->
-    <label for="nomArticle">Article :</label>
+    <label for="nomArticle" data-th-text="#{vente.article}">Article :</label>
     <input type="text" id="nomArticle" name="nom_article" placeholder="Nom de l'article" required />
 
     <!-- Mise à prix -->
-    <label for="prixInitial">Mise à prix :</label>
+    <label for="prixInitial" data-th-text="#{vente.prix}">Mise à prix :</label>
     <input type="number" id="prixInitial" name="prix_initial" placeholder="Prix de départ" min="0" required />
 
     <!-- Catégorie -->
-    <label for="categorie">Catégorie :</label>
+    <label for="categorie" data-th-text="#{vente.categorie}">Catégorie :</label>
     <select id="categorie" name="no_categorie" required>
         <option th:each="cat : ${categories}"
                 th:value="${cat.no_categorie}"
@@ -28,30 +28,30 @@
     </select>
 
     <!-- Date de début -->
-    <label for="dateDebut">Début de l'enchère :</label>
+    <label for="dateDebut" data-th-text="#{vente.debut}">Début de l'enchère :</label>
     <input type="date" id="dateDebut" name="date_debut_encheres" required />
 
     <!-- Date de fin -->
-    <label for="dateFin">Fin de l'enchère :</label>
+    <label for="dateFin" data-th-text="#{vente.fin}">Fin de l'enchère :</label>
     <input type="date" id="dateFin" name="date_fin_encheres" required />
 
     <!-- Description -->
-    <label for="description">Description :</label>
+    <label for="description" data-th-text="#{vente.description}">Description :</label>
     <textarea id="description" name="description" placeholder="Ex: Fauteuil en cuir rouge" required></textarea>
 
     <!-- Adresse de retrait -->
-    <label for="retrait">Retrait :</label>
+    <label for="retrait" data-th-text="#{vente.retrait}">Retrait :</label>
     <select id="retrait" name="no_adresse_retrait" required>
         <option th:each="adr : ${adresses}"
                 th:value="${adr.no_adresse}"
-                th:text="${adr.rue}"></option>
+                th-text="${adr.rue}"></option>
     </select>
 
     <br/><br/>
     <!-- Boutons -->
-    <button type="submit" name="action" value="suivant">Suivant</button>
-    <button type="submit" name="action" value="annulerVente">Annuler la vente</button>
-    <button type="submit" name="action" value="annuler">Annuler</button>
+    <button type="submit" name="action" value="suivant" data-th-text="#{vente.suivant}">Suivant</button>
+    <button type="submit" name="action" value="annulerVente" data-th-text="#{vente.annulerVente}">Annuler la vente</button>
+    <button type="submit" name="action" value="annuler" data-th-text="#{vente.annuler}">Annuler</button>
 </form>
 
 </body>
