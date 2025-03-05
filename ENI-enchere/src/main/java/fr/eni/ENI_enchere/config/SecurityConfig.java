@@ -40,11 +40,15 @@ public class SecurityConfig {
         http.authorizeHttpRequests(
                 auth -> {
                     // Authorize the access to the register page only for ADMIN role
-                    auth.requestMatchers(HttpMethod.GET, "/users/register").hasRole("ADMIN");
-                    auth.requestMatchers(HttpMethod.POST, "/users/register").hasRole("ADMIN");
-                    
+                    //auth.requestMatchers(HttpMethod.GET, "/users/register").hasRole("ADMIN");
+                    //auth.requestMatchers(HttpMethod.POST, "/users/register").hasRole("ADMIN");
+                    auth.requestMatchers(HttpMethod.GET, "/profil/*").hasAnyRole("USER", "ADMIN");
+                    auth.requestMatchers(HttpMethod.POST, "/profil/*").hasAnyRole("USER", "ADMIN");
+                    auth.requestMatchers(HttpMethod.POST,"/enchere/*").hasAnyRole("USER", "ADMIN");
+                    auth.requestMatchers(HttpMethod.GET, "/nouvelle-vente").hasAnyRole("USER", "ADMIN");
+                    auth.requestMatchers(HttpMethod.POST, "/nouvelle-vente").hasAnyRole("USER", "ADMIN");
                     // Permit access to the homepage and other public pages
-                    auth.requestMatchers("/*").permitAll();
+                    auth.requestMatchers("/*").denyAll();
 
                     // Allow access to static resources (CSS, Images) for all users
                     auth.requestMatchers("/css/*").permitAll();
@@ -76,9 +80,9 @@ public class SecurityConfig {
         http.sessionManagement(
 	  			session -> session
 	  			    .sessionFixation().migrateSession()
-	  			    .invalidSessionUrl("/utilisateur/signin-utilisateur?invalid")
+	  			    .invalidSessionUrl("/login?invalid")
 	  			    .maximumSessions(1) // une  session active
-	  			    .expiredUrl("/utilisateur/signin-utilisateur?expired")
+	  			    .expiredUrl("/login?expired")
 	  			);
  
 
