@@ -43,6 +43,8 @@
 		<p class="article__text">Vendeur :</p>
 		<span class="article__data--line" data-th-text="*{utilisateur.pseudo}"></span>
 		
+				<p class="article__text">dernier encherisseur :</p>
+		<span class="article__data--line" data-th-text="${pseudoLastEnchere}"></span>
 	</form>
 	<form data-th-action="@{/enchere/miser/{id}(id=${article.no_article})}" method="POST">
 		<div class="article__input-container"
