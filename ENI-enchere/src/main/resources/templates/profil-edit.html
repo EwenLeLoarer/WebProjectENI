@@ -3,11 +3,13 @@
                             title= ~{ :: title},
                             content = ~{ :: main})}">
 
+  
     <!--  titre passé en paramètre -->
     <title data-th-text="#{profile.title}">Profil</title>    
 
+
     <main>
-        <h1 data-th-text="#{profile.heading}">Mon Profil</h1>
+        <h1 class="title" data-th-text="#{profile.heading}">Mon Profil</h1>
         <form class="profil__form" data-th-action="@{/profil/edit}" method="post" data-th-object="${user}">
             <ul class="profil__list">
                 <li class="profil__item">
@@ -51,6 +53,41 @@
                     <span class="profil__data" data-th-text="*{credit}"></span>
                 </li>
             </ul>
+            <ul>
+                <li class="profil__item">
+                  <!--  ne pas modifier le name utiliser username --> <input
+                  class="profil__field" id="idAdresseEni"
+                  placeholder="est une adresse eni"
+                  data-th-field="*{adresse.adresseEni}" type="hidden"
+                  readonly="readonly">
+                </li>
+                <li class="profil__item">
+                  <!--  ne pas modifier le name utiliser username --> <input
+                  class="read-only" id="idnumero_eni" type="hidden" placeholder=""
+                  data-th-field="*{adresse.no_adresse}">
+                </li>
+                <li class="profil__item">
+                  <!--  ne pas modifier le name utiliser username --> <input
+                  class="read-only" id="idmot_de_passe" type="hidden" placeholder=""
+                  data-th-field="*{mot_de_passe}">
+                </li>
+                <li class="profil__item">
+                  <!--  ne pas modifier le name utiliser username --> <input
+                  class="read-only" id="idactive" type="hidden" placeholder=""
+                  data-th-field="*{active}">
+                </li>
+
+                <li class="profil__item">
+                  <!--  ne pas modifier le name utiliser username --> <input
+                  class="read-only" id="idadministrateur" type="hidden" placeholder=""
+                  data-th-field="*{administrateur}">
+                </li>
+                <li class="profil__item">
+                  <!--  ne pas modifier le name utiliser username --> <input
+                  class="read-only" id="idPseudo" type="hidden" placeholder=""
+                  data-th-field="*{pseudo}">
+                </li>
+		       </ul>
             <div class="profil-edit__buttons">
                 <button class="profil-edit__button button" type="submit" data-th-text="#{profile.modifier}">Modifier</button>
                 <a class="profil-edit__button button" href="/profil/change-password" data-th-text="#{profile.changePassword}">Modifier mot de passe</a>

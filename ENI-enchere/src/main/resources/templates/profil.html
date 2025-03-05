@@ -7,8 +7,10 @@
 <!--  titre passé en paramètre -->
 <title data-th-text="#{profile.title}">Profil</title>
 
-<main>
-	<h1 data-th-text="${user.pseudo}"></h1>
+<main class="main">
+
+	<h1 class="title" data-th-text="${user.pseudo}"></h1>
+
 	<ul class="profil__list--other" data-th-object="${user}">
 		<li class="profil__item">
 			<p class="profil__text" data-th-text="#{profile.prenom}">Prénom:</p>

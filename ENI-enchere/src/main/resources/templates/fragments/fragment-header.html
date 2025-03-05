@@ -3,6 +3,7 @@
 	<a class="home__link" href="/">Eni-Encheres</a>
 	<nav class="main__nav">
 		<ul class="nav__list">
+
 			<li class="nav__item"><a class="li__link" href="/">Accueil</a></li>
 			<li data-th-if="${#authorization.expression('isAuthenticated')}"
 				class="nav__item"><a class="li__link"
@@ -21,7 +22,6 @@
 				<a th:href="@{?lang=fr}"
 				th:if="${#locale.language == 'en' or #locale.language == 'en_US'}">Français</a>
 			</li>
-
 
 		</ul>
 	</nav>
