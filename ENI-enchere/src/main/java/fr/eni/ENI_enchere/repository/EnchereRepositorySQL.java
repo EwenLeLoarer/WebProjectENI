@@ -25,7 +25,7 @@ public class EnchereRepositorySQL implements EnchereRepository{
 	    public String getPseudoLastMiseByIdEnchere(String idEnchere) {
 	        String sql = "select TOP 1 en.id_utilisateur from encheres en "
 	                + "INNER JOIN ARTICLES_A_VENDRE ar on ar.no_article = en.no_article "
-	                + "WHERE en.no_article = 4"
+	                + "WHERE en.no_article = :no_article "
 	                + "ORDER BY en.date_enchere DESC ";
 
 	        String idUtilisateur = "";

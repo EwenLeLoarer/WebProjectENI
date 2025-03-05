@@ -7,9 +7,9 @@
 <!--  tire passé en paramètre -->
 <title>Profile</title>
 
-<main>
+<main class="main">
 
-	<h1 data-th-text="${user.pseudo}"></h1>
+	<h1 class="title" data-th-text="${user.pseudo}"></h1>
 	<ul class="profil__list--other" data-th-object="${user}">
 		<li class="profil__item"><p class="profil__text">Prénom:</p> <!--  ne pas modifier le name utiliser username -->
 			<span class="profil__data--other" data-th-text="*{prenom}"></span></li>
