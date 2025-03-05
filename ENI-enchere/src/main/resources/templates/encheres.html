@@ -40,9 +40,9 @@ data-th-replace="~{layouts/fragment-layout :: layoutName (
 				</label> <select class="radio__list" id="achats-options" name="filterValue"
 					th:disabled="${filterType != null and filterType != 'achats'}">
 					<option value="ouvertes"
-						th:selected="${filterValue == null or filterValue == 'ouvertes'}" data-th-text="#enchere.ouvertes">Enchères
+						th:selected="${filterValue == null or filterValue == 'ouvertes'}" data-th-text="#{enchere.ouvertes}">Enchères
 						ouvertes</option>
-					<option value="cours" th:selected="${filterValue == 'cours'}" data-th-text="#enchere.cours">Mes
+					<option value="cours" th:selected="${filterValue == 'cours'}" data-th-text="#{enchere.cours}">Mes
 						enchères en cours</option>
 					<option value="remportees"
 						th:selected="${filterValue == 'remportees'}" data-th-text="#{enchere.remportees}">Mes enchères
