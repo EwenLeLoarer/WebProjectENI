@@ -40,7 +40,7 @@ public class AdressesRepositorySQL implements AdressesRepository {
 	}
 	
 	@Override
-	public Adresse FindAdresseByID(Integer id)
+	public Adresse findAdresseByID(Integer id)
 	{
 		Adresse adresse = null;
 		String sql = "select no_adresse, rue, code_postal, ville, adresse_eni from ADRESSES WHERE no_adresse = :id";
@@ -81,7 +81,7 @@ public class AdressesRepositorySQL implements AdressesRepository {
 	}
 
 	@Override
-	public void ModifyById(Integer no_adresse) {
+	public void modifyById(Integer no_adresse) {
 		// TODO Auto-generated method stub
 		
 	}

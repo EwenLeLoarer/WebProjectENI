@@ -11,11 +11,11 @@ import fr.eni.ENI_enchere.bo.Utilisateur;
 import fr.eni.ENI_enchere.service.UtilisateurService;
 
 @Controller
-public class registerController {
+public class RegisterController {
 	
 	private final UtilisateurService utilisateurService;
 
-	public registerController(UtilisateurService utilisateurService) {
+	public RegisterController(UtilisateurService utilisateurService) {
 		super();
 		this.utilisateurService = utilisateurService;
 	}

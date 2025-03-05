@@ -17,7 +17,9 @@ public interface UtilisateurRepository {
 	Utilisateur selectUtilisateurByPseudo(String pseudo);
 	void modifyUser(Utilisateur utilisateur);
 	void deleteByPseudo(String pseudo);
-	void ModifyById(String pseudo);
-	void ModifyPasswordByPseudo(String pseudo, String newPassword);
+	void modifyById(String pseudo);
+	void modifyPasswordByPseudo(String pseudo, String newPassword);
+	void addCreditToUserByPseudo(String pseudo, int value);
+	void removeCreditToUserByPseudo(String pseudo, int value);
 }
 

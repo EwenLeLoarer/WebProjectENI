@@ -99,7 +99,7 @@ public class UtilisateurRepositorySQL implements UtilisateurRepository {
 
 
 	@Override
-	public void ModifyById(String pseudo) {
+	public void modifyById(String pseudo) {
 
 	}
 
@@ -128,7 +128,7 @@ public class UtilisateurRepositorySQL implements UtilisateurRepository {
 	}
 
 	@Override
-	public void ModifyPasswordByPseudo(String pseudo, String newPassword) {
+	public void modifyPasswordByPseudo(String pseudo, String newPassword) {
 		String sql = "UPDATE Utilisateurs set mot_de_passe = :newPassword WHERE pseudo = :pseudo";
 		
 		MapSqlParameterSource map = new MapSqlParameterSource();
@@ -136,5 +136,30 @@ public class UtilisateurRepositorySQL implements UtilisateurRepository {
 		map.addValue("newPassword", newPassword);
 		
 		this.namedParameterJdbcTemplate.update(sql, map);	
+	}
+
+
+	@Override
+	public void addCreditToUserByPseudo(String pseudo, int value) {
+		String sql = "UPDATE Utilisateurs set credit = credit + :value where pseudo = :pseudo";
+		
+		MapSqlParameterSource map = new MapSqlParameterSource();
+		map.addValue("pseudo", pseudo);
+		map.addValue("value", value);
+		
+		this.namedParameterJdbcTemplate.update(sql, map);	
+	}
+
+
+	@Override
+	public void removeCreditToUserByPseudo(String pseudo, int value) {
+		String sql = "UPDATE Utilisateurs set credit = credit - :value where pseudo = :pseudo";
+		
+		MapSqlParameterSource map = new MapSqlParameterSource();
+		map.addValue("pseudo", pseudo);
+		map.addValue("value", value);
+		
+		this.namedParameterJdbcTemplate.update(sql, map);	
+		
 	}
 }

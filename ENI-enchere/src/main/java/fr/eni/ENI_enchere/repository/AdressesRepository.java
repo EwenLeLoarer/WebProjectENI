@@ -8,8 +8,8 @@ import fr.eni.ENI_enchere.bo.Adresse;
 public interface AdressesRepository {
 	int createAdresse(Adresse adresse);
 	void deleteByPseudo(Integer no_adresse);
-	void ModifyById(Integer no_adresse);
-	Adresse FindAdresseByID(Integer id);
+	void modifyById(Integer no_adresse);
+	Adresse findAdresseByID(Integer id);
 	Optional<Long> selectAdresseNumber(String rue, String CodePostal, String Ville, Boolean adresse_eni);
 	List<Adresse> findAll();
 }
