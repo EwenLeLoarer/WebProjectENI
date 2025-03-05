@@ -73,7 +73,7 @@ public class SecurityConfig {
 			logout.permitAll();
 		});
         
-        httpSecurity.sessionManagement(
+        http.sessionManagement(
 	  			session -> session
 	  			    .sessionFixation().migrateSession()
 	  			    .invalidSessionUrl("/utilisateur/signin-utilisateur?invalid")
