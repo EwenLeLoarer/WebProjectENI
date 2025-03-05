@@ -32,7 +32,7 @@ public class ArticleRepositorySQL implements ArticleRepository{
     public List<Article> getMesEncheresEnCours(String pseudo) {
         String sql = "SELECT a.* FROM ARTICLES_A_VENDRE a " +
                      "JOIN ENCHERES e ON a.no_article = e.no_article " +
-                     "WHERE e.id_utilisateur = ? AND a.statut_enchere = 1";
+                     "WHERE e.id_utilisateur = ? AND a.statut_enchere = 1 ";
         return jdbcTemplate.query(sql, new ArticleRowMapper(), pseudo);
     }
 
