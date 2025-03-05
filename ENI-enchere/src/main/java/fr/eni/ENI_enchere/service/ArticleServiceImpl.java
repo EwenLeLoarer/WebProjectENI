@@ -20,4 +20,10 @@ public class ArticleServiceImpl implements ArticleService{
 	{
 		return this.articleRepository.getArticleById(id);
 	}
+
+	@Override
+	public void Save(Article article) {
+		this.articleRepository.save(article);
+		
+	}
 }

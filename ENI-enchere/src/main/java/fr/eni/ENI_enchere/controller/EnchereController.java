@@ -1,6 +1,7 @@
 package fr.eni.ENI_enchere.controller;
 
 import fr.eni.ENI_enchere.bo.Article;
+import fr.eni.ENI_enchere.bo.Enchere;
 import fr.eni.ENI_enchere.bo.Utilisateur;
 import fr.eni.ENI_enchere.service.ArticleService;
 import fr.eni.ENI_enchere.service.EnchereService;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Comparator;
@@ -43,9 +45,50 @@ public class EnchereController {
         model.addAttribute("loggedInUser", loggedInUser);
         model.addAttribute("articleUser",articleUser);
         model.addAttribute("article" ,article);
+		String pseudoLastEnchere = this.enchereService.getPseudoLastMiseByIdEnchere(article.getNo_article().toString());
+		model.addAttribute("pseudoLastEnchere", pseudoLastEnchere);
+		System.out.println("user"+ pseudoLastEnchere);
         return "viewEnchere";
     }
     
+	@PostMapping("/enchere/miser/{id}")
+	public String Encherire(@PathVariable("id") String id, @RequestParam("mise") Integer mise, Model model)
+	{
+		String username = getCurrentUsername();
+		
+
+		String errorMessage = "";
+		Article article = this.articleService.getArticleById(id);
+
+		Utilisateur loggedInUser = utilisateurService.selectUtilisateurByPseudo(username);
+		//pas asser de credits pour l'encheres
+		if(loggedInUser.getCredit() < article.getPrixVente()){
+			model.addAttribute("creditLowerThanLastEnchere", "true");
+			//mise en dessous de la derniere enchere
+		} else if(mise < article.getPrixVente()) {
+			model.addAttribute("miseTooSmall", "true");
+			//mise au dessus des credits que possede l'utilisateurs
+		} else if(mise > loggedInUser.getCredit()){
+	
+			model.addAttribute("miseBiggerThanCredits", "true");
+		} else {
+			String pseudoLastEnchere = this.enchereService.getPseudoLastMiseByIdEnchere(article.getNo_article().toString());
+			if(pseudoLastEnchere != "" || pseudoLastEnchere != null) {
+				this.utilisateurService.addCreditToUserByPseudo(pseudoLastEnchere, article.getPrixVente());
+
+			}
+			this.utilisateurService.removeCreditToUserByPseudo(username, mise);
+			article.setPrixVente(mise);
+			Enchere enchere = new Enchere();
+			enchere.setId_utilisateur(username);
+			enchere.setMontant(mise);
+			enchere.setNo_article(article.getNo_article());
+			this.enchereService.saveEnchere(enchere);
+			this.articleService.Save(article);
+		}
+		return "redirect:/enchere/"+id;
+	}
+	
     @GetMapping("/")
     public String afficherEncheres(
             @RequestParam(name = "search", required = false, defaultValue = "") String search,

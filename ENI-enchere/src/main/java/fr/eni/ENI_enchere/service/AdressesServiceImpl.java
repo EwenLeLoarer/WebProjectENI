@@ -31,7 +31,7 @@ public class AdressesServiceImpl implements AdressesService {
 	@Override
 	public Adresse FindAdresseByID(int id) {
 		Adresse adresse = new Adresse();
-		adresse = this.adressesRepo.FindAdresseByID(id);
+		adresse = this.adressesRepo.findAdresseByID(id);
 		return adresse;
 	}
 

@@ -128,7 +128,7 @@ public class ArticleRepositorySQL implements ArticleRepository{
 				+ "	INNER JOIN utilisateurs ut on ut.pseudo = ar.id_utilisateur\r\n"
 				+ "				INNER JOIN adresses ad on ar.no_adresse_retrait = ad.no_adresse\r\n"
 				+ "        		RIGHT JOIN CATEGORIES cat on ar.no_categorie = cat.no_categorie\r\n"
-				+ "				WHERE date_debut_encheres = ? AND statut_enchere = ?";
+				+ "				WHERE date_debut_encheres < ? AND statut_enchere = ?";
 		return jdbcTemplate.query(sql, new ArticleRowMapper(), dateDebutEncheres, statut);
 	}
 

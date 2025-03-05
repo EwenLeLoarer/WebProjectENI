@@ -1,27 +1,11 @@
 package fr.eni.ENI_enchere.repository;
 
-import fr.eni.ENI_enchere.bo.Categorie;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
-@Repository
-public class CategorieRepository {
+import fr.eni.ENI_enchere.bo.Categorie;
 
-    private final JdbcTemplate jdbcTemplate;
+public interface CategorieRepository {
 
-    public CategorieRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+	List<Categorie> findAll();
 
-    public List<Categorie> findAll() {
-        String sql = "SELECT no_categorie, libelle FROM CATEGORIES";
-        return jdbcTemplate.query(sql, (rs, rowNum) -> {
-            Categorie c = new Categorie();
-            c.setNo_categorie(rs.getLong("no_categorie"));
-            c.setLibelle(rs.getString("libelle"));
-            return c;
-        });
-    }
 }
