@@ -22,6 +22,16 @@ public interface EnchereService {
     String getPseudoLastMiseByIdEnchere(String idEnchere);
     
     void saveEnchere(Enchere enchere);
+
+	/**
+	 * Tâche planifiée : tous les jours à minuit, on clôture les enchères dont la date de fin est atteinte.
+	 */
+	void cloturerEncheresExpirees();
+
+	/**
+	 * Tâche planifiée : tous les jours à minuit, on active les enchères qui démarrent aujourd’hui.
+	 */
+	void activerEncheresDuJour();
     
 
 }

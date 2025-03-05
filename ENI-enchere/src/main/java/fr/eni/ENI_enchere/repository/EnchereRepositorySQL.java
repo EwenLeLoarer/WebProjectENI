@@ -3,6 +3,7 @@ package fr.eni.ENI_enchere.repository;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -28,13 +29,14 @@ public class EnchereRepositorySQL implements EnchereRepository{
 	                + "WHERE en.no_article = :no_article "
 	                + "ORDER BY en.date_enchere DESC ";
 
-	        String idUtilisateur = "";
-
 	        MapSqlParameterSource map = new MapSqlParameterSource();
 	        map.addValue("no_article", idEnchere);
-	        idUtilisateur = namedParameterJdbcTemplate.queryForObject(sql, map, String.class);
-	        System.out.println(idUtilisateur);
-	        return idUtilisateur;
+	        try {
+	        	return namedParameterJdbcTemplate.queryForObject(sql, map, String.class);
+	        } catch (EmptyResultDataAccessException e) {
+	        	return "0";
+	        }
+	        
 	    }
 
 	@Override
