@@ -1,16 +1,19 @@
 /*********** RESET ***********/
 * {
-	margin : 0;
+	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
+
 ul {
 	text-decoration: none;
 	list-style: none;
 }
+
 a {
 	text-decoration: none;
 }
+
 html {
 	width: 100vw;
 	height: 100vh;
@@ -20,6 +23,7 @@ body {
 	width: 100%;
 	height: 100%;
 }
+
 main {
 	width: 100%;
 	height: 100%;
@@ -29,14 +33,17 @@ main {
 	align-items: center;
 	gap: 50px;
 }
+
 h1 {
 	font-size: 30px;
 	position: absolute;
 	top: 15vh;
 }
+
 label {
 	width: 100px;
 }
+
 input {
 	padding-left: 3px;
 }
@@ -49,26 +56,31 @@ input {
 	justify-content: space-between;
 	background-color: white;
 }
+
 .home__link {
 	padding: 0 20px;
 	color: black;
 	font-weight: bold;
 	font-size: 20px;
 }
+
 .main__nav {
 	display: flex;
 }
+
 .nav__list {
 	display: flex;
 }
+
 .nav__item {
 	padding: 0 20px;
 }
+
 .li__link {
 	width: 100%;
 	height: 100%;
 	color: blue;
-	text-decoration: underline;	
+	text-decoration: underline;
 }
 
 /*********** DATE ***********/
@@ -80,7 +92,6 @@ input {
 	border: 2px black solid;
 }
 /*********** LOGIN AND REGISTER ***********/
-
 .login__form {
 	width: 300px;
 	display: flex;
@@ -88,6 +99,7 @@ input {
 	justify-content: space-between;
 	gap: 30px;
 }
+
 .register__form, .profil__form {
 	width: 700px;
 	display: flex;
@@ -95,28 +107,33 @@ input {
 	justify-content: space-between;
 	gap: 30px;
 }
+
 .login__list {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	gap: 30px;
 }
+
 .register__list, .profil__list {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 30px;
 	justify-content: space-between;
 }
+
 .register__list--address, .profil__list--address {
 	width: 700px;
 	display: flex;
 	justify-content: space-between;
 }
+
 label[for="idCodePostal"], label[for="idVille"] {
 	visibility: hidden;
 	width: 0px;
 	overflow: hidden;
 }
+
 .login__item, .register__item, .profil__item {
 	display: flex;
 	justify-content: space-between;
@@ -124,20 +141,24 @@ label[for="idCodePostal"], label[for="idVille"] {
 	width: 300px;
 	gap: 30px;
 }
+
 .register__item--address, .profil__item--address {
 	display: flex;
 	align-items: center;
 }
+
 .login__field, .register__field, .profil__field {
 	flex-grow: 2;
 	height: 30px;
 	border: 2px black solid;
 }
+
 .login__box {
 	display: flex;
 	justify-content: space-between;
 	align-items: end;
 }
+
 .button {
 	display: flex;
 	justify-content: center;
@@ -145,18 +166,21 @@ label[for="idCodePostal"], label[for="idVille"] {
 	height: 50px;
 	background-color: white;
 	font-weight: bold;
-	box-shadow: 3px 3px 0px 0px rgba(0,0,0,1);
+	box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 1);
 	cursor: pointer;
 	color: black;
 	border: 2px black solid;
 }
+
 .login__button {
 	padding: 0 20px;
 }
+
 .register__buttons {
 	display: flex;
 	justify-content: space-evenly;
 }
+
 .register__button {
 	display: flex;
 	justify-content: center;
@@ -165,17 +189,19 @@ label[for="idCodePostal"], label[for="idVille"] {
 }
 
 .button:hover {
-	box-shadow: inset 2px 2px 0px 0px rgba(0,0,0,1);
+	box-shadow: inset 2px 2px 0px 0px rgba(0, 0, 0, 1);
 }
+
 .login__forgot {
 	margin-bottom: 10px;
 	color: blue;
 	text-decoration: underline;
 }
+
 .login__register {
 	line-height: 50px;
 	border: 2px black solid;
-	box-shadow: 3px 3px 0px 0px rgba(0,0,0,1);
+	box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 1);
 	color: black;
 	font-weight: bold;
 	display: flex;
@@ -183,34 +209,41 @@ label[for="idCodePostal"], label[for="idVille"] {
 }
 
 .login__register:hover {
-	box-shadow: inset 2px 2px 0px 0px rgba(0,0,0,1);
+	box-shadow: inset 2px 2px 0px 0px rgba(0, 0, 0, 1);
 }
 
 /*********** PROFIL ***********/
 .profil__text {
 	width: 100px;
 }
+
 .profil__data {
 	font-weight: bold;
 	flex-grow: 2;
 }
+
 li:has(input[type="hidden"]) {
 	display: none;
 }
+
 .profil__button {
 	width: 300px;
 }
+
 .profil-edit__buttons {
 	display: flex;
 	justify-content: space-between;
 }
+
 .profil-edit__button {
 	width: 200px;
 }
+
 .profil__cancel {
 	align-self: flex-end;
 	margin-right: 20px;
 }
+
 .profil__list--other {
 	width: 300px;
 	display: flex;
@@ -219,9 +252,11 @@ li:has(input[type="hidden"]) {
 	align-items: center;
 	gap: 30px;
 }
+
 .profil__data--other {
 	font-weight: bold;
 }
+
 .changepass__box {
 	display: flex;
 	justify-content: space-evenly;
@@ -232,30 +267,36 @@ li:has(input[type="hidden"]) {
 	justify-content: space-evenly;
 	padding: 20px;
 }
+
 .index__title {
 	align-self: center;
 }
+
 .enchere__form {
-	margin-top: 160px;
-	display: flex;
+	margin-top: 160px; display : flex;
 	flex-wrap: wrap;
 	margin-left: 20px;
 	width: 30%;
 	gap: 10px;
+	display: flex;
 }
+
 .filter__text {
 	width: 100%;
 	align-self: flex-end;
 }
+
 .filter__input {
 	width: 75%;
 	border-radius: 30px;
 }
+
 .filter__input, .categorie__list {
 	flex-grow: 2;
 	height: 30px;
 	align-self: center;
 }
+
 .filter__button {
 	width: calc(25% - 10px);
 }
@@ -263,46 +304,54 @@ li:has(input[type="hidden"]) {
 .categorie__text {
 	align-self: center;
 }
+
 .article__container {
-	width: 100%;
-	display: grid;
+	width: 100%; display : grid;
 	grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
 	gap: 20px;
+	display: grid;
 }
+
 .article__card {
-	display: flex;
-	position: relative;
+	display: flex; position : relative;
 	border: 1px black solid;
 	padding: 20px;
 	gap: 40px;
+	position: relative;
 }
+
 .article__link {
-	font-weight: bold;
-	font-size: 20px;
+	font-weight: bold; font-size : 20px;
 	color: black;
 	text-decoration: underline;
+	font-size: 20px;
 }
+
 .article__image {
 	width: 100px;
 	height: 100px;
 }
+
 .article__infos {
 	flex-grow: 2;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 }
+
 .radio__filters {
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
 	gap: 10px;
 }
+
 .radio__container {
-	width: 100%;
-	display: flex;
+	width: 100%; display : flex;
 	flex-direction: column;
+	display: flex;
 }
+
 .radio__list {
 	width: 60%;
 }
@@ -314,25 +363,65 @@ li:has(input[type="hidden"]) {
 	gap: 40px;
 	align-items: center;
 }
+
 .article__data--line {
-	grid-column: 2 / span 3;
+	grid-column: 2/span 3;
 }
+
 .article__text {
 	width: 100%;
 	display: flex;
 	justify-content: flex-end;
 }
+
 .article__input-container {
-	grid-column: 1 / span 4;
+	grid-column: 1/span 4;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	width: 100%;
 	gap: 40px;
 	align-items: center;
 }
+
 .mise__input {
 	height: 20px;
 }
+
 .encherir__button {
+	padding: 0 40px;
+}
+/*********** NOUVELLE VENTE ***********/
+.vente__form {
+	width: 50%;
+	display: flex;
+	flex-direction:column;
+	gap: 50px;
+}
+.vente__form-container {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 40px;
+	align-items: flex-start;
+	position: relative;
+	right: 80px;
+}
+.vente__retrait {
+	grid-column: 2 / 4;
+}
+.article__text--description {
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	align-self: flex-start;
+}
+.article__textarea {
+	height: 50px;
+}
+.vente__buttons {
+	display: flex;
+	justify-content: center;
+	gap: 60px;
+}
+.vente__button {
 	padding: 0 40px;
 }

@@ -8,7 +8,10 @@
 <title>Profile</title>
 
 <main>
-	<h1 class="article__title">Détail d'une vente</h1>
+	<h1 data-th-if="${!#temporals.createNow().toLocalDate().isAfter(article.dateFinEncheres)}" class="article__title">Détail d'une vente</h1>
+	
+	<h1 data-th-if="${#temporals.createNow().toLocalDate().isAfter(article.dateFinEncheres) and loggedInUser != null}" class="article__title" data-th-text="'a remporté la vente'"></h1>
+
 	<form data-th-action="#{/enchere/miser}" method="POST"
 		data-th-object="${article}" class="article__list">
 
@@ -53,6 +56,5 @@
 	<a
 		data-th-if="${loggedInUser == null or articleUser.pseudo == loggedInUser.pseudo}"
 		class="button encherir__button encherir__button--retour" href="/">Retour</a>
-
 </main>
 </html>
