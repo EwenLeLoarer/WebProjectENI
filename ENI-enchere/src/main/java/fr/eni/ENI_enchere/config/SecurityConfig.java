@@ -36,34 +36,38 @@ public class SecurityConfig {
 	}
 	
 	@Bean
-	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.authorizeHttpRequests(
-				auth -> {
-					//authoriser l'accès à la liste uniquement au employé
-					//auth.requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN");
-					auth.requestMatchers(HttpMethod.GET, "/users/register").hasRole("ADMIN");
-					auth.requestMatchers(HttpMethod.POST, "/users/register").hasRole("ADMIN");
-					//authorise l'accès à la page d'accueil du site à tout le monde
-					auth.requestMatchers("/*").permitAll();
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests(
+                auth -> {
+                    // Authorize the access to the register page only for ADMIN role
+                    //auth.requestMatchers(HttpMethod.GET, "/users/register").hasRole("ADMIN");
+                    //auth.requestMatchers(HttpMethod.POST, "/users/register").hasRole("ADMIN");
+                    auth.requestMatchers(HttpMethod.GET, "/profil/*").hasAnyRole("USER", "ADMIN");
+                    auth.requestMatchers(HttpMethod.POST, "/profil/*").hasAnyRole("USER", "ADMIN");
+                    auth.requestMatchers(HttpMethod.POST,"/enchere/*").hasAnyRole("USER", "ADMIN");
+                    auth.requestMatchers(HttpMethod.GET, "/nouvelle-vente").hasAnyRole("USER", "ADMIN");
+                    auth.requestMatchers(HttpMethod.POST, "/nouvelle-vente").hasAnyRole("USER", "ADMIN");
+                    auth.requestMatchers(HttpMethod.GET, "/").permitAll();
+                    // Permit access to the homepage and other public pages
+                    auth.requestMatchers("/*").denyAll();
 
-					//accès au ressource pour tous
-					auth.requestMatchers("/css/*").permitAll();
-					auth.requestMatchers("/image/*").permitAll();
-					
-					//refuse toutes autre url
-					//a re changer
-					auth.anyRequest().permitAll();	
-				});
-		
-		//customisation de ma page login
-		http.formLogin(form -> {
-					//définir la nouvelle page de login
-					form.loginPage("/login").permitAll();
-					//définir la page sur laquelle on arrive après la connexion
-					form.defaultSuccessUrl("/");
-				});
-		
-		http.logout( logout -> {
+                    // Allow access to static resources (CSS, Images) for all users
+                    auth.requestMatchers("/css/*").permitAll();
+                    auth.requestMatchers("/image/*").permitAll();
+                    auth.requestMatchers("/js/*").permitAll();
+                    auth.requestMatchers("/assets/image/*").permitAll();
+                    
+                    // Refuse all other URLs
+                    auth.anyRequest().authenticated();  
+                });
+
+        // Customize the login page
+        http.formLogin(form -> {
+            form.loginPage("/login").permitAll();  // Set custom login page
+            form.defaultSuccessUrl("/");  // Redirect to home page after login
+        });
+
+        http.logout( logout -> {
 			//supprimer la session du côté serveur
 			logout.invalidateHttpSession(true);
 			logout.clearAuthentication(true);
@@ -75,10 +79,18 @@ public class SecurityConfig {
 			logout.logoutSuccessUrl("/");
 			logout.permitAll();
 		});
-		
-		return http.build();
-		
-	}
+        
+        http.sessionManagement(
+	  			session -> session
+	  			    .sessionFixation().migrateSession()
+	  			    .invalidSessionUrl("/login?invalid")
+	  			    .maximumSessions(1) // une  session active
+	  			    .expiredUrl("/login?expired")
+	  			);
+ 
+
+        return http.build();
+    }
 	
 
 

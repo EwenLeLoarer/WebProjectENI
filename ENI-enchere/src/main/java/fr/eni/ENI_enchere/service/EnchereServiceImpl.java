@@ -4,6 +4,7 @@ import fr.eni.ENI_enchere.bo.Article;
 import fr.eni.ENI_enchere.bo.Enchere;
 import fr.eni.ENI_enchere.repository.ArticleRepository;
 import fr.eni.ENI_enchere.repository.EnchereRepository;
+import fr.eni.ENI_enchere.repository.UtilisateurRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -19,6 +20,8 @@ public class EnchereServiceImpl implements EnchereService {
 	private ArticleRepository repository;
 	@Autowired
 	private EnchereRepository enchereRepository;
+	@Autowired
+	private UtilisateurRepository userRepository;
 
 	// Retourne toutes les enchères actives (statut = 1)
 	@Override
@@ -103,9 +106,15 @@ public class EnchereServiceImpl implements EnchereService {
 			if (article.getDateFinEncheres().isBefore(today) && (article.getStatut() == 1)) {
 				article.setStatut(2); // Passer en statut "CLOTURÉE"
 				repository.save(article);
+				String winner = this.enchereRepository.getPseudoLastMiseByIdEnchere(article.getNo_article().toString());
+				if(winner != "" && winner != null) {
+					this.userRepository.addCreditToUserByPseudo(winner, article.getPrixVente());
+				}
 			}
 		}
-
+		
+		
+		
 		System.out.println("Enchères clôturées pour le " + today + " : " + articles.size());
 	}
 

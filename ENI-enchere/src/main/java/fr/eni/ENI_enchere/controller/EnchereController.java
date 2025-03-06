@@ -8,12 +8,16 @@ import fr.eni.ENI_enchere.service.ArticleService;
 import fr.eni.ENI_enchere.service.EnchereService;
 import fr.eni.ENI_enchere.service.UtilisateurService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,13 +58,21 @@ public class EnchereController {
     }
     
 	@PostMapping("/enchere/miser/{id}")
-	public String Encherire(@PathVariable("id") String id, @RequestParam("mise") Integer mise, Model model)
+	public String Encherire(@PathVariable("id") String id,     @Valid @ModelAttribute EnchereMiseDTO miseDTO,
+		    BindingResult bindingResult, Model model)
 	{
 		String username = getCurrentUsername();
 		
+		Integer mise = miseDTO.getMise();
 
 		String errorMessage = "";
 		Article article = this.articleService.getArticleById(id);
+		
+	    // If validation errors exist, return to the same page with errors
+	    if (bindingResult.hasErrors()) {
+	        model.addAttribute("article", article);
+	        return "redirect:/enchere/"+id; // The HTML file where the form is displayed
+	    }
 
 		Utilisateur loggedInUser = utilisateurService.selectUtilisateurByPseudo(username);
 		if(article.getStatut() != 1 || article.getDateFinEncheres().isBefore(LocalDate.now()))
