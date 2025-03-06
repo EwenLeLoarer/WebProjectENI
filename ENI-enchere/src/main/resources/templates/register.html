@@ -5,58 +5,43 @@
 
 <title data-th-text="#{register.title}">Inscription</title>
 
-<main class="register__main">
-    <h1 data-th-text="#{register.heading}">Nouveau Profil</h1>
+<main>
+    <h1 class="title" data-th-text="#{register.heading}">Nouveau Profil</h1>
     <form class="register__form" data-th-action="@{/security/create}" method="post" data-th-object="${user}">
         <ul class="register__list">
             <li class="register__item">
                 <label for="idPseudo" data-th-text="#{register.pseudo}">Pseudo(*):</label>
                 <input class="register__field" id="idPseudo" type="text" data-th-field="*{pseudo}">
-            </li>
-            <li class="register__item">
                 <label for="idNom" data-th-text="#{register.nom}">Nom(*):</label>
                 <input class="register__field" id="idNom" type="text" data-th-field="*{nom}">
             </li>
+            
             <li class="register__item">
                 <label for="idPrenom" data-th-text="#{register.prenom}">Prénom(*):</label>
                 <input class="register__field" id="idPrenom" type="text" data-th-field="*{prenom}">
-            </li>
-            <li class="register__item">
                 <label for="idEmail" data-th-text="#{register.email}">Email(*):</label>
                 <input class="register__field" id="idEmail" type="text" data-th-field="*{email}">
             </li>
+            
             <li class="register__item">
                 <label for="idTelephone" data-th-text="#{register.telephone}">Téléphone:</label>
                 <input class="register__field" id="idTelephone" type="text" data-th-field="*{telephone}">
             </li>
-        </ul>
-
-        <ul class="register__list--address">
+            
             <li class="register__item">
                 <label for="idRue" data-th-text="#{register.adresse}">Adresse(*):</label>
-                <input class="register__field" id="idRue" type="text" data-th-field="*{adresse.rue}">
+                <input class="register__field" id="idRue" type="text" data-th-field="*{adresse.rue}" data-th-placeholder="#{register.rue}">
+                <input aria-label="Code Postal" class="register__field" id="idCodePostal" type="text" data-th-field="*{adresse.code_postal}" data-th-placeholder="#{register.codepostal}">
+                <input aria-label="Ville" class="register__field" id="idVille" type="text" data-th-field="*{adresse.ville}" data-th-placeholder="#{register.ville}">
             </li>
-            <li class="register__item--address">
-                <label for="idCodePostal" data-th-text="#{register.codepostal}">Code Postal(*):</label>
-                <input class="register__field" id="idCodePostal" type="text" data-th-field="*{adresse.code_postal}">
-            </li>
-            <li class="register__item--address">
-                <label for="idVille" data-th-text="#{register.ville}">Ville(*):</label>
-                <input class="register__field" id="idVille" type="text" data-th-field="*{adresse.ville}">
-            </li>
-        </ul>
 
-        <ul class="register__list">
             <li class="register__item">
                 <label for="idMotDePasse" data-th-text="#{register.motdepasse}">Mot de Passe(*):</label>
                 <input class="register__field" id="idMotDePasse" type="password" data-th-field="*{mot_de_passe}">
-            </li>
-            <li class="register__item">
                 <label for="idValidation" data-th-text="#{register.confirmation}">Confirmation(*):</label>
                 <input class="register__field" id="idValidation" type="password" data-th-field="*{mot_de_passe}">
             </li>
-        </ul>
-
+	</ul>
         <div class="register__buttons">
             <button class="register__button button" type="submit" data-th-text="#{register.submit}">S'inscrire</button>
             <a class="register__button button" href="/" data-th-text="#{register.cancel}">Annuler</a>

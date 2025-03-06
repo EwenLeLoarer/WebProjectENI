@@ -120,14 +120,6 @@ input {
 	gap: 30px;
 }
 
-.register__form {
-	width: 700px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	gap: 30px;
-}
-
 .login__list {
 	display: flex;
 	flex-direction: column;
@@ -199,6 +191,7 @@ label[for="idCodePostal"], label[for="idVille"] {
 }
 
 .register__buttons {
+	width: 70%;
 	display: flex;
 	justify-content: space-evenly;
 }
@@ -207,7 +200,7 @@ label[for="idCodePostal"], label[for="idVille"] {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 100px;
+	padding: 0 40px;
 }
 
 .button:hover {
@@ -247,20 +240,20 @@ li:has(input[type="hidden"]) {
 	width: 300px;
 }
 
-.profil-edit__form {
+.profil-edit__form, .register__form {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
 	align-items: center;
 }
-.profil-edit__list {
+.profil-edit__list, .register__list {
 	position: relative;
 	right: 40px;
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
 }
-.profil-edit__item {
+.profil-edit__item, .register__item {
 	width: 100%;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
@@ -356,7 +349,6 @@ li:has(input[type="hidden"]) {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
 	gap: 20px;
-	display: grid;
 }
 
 .article__card {

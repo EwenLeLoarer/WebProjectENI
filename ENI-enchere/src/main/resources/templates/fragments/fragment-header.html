@@ -4,15 +4,20 @@
 	<nav class="main__nav">
 		<ul class="nav__list">
 			<li class="nav__item"><a th:href="@{?lang=en}"
-				th:if="${#locale.language == 'fr' or #locale.language == 'fr_FR'}"><img src="/assets/image/english_flag.webp" class="language-icon"></a>
+				th:if="${#locale.language == 'fr' or #locale.language == 'fr_FR'}"><img
+					src="/assets/image/english_flag.webp" class="language-icon"></a>
 				<a th:href="@{?lang=fr}"
-				th:if="${#locale.language == 'en' or #locale.language == 'en_US'}"><img src="/assets/image/france_flag.webp" class="language-icon"></a>
-			</li>
+				th:if="${#locale.language == 'en' or #locale.language == 'en_US'}"><img
+					src="/assets/image/france_flag.webp" class="language-icon"></a></li>
 			<li class="nav__item"><a class="li__link" href="/">Accueil</a></li>
+			<li data-th-if="${#authorization.expression('isAuthenticated')}"
+				class="nav__item"><a class="li__link" href="/nouvelle-vente" data-th-text="#{nav.sell}">Vendre
+					un article</a></li>
 			<li data-th-if="${#authorization.expression('isAuthenticated')}"
 				class="nav__item"><a class="li__link"
 				data-th-href="@{'/profil/' + ${#authentication.name}}"
 				data-th-text="#{nav.profil}">Mon profil</a></li>
+
 			<li data-sec-authorize="!isAuthenticated()"
 				data-th-if="${currentPage != '/login'}" class="nav__item"><a
 				class="li__link" href="/login" data-th-text="#{nav.login}">S'inscrire
