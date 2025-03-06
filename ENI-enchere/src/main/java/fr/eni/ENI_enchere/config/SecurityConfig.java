@@ -47,12 +47,15 @@ public class SecurityConfig {
                     auth.requestMatchers(HttpMethod.POST,"/enchere/*").hasAnyRole("USER", "ADMIN");
                     auth.requestMatchers(HttpMethod.GET, "/nouvelle-vente").hasAnyRole("USER", "ADMIN");
                     auth.requestMatchers(HttpMethod.POST, "/nouvelle-vente").hasAnyRole("USER", "ADMIN");
+                    auth.requestMatchers(HttpMethod.GET, "/").permitAll();
                     // Permit access to the homepage and other public pages
                     auth.requestMatchers("/*").denyAll();
 
                     // Allow access to static resources (CSS, Images) for all users
                     auth.requestMatchers("/css/*").permitAll();
                     auth.requestMatchers("/image/*").permitAll();
+                    auth.requestMatchers("/js/*").permitAll();
+                    auth.requestMatchers("/assets/image/*").permitAll();
                     
                     // Refuse all other URLs
                     auth.anyRequest().authenticated();  
