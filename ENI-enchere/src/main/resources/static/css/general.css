@@ -61,6 +61,7 @@ main {
 
 input {
 	padding-left: 3px;
+	width: 200px;
 }
 /*********** HEADER ***********/
 .main__header {
@@ -127,13 +128,31 @@ input {
 	gap: 30px;
 }
 
+.login__error {
+	color: red;
+}
+
 .register__list, .profil__list {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 30px;
-	justify-content: space-between;
 }
 
+.error__container {
+	display: flex;
+	gap: 10px;
+}
+#password__error {
+	align-self: top;
+	width: 50%;
+	display: flex;
+	text-align: left;
+	font-size: 10px;
+	color: red;
+}
+label[for="idValidation"] {
+	align-self: center;
+}
 .register__list--address, .profil__list--address {
 	width: 100%;
 	display: flex;
@@ -150,10 +169,12 @@ label[for="idCodePostal"], label[for="idVille"] {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	width: 100%;
+	width: 800px;
 	gap: 30px;
 }
-
+.register__item > * {
+	width: 200px;
+}
 .register__item--address, .profil__item--address {
 	display: flex;
 	align-items: center;

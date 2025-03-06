@@ -1,31 +1,37 @@
 <!DOCTYPE html>
-<html data-th-replace="~{layouts/fragment-layout :: layoutName (
+<html
+	data-th-replace="~{layouts/fragment-layout :: layoutName (
                             title=~{ :: title},
                             content=~{ :: main})}">
 
-    <title data-th-text="#{login.title}">Connexion</title>
+<title data-th-text="#{login.title}">Connexion</title>
 
-    <main class="login__main">
-        <form class="login__form" data-th-action="@{/login}" method="post">
-            <ul class="login__list">
-                <li class="login__item">
-                    <label class="login__label" for="idUser" data-th-text="#{login.username}">Identifiant :</label>
-                    <input class="login__field" id="idUser" type="text" name="username">
-                </li>
+<main class="login__main">
+	<form class="login__form" data-th-action="@{/login}" method="post">
+		<ul class="login__list">
+			<li class="login__item"><label class="login__label" for="idUser"
+				data-th-text="#{login.username}">Identifiant :</label> <input
+				class="login__field" id="idUser" type="text" name="username">
+			</li>
 
-                <li class="login__item">
-                    <label class="login__label" for="idPass" data-th-text="#{login.password}">Mot de passe :</label>
-                    <input class="login__field" id="idPass" type="password" name="password">
-                </li>
-            </ul>
+			<li class="login__item"><label class="login__label" for="idPass"
+				data-th-text="#{login.password}">Mot de passe :</label> <input
+				class="login__field" id="idPass" type="password" name="password">
+			</li>
+			<li class="login__error" data-th-if="${param.error}">
+				Identifiant ou mot de passe incorrect.</li>
+		</ul>
 
-            <div class="login__box">
-                <button class="login__button button" type="submit" data-th-text="#{login.submit}">Connexion</button>
-                <a class="login__forgot" href="/" data-th-text="#{login.forgot}">Mot de passe oublié</a>
-            </div>
+		<div class="login__box">
+			<button class="login__button button" type="submit"
+				data-th-text="#{login.submit}">Connexion</button>
+			<a class="login__forgot" href="/" data-th-text="#{login.forgot}">Mot
+				de passe oublié</a>
+		</div>
 
-            <a class="login__register button" href="/register" data-th-text="#{login.register}">Créer un compte</a>
-        </form>
-    </main>
+		<a class="login__register button" href="/register"
+			data-th-text="#{login.register}">Créer un compte</a>
+	</form>
+</main>
 
 </html>

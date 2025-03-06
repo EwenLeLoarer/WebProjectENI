@@ -47,9 +47,11 @@ public class SecurityConfig {
                     auth.requestMatchers(HttpMethod.POST,"/enchere/*").hasAnyRole("USER", "ADMIN");
                     auth.requestMatchers(HttpMethod.GET, "/nouvelle-vente").hasAnyRole("USER", "ADMIN");
                     auth.requestMatchers(HttpMethod.POST, "/nouvelle-vente").hasAnyRole("USER", "ADMIN");
-                    auth.requestMatchers(HttpMethod.GET, "/").permitAll();
                     auth.requestMatchers(HttpMethod.GET, "/register").permitAll();
                     auth.requestMatchers(HttpMethod.GET, "/enchere/*").permitAll();
+                    auth.requestMatchers(HttpMethod.GET, "/").permitAll()
+                    .requestMatchers(request -> request.getParameter("lang") != null).permitAll() // Allow ?lang=xx parameter
+                    .requestMatchers(request -> request.getParameter("invalid") != null).permitAll(); // Allow ?invalid&continue
                     // Permit access to the homepage and other public pages
                     auth.requestMatchers("/*").denyAll();
 
