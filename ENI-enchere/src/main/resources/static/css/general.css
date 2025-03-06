@@ -36,8 +36,8 @@ body {
 main {
 	position: relative;
 	top: 80px;
-	padding: 20px;
-	width: 100%;
+	left: 20px;
+	width: calc(100% - 40px);
 	height: calc(100% - 80px);
 	display: flex;
 	flex-direction: column;
@@ -239,11 +239,6 @@ label[for="idCodePostal"], label[for="idVille"] {
 	width: 100px;
 }
 
-.profil__data {
-	font-weight: bold;
-	flex-grow: 2;
-}
-
 li:has(input[type="hidden"]) {
 	display: none;
 }
@@ -252,18 +247,39 @@ li:has(input[type="hidden"]) {
 	width: 300px;
 }
 
-.profil__form {
-	width: 700px;
+.profil-edit__form {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	align-items: center;
+}
+.profil-edit__list {
+	position: relative;
+	right: 40px;
+	display: flex;
+	flex-direction: column;
 	gap: 20px;
 }
-.profil__list-edit {
+.profil-edit__item {
+	width: 100%;
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 40px;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 20px;
+	text-align: right;
 }
+.profil-edit__field {
+	width: 170px;
+	border: 2px black solid;
+}
+.profil-edit__data {
+	font-weight: bold;
+	text-align: left;
+}
+
 .profil-edit__buttons {
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
+	gap: 40px;
 }
 
 .profil-edit__button {
@@ -285,11 +301,6 @@ li:has(input[type="hidden"]) {
 	align-items: center;
 	gap: 30px;
 }
-
-.profil__data--other {
-	font-weight: bold;
-}
-
 .changepass__box {
 	display: flex;
 	justify-content: space-evenly;
@@ -304,8 +315,8 @@ li:has(input[type="hidden"]) {
 }
 
 .enchere__form {
-	position: relative;
-	top: 0;
+	position: absolute;
+	top: 120px;
 	display: flex;
 	flex-wrap: wrap;
 	margin-left: 20px;
@@ -339,6 +350,8 @@ li:has(input[type="hidden"]) {
 }
 
 .article__container {
+	position: absolute;
+	top: 400px;
 	width: 100%;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
