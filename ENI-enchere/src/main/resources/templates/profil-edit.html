@@ -11,7 +11,7 @@
     <main>
         <h1 class="title" data-th-text="#{profile.heading}">Mon Profil</h1>
         <form class="profil__form" data-th-action="@{/profil/edit}" method="post" data-th-object="${user}">
-            <ul class="profil__list">
+            <ul class="profil__list-edit">
                 <li class="profil__item">
                     <p class="profil__text" data-th-text="#{profile.pseudo}">Pseudo:</p>
                     <span class="profil__data" data-th-text="*{pseudo}"></span>
@@ -47,7 +47,7 @@
                     <input class="profil__field" id="idVille" type="text" placeholder="ta ville" data-th-field="*{adresse.ville}">
                 </li>
             </ul>
-            <ul class="profil__list">
+            <ul class="profil__list-edit">
                 <li class="profil__item">
                     <p class="profil__text" data-th-text="#{profile.credit}">Mon crédit:</p>
                     <span class="profil__data" data-th-text="*{credit}"></span>

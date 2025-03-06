@@ -3,7 +3,11 @@
 	<a class="home__link" href="/">Eni-Encheres</a>
 	<nav class="main__nav">
 		<ul class="nav__list">
-
+			<li class="nav__item"><a th:href="@{?lang=en}"
+				th:if="${#locale.language == 'fr' or #locale.language == 'fr_FR'}"><img src="/assets/image/english_flag.webp" class="language-icon"></a>
+				<a th:href="@{?lang=fr}"
+				th:if="${#locale.language == 'en' or #locale.language == 'en_US'}"><img src="/assets/image/france_flag.webp" class="language-icon"></a>
+			</li>
 			<li class="nav__item"><a class="li__link" href="/">Accueil</a></li>
 			<li data-th-if="${#authorization.expression('isAuthenticated')}"
 				class="nav__item"><a class="li__link"
@@ -17,11 +21,7 @@
 				class="nav__item"><a class="li__link" href="/logout"
 				data-th-text="#{nav.logout}">Deconnexion</a></li>
 			<!-- Liens pour changer la langue (affiche uniquement l'autre option) -->
-			<li><a th:href="@{?lang=en}"
-				th:if="${#locale.language == 'fr' or #locale.language == 'fr_FR'}">English</a>
-				<a th:href="@{?lang=fr}"
-				th:if="${#locale.language == 'en' or #locale.language == 'en_US'}">Français</a>
-			</li>
+
 
 		</ul>
 	</nav>
