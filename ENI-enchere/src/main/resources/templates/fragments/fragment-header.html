@@ -17,10 +17,6 @@
 				class="nav__item"><a class="li__link"
 				data-th-href="@{'/profil/' + ${#authentication.name}}"
 				data-th-text="#{nav.profil}">Mon profil</a></li>
-			<li data-th-if="${#authorization.expression('isAuthenticated')}"
-				class="nav__item"><a class="li__link"
-				data-th-href="@{'/nouvelle-vente'}"
-				data-th-text="#{vente.nouvelle}">Nouvelle vente</a></li>
 			<li data-sec-authorize="!isAuthenticated()"
 				data-th-if="${currentPage != '/login'}" class="nav__item"><a
 				class="li__link" href="/login" data-th-text="#{nav.login}">S'inscrire

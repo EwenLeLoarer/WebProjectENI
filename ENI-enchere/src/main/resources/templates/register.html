@@ -38,7 +38,8 @@
             <li class="register__item">
                 <label for="idMotDePasse" data-th-text="#{register.motdepasse}">Mot de Passe(*):</label>
                 <input class="register__field" id="idMotDePasse" type="password" data-th-field="*{mot_de_passe}">
-                <label for="idValidation" data-th-text="#{register.confirmation}">Confirmation(*):</label>
+                <div class="error__container"><p id="password__error"></p> <label for="idValidation" data-th-text="#{register.confirmation}">Confirmation(*):</label></div>
+                
                 <input class="register__field" id="idValidation" type="password" data-th-field="*{mot_de_passe}">
             </li>
 	</ul>

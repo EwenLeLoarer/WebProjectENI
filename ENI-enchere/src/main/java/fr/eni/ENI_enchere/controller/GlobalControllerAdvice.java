@@ -1,15 +1,12 @@
 package fr.eni.ENI_enchere.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import fr.eni.ENI_enchere.bo.Utilisateur;
 import fr.eni.ENI_enchere.service.UtilisateurService;
 import jakarta.servlet.http.HttpServletRequest;
 

@@ -11,13 +11,13 @@ data-th-replace="~{layouts/fragment-layout :: layoutName (
 
 	<!-- Formulaire de recherche global -->
 	<form class="enchere__form" method="get" action="/">
-		<h2 class="filter__text" data-th-text="#{filter.text}">Filtre:</h2>
+		<h2 class="filter__text" data-th-text="#{filter.text}"></h2>
 		<input class="filter__input" type="text" name="search"
 			style="font-family: Arial, FontAwesome;"
 			data-th-placeholder="#{filter.searchPlaceholder}"
 			th:value="${search}" />
 		<button class="filter__button button" type="submit"
-			data-th-text="#{filter.text}">Rechercher</button>
+			data-th-text="#{filter.button}"></button>
 
 		<!-- Filtrage par catégorie -->
 		<p class="categorie__text" data-th-text="#{categorie.text}">Catégorie
