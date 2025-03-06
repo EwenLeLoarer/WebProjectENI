@@ -7,9 +7,13 @@
 <title data-th-text="#{profile.title}">Profil</title>
 
 <main>
-    <h1 class="title" data-th-text="#{profile.detailVente}">Détail d'une vente</h1>
+    <h1 data-th-if="${article.statut <= 1}" class="title" data-th-text="#{profile.detailVente}">Détail d'une vente</h1>
+    <div data-th-if="${article.statut > 1}">
+	<h1 class="title" data-th-if="${loggedInUser == null or (loggedInUser != articleUser and pseudoLastEnchere != '0' and loggedInUser.pseudo != pseudoLastEnchere)}" data-th-text="${pseudoLastEnchere}+ ' a remporté la vente'"></h1>
+	<h1 class="title" data-th-if="${loggedInUser != null and loggedInUser.pseudo == pseudoLastEnchere}">Vous avez remporté la vente</h1>
+	<h1 class="title" data-th-if="${pseudoLastEnchere == '0'}">Personne n'a enchérit</h1>
+	</div>
     <div data-th-object="${article}" class="article__list">
-
 
         <p class="article__text" data-th-text="#{profile.article}">Article :</p>
         <span data-th-text="*{nom_article}"></span>
@@ -38,7 +42,7 @@
 
 	</div>
 
-	<form data-th-action="@{/enchere/miser/{id}(id=${article.no_article})}" method="POST">
+	<form data-th-if="${article.statut == 1}" data-th-action="@{/enchere/miser/{id}(id=${article.no_article})}" method="POST">
 		<div class="article__input-container"
 		data-th-if="${loggedInUser != null and articleUser.pseudo != loggedInUser.pseudo}">
 		<label class="article__text" for="idEncherire" data-th-text="#{enchere.monEnchere}">Mon enchère: </label>
@@ -48,7 +52,7 @@
 	</form>
 
 	<a
-		data-th-if="${loggedInUser == null or articleUser.pseudo == loggedInUser.pseudo}"
+		data-th-if="${loggedInUser == null or articleUser.pseudo == loggedInUser.pseudo or article.statut != 1}"
 		class="button encherir__button encherir__button--retour" href="/" data-th-text="#{profile.retour}">Retour</a>
 
 </main>

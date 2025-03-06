@@ -63,6 +63,9 @@ input {
 	padding-left: 3px;
 	width: 200px;
 }
+input[type="radio"] {
+	width: auto;
+}
 /*********** HEADER ***********/
 .main__header {
 	position: fixed;
