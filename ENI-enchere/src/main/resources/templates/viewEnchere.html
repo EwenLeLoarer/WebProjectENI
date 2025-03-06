@@ -7,8 +7,8 @@
 <title data-th-text="#{profile.title}">Profil</title>
 
 <main>
-    <h1 class="article__title">Détail d'une vente</h1>
-    <form data-th-if="${articleUser.pseudo != loggedInUser.pseudo or notStarted != true}" data-th-action="#{/enchere/miser}" method="POST" data-th-object="${article}" class="article__list">
+    <h1 class="title">Détail d'une vente</h1>
+    <div data-th-if="${articleUser.pseudo != loggedInUser.pseudo or notStarted != true}" data-th-action="#{/enchere/miser}" method="POST" data-th-object="${article}" class="article__list">
 
 
         <p class="article__text" data-th-text="#{profile.article}">Article :</p>
@@ -21,7 +21,8 @@
         <span data-th-text="*{categorie.libelle}"></span>
 
         <p class="article__text" data-th-text="#{profile.meilleurOffre}">Meilleure offre :</p>
-        <span data-th-text="*{prixVente}+' point(s)'"></span>
+                <span data-th-if="${pseudoLastEnchere !='0'}" data-th-text="*{prixVente}+' point(s) par ' + ${pseudoLastEnchere}"></span>
+		<span data-th-if="${pseudoLastEnchere == '0'}">Aucune offre</span>
 
         <p class="article__text" data-th-text="#{profile.description}">Description :</p>
         <span data-th-text="*{description}"></span>
@@ -33,10 +34,9 @@
         <span class="article__data--line" data-th-text="*{adresse_retrait}"></span>
 
 		<p class="article__text" data-th-text="#{profile.vendeur}">Vendeur :</p>
-		<span class="article__data--line" data-th-text="*{utilisateur.pseudo}"></span>
-        <p class="article__text" data-th-text="#{enchere.dernierEncherisseur}">dernier encherisseur :</p>
-		<span class="article__data--line" data-th-text="${pseudoLastEnchere}"></span>
-	</form>
+	
+	</div>
+
 
     <form  data-th-if="${articleUser.pseudo == loggedInUser.pseudo and notStarted == true}" data-th-action="@{/enchere/update}" method="POST" data-th-object="${article}" class="article__list">
 

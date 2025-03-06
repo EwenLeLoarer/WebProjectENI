@@ -1,7 +1,16 @@
 /*********** RESET ***********/
-* {
-	margin: 0;
-	padding: 0;
+html, body, 
+div, section, article, header, footer, nav, aside, main, 
+h1, h2, h3, h4, h5, h6, p, span, strong, b, em, i, small, mark, blockquote, cite, code, pre, 
+ul, ol, li, dl, dt, dd, 
+form, input, textarea, button, select, option, label, fieldset, legend, 
+table, thead, tbody, tfoot, tr, th, td, caption, 
+img, audio, video, source, iframe, canvas, svg, 
+a, details, summary, dialog, 
+hr, br, wbr, abbr, address, progress, meter {
+	font-size: 16px;
+	margin: 0; 
+	padding: 0; 
 	box-sizing: border-box;
 }
 
@@ -50,10 +59,6 @@ main {
 	left: 50%;
 }
 
-label {
-	width: 100px;
-}
-
 input {
 	padding-left: 3px;
 }
@@ -93,6 +98,11 @@ input {
 	text-decoration: underline;
 }
 
+.language-icon {
+	height: 20px;
+	border-radius: 5px;
+}
+
 /*********** DATE ***********/
 .date__container {
 	position: fixed;
@@ -103,14 +113,14 @@ input {
 }
 /*********** LOGIN AND REGISTER ***********/
 .login__form {
-	width: 300px;
+	width: 350px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	gap: 30px;
 }
 
-.register__form, .profil__form {
+.register__form {
 	width: 700px;
 	display: flex;
 	flex-direction: column;
@@ -133,7 +143,7 @@ input {
 }
 
 .register__list--address, .profil__list--address {
-	width: 700px;
+	width: 100%;
 	display: flex;
 	justify-content: space-between;
 }
@@ -148,7 +158,7 @@ label[for="idCodePostal"], label[for="idVille"] {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	width: 300px;
+	width: 100%;
 	gap: 30px;
 }
 
@@ -156,9 +166,11 @@ label[for="idCodePostal"], label[for="idVille"] {
 	display: flex;
 	align-items: center;
 }
-
+.login__label {
+	display: flex;
+	justify-content: flex-end;
+}
 .login__field, .register__field, .profil__field {
-	flex-grow: 2;
 	height: 30px;
 	border: 2px black solid;
 }
@@ -240,6 +252,15 @@ li:has(input[type="hidden"]) {
 	width: 300px;
 }
 
+.profil__form {
+	width: 700px;
+	gap: 20px;
+}
+.profil__list-edit {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 40px;
+}
 .profil-edit__buttons {
 	display: flex;
 	justify-content: space-between;
@@ -254,7 +275,9 @@ li:has(input[type="hidden"]) {
 	margin-right: 20px;
 }
 
-.profil__list--other {
+.profil__list {
+	position: relative;
+	top: -80px;
 	width: 300px;
 	display: flex;
 	flex-direction: column;
@@ -281,14 +304,17 @@ li:has(input[type="hidden"]) {
 }
 
 .enchere__form {
+	position: relative;
+	top: 0;
 	display: flex;
 	flex-wrap: wrap;
 	margin-left: 20px;
-	width: 30%;
+	width: 600px;
 	gap: 10px;
 }
 
 .filter__text {
+	font-size: 20px;
 	width: 100%;
 	align-self: flex-end;
 }
@@ -322,9 +348,10 @@ li:has(input[type="hidden"]) {
 
 .article__card {
 	display: flex;
+	align-items: center;
 	position: relative; border : 1px black solid;
 	padding: 20px;
-	gap: 40px;
+	gap: 20px;
 	position: relative;
 	border: 1px black solid;
 }

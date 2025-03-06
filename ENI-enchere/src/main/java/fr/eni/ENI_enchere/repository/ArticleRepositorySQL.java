@@ -30,11 +30,19 @@ public class ArticleRepositorySQL implements ArticleRepository {
 	// Retourne les enchères où l'utilisateur a enchéri et qui sont actives
 	@Override
 	public List<Article> getMesEncheresEnCours(String pseudo) {
-		String sql = "SELECT * FROM ARTICLES_A_VENDRE a " + "JOIN ENCHERES e ON a.no_article = e.no_article "
-				+ " INNER JOIN utilisateurs ut on ut.pseudo = a.id_utilisateur "
-				+ "INNER JOIN adresses ad on a.no_adresse_retrait = ad.no_adresse "
-				+ "RIGHT JOIN CATEGORIES cat on a.no_categorie = cat.no_categorie "
-				+ "WHERE e.id_utilisateur = ? AND a.statut_enchere = 1 ";
+		String sql = "SELECT *\r\n"
+				+ "FROM ARTICLES_A_VENDRE a\r\n"
+				+ "JOIN (\r\n"
+				+ "    SELECT no_article, MAX(date_enchere) AS last_bid_date\r\n"
+				+ "    FROM ENCHERES\r\n"
+				+ "    WHERE id_utilisateur = ?\r\n"
+				+ "    GROUP BY no_article\r\n"
+				+ ") latest_bids ON a.no_article = latest_bids.no_article\r\n"
+				+ "INNER JOIN UTILISATEURS ut ON ut.pseudo = a.id_utilisateur\r\n"
+				+ "INNER JOIN ADRESSES ad ON a.no_adresse_retrait = ad.no_adresse\r\n"
+				+ "RIGHT JOIN CATEGORIES cat ON a.no_categorie = cat.no_categorie\r\n"
+				+ "WHERE a.statut_enchere = 1;";
+				
 		return jdbcTemplate.query(sql, new ArticleRowMapper(), pseudo);
 	}
 
@@ -47,7 +55,7 @@ public class ArticleRepositorySQL implements ArticleRepository {
 				+ "RIGHT JOIN CATEGORIES cat on a.no_categorie = cat.no_categorie " + "WHERE statut_enchere = 2 "
 				+ "AND no_article IN (" + "    SELECT no_article FROM ENCHERES " + "    WHERE id_utilisateur = ? "
 				+ "    AND montant_enchere = (" + "        SELECT MAX(montant_enchere) " + "        FROM ENCHERES "
-				+ "        WHERE no_article = ARTICLES_A_VENDRE.no_article" + "    )" + ")";
+				+ "        WHERE no_article = a.no_article" + "    )" + ")";
 		return jdbcTemplate.query(sql, new ArticleRowMapper(), pseudo);
 	}
 
