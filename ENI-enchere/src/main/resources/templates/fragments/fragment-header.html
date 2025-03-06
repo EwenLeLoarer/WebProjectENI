@@ -9,8 +9,10 @@
 				<a th:href="@{?lang=fr}"
 				th:if="${#locale.language == 'en' or #locale.language == 'en_US'}"><img
 					src="/assets/image/france_flag.webp" class="language-icon"></a></li>
-			<li class="nav__item"><a class="li__link" href="/"
-				data-th-text="#{nav.home}">Accueil</a></li>
+			<li class="nav__item"><a class="li__link" href="/" data-th-text="#{nav.home}">Accueil</a></li>
+			<li data-th-if="${#authorization.expression('isAuthenticated')}"
+				class="nav__item"><a class="li__link" href="/nouvelle-vente" data-th-text="#{nav.sell}">Vendre
+					un article</a></li>
 			<li data-th-if="${#authorization.expression('isAuthenticated')}"
 				class="nav__item"><a class="li__link"
 				data-th-href="@{'/profil/' + ${#authentication.name}}"

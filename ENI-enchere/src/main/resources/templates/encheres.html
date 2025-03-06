@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-	data-th-replace="~{layouts/fragment-layout :: layoutName (
+<!DOCTYPE html><html 
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+data-th-replace="~{layouts/fragment-layout :: layoutName (
 					  title= ~{ :: title},
 					  content = ~{ :: main})}">
 <title data-th-text="#{enchere.liste}">Liste des encheres</title>
 <main class="index__main">
 
-	<h1 class="title" data-th-text="#{enchere.liste}">Liste des
-		enchères</h1>
+	<h1 class="title" data-th-text="#{enchere.liste}">Liste des enchères</h1>
 
 
 	<!-- Formulaire de recherche global -->
@@ -47,7 +46,7 @@
 				<!-- Radio pour Achats -->
 				<label> <input type="radio" name="filterType" value="achats"
 					th:checked="${filterType == null or filterType == 'achats'}"
-					data-th-text="#{enchere.achats}" />
+					data-th-text="#{enchere.achats}"/>
 
 				</label> <select class="radio__list" id="achats-options" name="filterValue"
 					th:disabled="${filterType != null and filterType != 'achats'}">
@@ -64,9 +63,10 @@
 			</div>
 			<div class="radio__container">
 				<!-- Radio pour Ventes -->
-				<label> <input type="radio" name="filterType" value="ventes"
-					th:checked="${filterType == 'ventes'}" /> <span
-					data-th-text="#{enchere.ventes}">Mes ventes</span>
+				<label>
+					<input type="radio" name="filterType" value="ventes"
+					th:checked="${filterType == 'ventes'}" />
+					<span data-th-text="#{enchere.ventes}">Mes ventes</span>
 				</label> <select id="ventes-options" name="filterValue"
 					th:disabled="${filterType != 'ventes'}">
 					<option value="cours" th:selected="${filterValue == 'cours'}"
@@ -98,8 +98,8 @@
 
 				<p class="article__description" th:text="${article.description}"></p>
 				<p class="article__prix--text">
-					<span data-th-text="#{enchere.prixActuel}">Prix actuel :</span> <span
-						th:text="${article.prixVente}"></span> €
+					<span data-th-text="#{enchere.prixActuel}">Prix actuel :</span> 
+					<span th:text="${article.prixVente}"></span> point(s)
 				</p>
 				<p class="article__date--text">
 					<span data-th-text="#{enchere.dateFin}">Date fin :</span> <span
