@@ -29,7 +29,7 @@
 		<span data-th-if="${pseudoLastEnchere == '0'}" data-th-text="#{profile.aucuneOffre}">Aucune offre</span>
 	
         <p class="article__text" data-th-text="#{profile.description}">Description :</p>
-        <span data-th-text="*{description}"></span>
+        <span id="article__description" data-th-text="*{description}"></span>
 
         <p class="article__text" data-th-text="#{profile.finEnchere}">Fin de l'enchère :</p>
         <span data-th-text="*{#temporals.format(dateFinEncheres, 'dd/MM/yyyy')}"></span>
