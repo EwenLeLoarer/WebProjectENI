@@ -48,6 +48,7 @@ public class SecurityConfig {
                     auth.requestMatchers(HttpMethod.GET, "/nouvelle-vente").hasAnyRole("USER", "ADMIN");
                     auth.requestMatchers(HttpMethod.POST, "/nouvelle-vente").hasAnyRole("USER", "ADMIN");
                     auth.requestMatchers(HttpMethod.GET, "/").permitAll();
+                    auth.requestMatchers(HttpMethod.GET, "/enchere/*").permitAll();
                     // Permit access to the homepage and other public pages
                     auth.requestMatchers("/*").denyAll();
 
