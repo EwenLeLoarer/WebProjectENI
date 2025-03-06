@@ -51,7 +51,7 @@ public class SecurityConfig {
                     .requestMatchers(request -> request.getParameter("lang") != null).permitAll() // Allow ?lang=xx parameter
                     .requestMatchers(request -> request.getParameter("invalid") != null).permitAll(); // Allow ?invalid&continue parameter
                     auth.requestMatchers(HttpMethod.GET, "/register").permitAll();
-                    auth.requestMatchers(HttpMethod.GET, "/enchere/*").permitAll();s
+                    auth.requestMatchers(HttpMethod.GET, "/enchere/*").permitAll();
                     auth.requestMatchers(HttpMethod.POST, "/register").permitAll();
                     // Permit access to the homepage and other public pages
                     auth.requestMatchers("/*").denyAll();
